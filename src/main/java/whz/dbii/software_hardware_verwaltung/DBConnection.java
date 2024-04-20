@@ -1,5 +1,9 @@
 package whz.dbii.software_hardware_verwaltung;
 
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.sql.*;
 
 public class DBConnection {
@@ -7,10 +11,10 @@ public class DBConnection {
     private static Connection conn = null;
     private static final String connStr = "jdbc:sqlserver://localhost;database=DB_HSverwaltung;" +
             "encrypt=true;trustServerCertificate=true;authenticationScheme=NTLM;domain=myDomain;";
-    public static final String USER = "sa";
-    public static final String PASS = "1234";
+    public static String USER;
+    public static String PASS;
 
-    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException{
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e){
@@ -21,6 +25,8 @@ public class DBConnection {
 
         System.out.println("SQL Server JDBC registered");
         try{
+            USER = Utils.getLogin();
+            PASS = Utils.getPassword();
             conn = DriverManager.getConnection(connStr, USER, PASS);
         }catch (SQLException e){
             System.out.println("Connection failed!");
