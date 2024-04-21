@@ -1,8 +1,5 @@
-package whz.dbii.software_hardware_verwaltung;
+package whz.dbii.software_hardware_verwaltung.dao;
 
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
