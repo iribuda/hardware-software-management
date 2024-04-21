@@ -3,65 +3,66 @@ package whz.dbii.software_hardware_verwaltung;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 public class DBConnection {
-    private static final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static Connection conn = null;
     private static final String connStr = "jdbc:sqlserver://localhost;database=DB_HSverwaltung;" +
             "encrypt=true;trustServerCertificate=true;authenticationScheme=NTLM;domain=myDomain;";
-    public static String USER;
-    public static String PASS;
 
-    public static Connection getConnection() throws SQLException, ClassNotFoundException{
-        try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException e){
-            System.out.println("No JDBC Driver found!");
-            e.printStackTrace();
-            throw e;
-        }
-
-        System.out.println("SQL Server JDBC registered");
-        try{
-            USER = Utils.getLogin();
-            PASS = Utils.getPassword();
-            conn = DriverManager.getConnection(connStr, USER, PASS);
-        }catch (SQLException e){
-            System.out.println("Connection failed!");
-            e.printStackTrace();
-            throw e;
+    public static Connection getConnection(){
+        if (conn == null){
+            try {
+                Properties properties = loadProperties();
+                String user = properties.getProperty("user");
+                String password = properties.getProperty("password");
+                conn = DriverManager.getConnection(connStr, user, password);
+            }catch (SQLException e){
+                throw new DBException(e.getMessage());
+            }
         }
         return conn;
     }
 
-    public static void disconnect() throws SQLException{
+    private static Properties loadProperties(){
+        try(FileInputStream fs = new FileInputStream("src/main/resources/whz/dbii/software_hardware_verwaltung/db.properties")){
+            Properties properties = new Properties();
+            properties.load(fs);
+            return properties;
+        }catch (IOException e){
+            throw new DBException(e.getMessage());
+        }
+    }
+
+    public static void disconnect(){
         try{
             if (conn != null && !conn.isClosed()){
                 conn.close();
             }
         }catch (Exception e){
-            throw e;
+            throw new DBException(e.getMessage());
         }
     }
 
-    public static void closeStatement(Statement st) throws SQLException {
+    public static void closeStatement(Statement st) {
         if (st != null) {
             try {
                 st.close();
             } catch (SQLException e) {
-                throw e;
+                throw new DBException(e.getMessage());
             }
         }
     }
 
-    public static void closeResultSet(ResultSet rs) throws SQLException {
+    public static void closeResultSet(ResultSet rs) {
         if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
-                throw e;
+                throw new DBException(e.getMessage());
             }
         }
     }
