@@ -14,6 +14,7 @@ public class DBConnection {
         if (conn == null){
             try {
                 Properties properties = loadProperties();
+                //later: setProperties with the input from login
                 String user = properties.getProperty("user");
                 String password = properties.getProperty("password");
                 conn = DriverManager.getConnection(connStr, user, password);
