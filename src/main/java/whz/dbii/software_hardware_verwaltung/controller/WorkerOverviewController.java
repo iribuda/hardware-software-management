@@ -2,10 +2,7 @@ package whz.dbii.software_hardware_verwaltung.controller;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.dao.WorkerDAO;
 import whz.dbii.software_hardware_verwaltung.dao.WorkerDAOImpl;
@@ -15,6 +12,8 @@ import java.sql.SQLException;
 
 public class WorkerOverviewController {
 
+    @FXML
+    private Label surnameLabel;
     @FXML
     private TableView<Worker> workerTable;
     @FXML
@@ -51,8 +50,60 @@ public class WorkerOverviewController {
     private void showWorkerDetails(Worker worker) {
         if (worker != null){
             nameLabel.setText(worker.getName());
+            surnameLabel.setText(worker.getSurname());
             emailLabel.setText(worker.getEmail());
         }
+    }
+
+    @FXML
+    private void handleDeleteWorker() {
+        int selectedIndex = workerTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            workerTable.getItems().remove(selectedIndex);
+            workerDAO.delete(selectedIndex);
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("Keine Mitarbeiter wurde gewählt");
+            alert.setContentText("Wählen Sie bitte einen Mitarbeiter");
+
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleNewWorker(){
+        Worker worker = new Worker();
+        boolean okClicked = mainApp.showWorkerEditDialog(worker);
+        if (okClicked){
+            workerDAO.save(worker);
+            workerTable.getItems().add(worker);
+        }
+    }
+
+    @FXML
+    private void handleEditWorker(){
+        Worker selectedWorker = workerTable.getSelectionModel().getSelectedItem();
+        if (selectedWorker != null){
+            boolean okClicked = mainApp.showWorkerEditDialog(selectedWorker);
+            if (okClicked){
+                workerDAO.update(selectedWorker);
+                showWorkerDetails(selectedWorker);
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("No Selection");
+                alert.setHeaderText("No Person Selected");
+                alert.setContentText("Please select a person in the table.");
+
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
     }
 
 }
