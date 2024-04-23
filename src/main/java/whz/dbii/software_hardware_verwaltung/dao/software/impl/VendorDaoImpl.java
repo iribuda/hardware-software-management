@@ -69,7 +69,7 @@ public class VendorDaoImpl implements VendorDao {
     }
 
     @Override
-    public void insert(Vendor vendor) {
+    public boolean insert(Vendor vendor) {
         Connection connection = DBConnection.getConnection();
         String query = "INSERT INTO vendor " +
                 "(vendor_name, email, mobile_number) " +
@@ -88,6 +88,7 @@ public class VendorDaoImpl implements VendorDao {
                 resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) {
                     vendor.setId(resultSet.getInt(1));
+                    return true;
                 }
             }
         } catch (SQLException e) {
@@ -97,10 +98,12 @@ public class VendorDaoImpl implements VendorDao {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
+
+        return false;
     }
 
     @Override
-    public void update(Vendor vendor) {
+    public boolean update(Vendor vendor) {
         Connection connection = DBConnection.getConnection();
         String query = "UPDATE vendor " +
                 "SET vendor_name = ?, email = ?, mobile_number = ? " +
@@ -114,17 +117,20 @@ public class VendorDaoImpl implements VendorDao {
             statement.setString(3, vendor.getMobileNumber());
             statement.setInt(4, vendor.getId());
 
-            statement.executeUpdate();
+            if (statement.executeUpdate() == 1)
+                return true;
         } catch (SQLException e) {
             throw new DBException("Error occurred by connecting while updating the vendor.");
         } finally {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
+
+        return false;
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         Connection connection = DBConnection.getConnection();
         String query = "DELETE FROM vendor WHERE vendor_id = ?";
         PreparedStatement statement = null;
@@ -133,13 +139,16 @@ public class VendorDaoImpl implements VendorDao {
             statement = connection.prepareStatement(query);
             statement.setInt(1, id);
 
-            statement.executeUpdate();
+            if (statement.executeUpdate() == 1)
+                return true;
         } catch (SQLException e) {
             throw new DBException("Error occurred by connecting while deleting the vendor.");
         } finally {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
+
+        return true;
     }
 
     private Vendor instantiateVendor(ResultSet resultSet) throws SQLException {

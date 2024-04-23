@@ -78,7 +78,7 @@ public class SoftwareDaoImpl implements SoftwareDao {
     }
 
     @Override
-    public void insert(Software software) {
+    public boolean insert(Software software) {
         Connection connection = DBConnection.getConnection();
         String query = "INSERT INTO software " +
                 "(software_name, software_version, vendor_id) " +
@@ -97,6 +97,7 @@ public class SoftwareDaoImpl implements SoftwareDao {
                 resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) {
                     software.setId(resultSet.getInt(1));
+                    return true;
                 }
             }
         } catch (SQLException e) {
@@ -106,10 +107,12 @@ public class SoftwareDaoImpl implements SoftwareDao {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
+
+        return false;
     }
 
     @Override
-    public void update(Software software) {
+    public boolean update(Software software) {
         Connection connection = DBConnection.getConnection();
         String query = "UPDATE software " +
                 "SET software_name = ?, software_version = ?, vendor_id = ? " +
@@ -123,17 +126,20 @@ public class SoftwareDaoImpl implements SoftwareDao {
             statement.setInt(3, software.getVendor().getId());
             statement.setInt(4, software.getId());
 
-            statement.executeUpdate();
+            if (statement.executeUpdate() == 1)
+                return true;
         } catch (SQLException e) {
             throw new DBException("Error occurred by connecting while updating the software.");
         } finally {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
+
+        return false;
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         Connection connection = DBConnection.getConnection();
         String query = "DELETE FROM software WHERE software_id = ?";
         PreparedStatement statement = null;
@@ -142,13 +148,16 @@ public class SoftwareDaoImpl implements SoftwareDao {
             statement = connection.prepareStatement(query);
             statement.setInt(1, id);
 
-            statement.executeUpdate();
+            if (statement.executeUpdate() == 1)
+                return true;
         } catch (SQLException e) {
             throw new DBException("Error occurred by connecting while deleting the software.");
         } finally {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
+
+        return false;
     }
 
     private Software instantiateSoftware(ResultSet resultSet) throws SQLException {
