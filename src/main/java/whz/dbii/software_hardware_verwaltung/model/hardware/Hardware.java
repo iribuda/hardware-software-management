@@ -1,6 +1,7 @@
 package whz.dbii.software_hardware_verwaltung.model.hardware;
 
 import javafx.beans.property.*;
+import whz.dbii.software_hardware_verwaltung.dao.hardware.ManufacturerDao;
 
 public class Hardware {
     private final IntegerProperty id;
@@ -57,5 +58,16 @@ public class Hardware {
     }
 
 
+    public void setId(int hardwareId) {
+    }
 
+    public void setName(String hardwareName) {
+    }
+
+    public void setVersion(String softwareVersion) {
+    }
+
+    public Manufacturer getManufacturer() {
+        return getManufacturer();
+    }
 }

@@ -60,4 +60,15 @@ public class Manufacturer {
     }
 
 
+    public void setId(int anInt) {
+    }
+
+    public void setName(String vendorName) {
+    }
+
+    public void setEmail(String email) {
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+    }
 }
