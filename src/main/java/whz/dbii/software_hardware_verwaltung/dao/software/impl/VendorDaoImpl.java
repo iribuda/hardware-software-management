@@ -13,8 +13,7 @@ public class VendorDaoImpl implements VendorDao {
     @Override
     public Vendor findById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * " +
-                "FROM vendor " +
+        String query = "SELECT * FROM vendor " +
                 "WHERE vendor_id = ?";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -41,8 +40,7 @@ public class VendorDaoImpl implements VendorDao {
     @Override
     public ObservableList<Vendor> findAll() {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * " +
-                "FROM vendor";
+        String query = "SELECT * FROM vendor";
         Statement statement = null;
         ResultSet resultSet = null;
 

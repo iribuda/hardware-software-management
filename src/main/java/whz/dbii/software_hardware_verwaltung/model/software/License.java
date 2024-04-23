@@ -3,14 +3,15 @@ package whz.dbii.software_hardware_verwaltung.model.software;
 import javafx.beans.property.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class License {
 
     private final IntegerProperty id;
     private final SimpleIntegerProperty key;
-    private final SimpleObjectProperty<LocalDateTime> startDate;
-    private final SimpleObjectProperty<LocalDateTime> expirationDate;
-    private final SimpleObjectProperty<LocalDateTime> purchaseDate;
+    private final SimpleObjectProperty<Date> startDate;
+    private final SimpleObjectProperty<Date> expirationDate;
+    private final SimpleObjectProperty<Date> purchaseDate;
     private final SimpleStringProperty status;
     private final SimpleFloatProperty price;
     private final SimpleObjectProperty<Software> software;
@@ -25,13 +26,13 @@ public class License {
         this.price = new SimpleFloatProperty();
         this.software = new SimpleObjectProperty<>();
     }
-    public License(Integer id, Integer key, LocalDateTime startDate, LocalDateTime expirationDate, LocalDateTime purchaseDate,
+    public License(Integer id, Integer key, Date startDate, Date expirationDate, Date purchaseDate,
                    Float price, Software software) {
         this.id = new SimpleIntegerProperty(id);
         this.key = new SimpleIntegerProperty(key);
-        this.startDate = new SimpleObjectProperty<>(LocalDateTime.of(startDate.toLocalDate(), startDate.toLocalTime()));
-        this.expirationDate = new SimpleObjectProperty<>(LocalDateTime.of(expirationDate.toLocalDate(), expirationDate.toLocalTime()));
-        this.purchaseDate = new SimpleObjectProperty<>(LocalDateTime.of(purchaseDate.toLocalDate(), purchaseDate.toLocalTime()));
+        this.startDate = new SimpleObjectProperty<>(startDate);
+        this.expirationDate = new SimpleObjectProperty<>(expirationDate);
+        this.purchaseDate = new SimpleObjectProperty<>(purchaseDate);
         this.status = new SimpleStringProperty(LicenseStatus.ACTIVE.toString());
         this.price = new SimpleFloatProperty(price);
         this.software = new SimpleObjectProperty<>(software);
@@ -61,39 +62,39 @@ public class License {
         this.key.set(key);
     }
 
-    public LocalDateTime getStartDate() {
+    public Date getStartDate() {
         return startDate.get();
     }
 
-    public SimpleObjectProperty<LocalDateTime> startDateProperty() {
+    public SimpleObjectProperty<Date> startDateProperty() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate.set(startDate);
     }
 
-    public LocalDateTime getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate.get();
     }
 
-    public SimpleObjectProperty<LocalDateTime> expirationDateProperty() {
+    public SimpleObjectProperty<Date> expirationDateProperty() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDateTime expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         this.expirationDate.set(expirationDate);
     }
 
-    public LocalDateTime getPurchaseDate() {
+    public Date getPurchaseDate() {
         return purchaseDate.get();
     }
 
-    public SimpleObjectProperty<LocalDateTime> purchaseDateProperty() {
+    public SimpleObjectProperty<Date> purchaseDateProperty() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDateTime purchaseDate) {
+    public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate.set(purchaseDate);
     }
 

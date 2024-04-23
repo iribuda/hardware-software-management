@@ -20,10 +20,8 @@ public class SoftwareDaoImpl implements SoftwareDao {
     @Override
     public Software findById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT software.software_name, software.software_version, vendor.vendor_name " +
-                "FROM software INNER JOIN vendor " +
-                "ON software.vendor_id = vendor.vendor_id " +
-                "WHERE software.software_id = ?";
+        String query = "SELECT * FROM software " +
+                "WHERE software_id = ?";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
@@ -44,14 +42,12 @@ public class SoftwareDaoImpl implements SoftwareDao {
         }
 
         return null;
-    }
+}
 
     @Override
     public ObservableList<Software> findAll() {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT software.software_name, software.software_version, vendor.vendor_name " +
-                "FROM software INNER JOIN vendor " +
-                "ON software.vendor_id = vendor.vendor_id";
+        String query = "SELECT * FROM software";
         Statement statement = null;
         ResultSet resultSet = null;
 
