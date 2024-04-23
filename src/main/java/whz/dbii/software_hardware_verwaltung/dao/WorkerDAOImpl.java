@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class WorkerDAOImpl implements WorkerDAO {
 
@@ -34,8 +31,7 @@ public class WorkerDAOImpl implements WorkerDAO {
                 workers.add(extractWorker(rs));
             }
         }catch (SQLException e){
-            e.printStackTrace();
-            throw new DBException("Error by getting all the workers");
+            throw new DBException(e.getMessage());
         }finally {
             DBConnection.closeResultSet(rs);
             DBConnection.closeStatement(statement);
@@ -54,17 +50,70 @@ public class WorkerDAOImpl implements WorkerDAO {
     }
 
     @Override
-    public void save(Worker worker) {
-
+    public boolean save(Worker worker) {
+        Connection conn = DBConnection.getConnection();
+        String sql = "INSERT INTO worker(worker_name, worker_surname, email) VALUES(?, ?, ?)";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, worker.getName());
+            preparedStatement.setString(2, worker.getSurname());
+            preparedStatement.setString(3, worker.getEmail());
+            int rs = preparedStatement.executeUpdate();
+            if (rs==1)
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DBException(e.getMessage());
+        }finally {
+            DBConnection.closeStatement(preparedStatement);
+            DBConnection.disconnect();
+        }
+        return false;
     }
 
     @Override
-    public void update(Worker worker) {
-
+    public boolean update(Worker worker) {
+        Connection conn = DBConnection.getConnection();
+        String sql = "UPDATE worker SET worker_name=?, worker_surname=?, email=? WHERE worker_id=?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, worker.getName());
+            preparedStatement.setString(2, worker.getSurname());
+            preparedStatement.setString(3, worker.getEmail());
+            preparedStatement.setInt(4, worker.getId());
+            int rs = preparedStatement.executeUpdate();
+            if (rs==1)
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DBException(e.getMessage());
+        }finally {
+            DBConnection.closeStatement(preparedStatement);
+            DBConnection.disconnect();
+        }
+        return false;
     }
 
     @Override
-    public void delete(Worker worker) {
-
+    public boolean delete(int id) {
+        Connection conn = DBConnection.getConnection();
+        String sql = "DELETE FROM worker WHERE worker_id=?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            int rs = preparedStatement.executeUpdate();
+            if (rs==1)
+                return true;
+        } catch (SQLException e) {
+            throw new DBException(e.getMessage());
+        }finally {
+            DBConnection.closeStatement(preparedStatement);
+            DBConnection.disconnect();
+        }
+        return false;
     }
 }
