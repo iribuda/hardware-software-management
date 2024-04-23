@@ -11,7 +11,7 @@ public class DBConnection {
             "encrypt=true;trustServerCertificate=true;authenticationScheme=NTLM;domain=myDomain;";
 
     public static Connection getConnection(){
-        if (conn == null){
+        if (conn == null || connectionIsClosed()){
             try {
                 Properties properties = loadProperties();
                 //later: setProperties with the input from login
@@ -43,6 +43,17 @@ public class DBConnection {
         }catch (Exception e){
             throw new DBException(e.getMessage());
         }
+    }
+
+    private static boolean connectionIsClosed() {
+        boolean connectionIsClosed=true;
+        try {
+            if (conn != null)
+                connectionIsClosed = conn.isClosed();
+        } catch (SQLException e) {
+            throw new DBException("Error by checking whether the connection is closed");
+        }
+        return connectionIsClosed;
     }
 
     public static void closeStatement(Statement st) {
