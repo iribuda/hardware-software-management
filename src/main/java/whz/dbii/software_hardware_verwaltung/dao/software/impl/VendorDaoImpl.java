@@ -45,7 +45,7 @@ public class VendorDaoImpl implements VendorDao {
         ResultSet resultSet = null;
 
         try {
-            statement = connection.prepareStatement(query);
+            statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             throw new DBException("Error occurred by connecting while getting the vendor list.");
