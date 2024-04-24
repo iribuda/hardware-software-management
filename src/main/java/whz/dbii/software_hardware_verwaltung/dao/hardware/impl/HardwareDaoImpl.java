@@ -38,6 +38,27 @@ public class HardwareDaoImpl implements HardwareDao {
     }
 
     @Override
+    public int findIdByName(String name) {
+        Connection connection = DBConnection.getConnection();
+        String query = "SELECT hardware_id FROM hardware WHERE hardware_name=?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int id = 0;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, name);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("hardware_id");
+            }
+        } catch (SQLException e) {
+            throw new DBException(e.getMessage());
+        }
+
+        return id;
+    }
+
+    @Override
     public ObservableList<Hardware> findAll(){
         Connection connection = DBConnection.getConnection();
         String query = "SELECT * FROM hardware";
@@ -67,11 +88,35 @@ public class HardwareDaoImpl implements HardwareDao {
         return hardware;
     }
 
+    @Override
+    public ObservableList<String> findAllNamesOfHardware() {
+        Connection connection = DBConnection.getConnection();
+        String query = "SELECT hardware_name FROM hardware";
+        Statement statement = null;
+        ResultSet resultSet = null;
+        ObservableList<String> hardware = FXCollections.observableArrayList();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next())
+                hardware.add(resultSet.getString("hardware_name"));
+
+        } catch (SQLException e) {
+            throw new DBException("Error occurred by connecting while getting the software list.");
+        } finally {
+            DBConnection.closeResultSet(resultSet);
+            DBConnection.closeStatement(statement);
+            DBConnection.disconnect();
+        }
+
+        return hardware;
+    }
+
     private Hardware instantiateHardware(ResultSet resultSet) throws SQLException {
         Hardware hardware = new Hardware();
         hardware.setId(resultSet.getInt("hardware_id"));
         hardware.setName(resultSet.getString("hardware_name"));
-        hardware.setVersion(resultSet.getString("software_version"));
+//        hardware.setVersion(resultSet.getString("software_version"));
 
         return hardware;
     }

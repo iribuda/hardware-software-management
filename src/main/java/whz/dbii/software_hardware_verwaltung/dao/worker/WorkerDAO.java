@@ -2,6 +2,7 @@ package whz.dbii.software_hardware_verwaltung.dao.worker;
 
 import javafx.collections.ObservableList;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
+import whz.dbii.software_hardware_verwaltung.model.hardware.Hardware;
 import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface WorkerDAO {
     ObservableList<String> findNamesOfHardwareOfWorker(int id);
 
     boolean addSoftwareToWorker(int softwareId, int workerId);
+    boolean addHardwareToWorker(int hardwareId, int workerId);
 }

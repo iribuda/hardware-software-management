@@ -228,6 +228,29 @@ public class WorkerDAOImpl implements WorkerDAO {
         return false;
     }
 
+    @Override
+    public boolean addHardwareToWorker(int hardwareId, int workerId) {
+        Connection conn = DBConnection.getConnection();
+        String sql = "INSERT INTO worker_hardware(worker_id, hardware_id, usage_start_date) VALUES(?, ?, ?)";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, workerId);
+            preparedStatement.setInt(2, hardwareId);
+            preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
+            int rs = preparedStatement.executeUpdate();
+            if (rs==1)
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DBException(e.getMessage());
+        }finally {
+            DBConnection.closeStatement(preparedStatement);
+            DBConnection.disconnect();
+        }
+        return false;
+    }
+
     private Software extractSoftware(ResultSet resultSet) throws SQLException {
         Software software = new Software();
         software.setId(resultSet.getInt("software_id"));

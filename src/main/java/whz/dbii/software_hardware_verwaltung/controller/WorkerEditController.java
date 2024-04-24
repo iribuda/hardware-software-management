@@ -1,10 +1,13 @@
 package whz.dbii.software_hardware_verwaltung.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
+import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.HardwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.software.SoftwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.software.impl.SoftwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
@@ -22,9 +25,9 @@ public class WorkerEditController {
     @FXML
     private TableColumn<Software, String> softwareVersionColumn;
     @FXML
-    private TableView<Hardware> hardwareTable;
+    private TableView<String> hardwareTable;
     @FXML
-    private TableColumn<Hardware, String> hardwareNameColumn;
+    private TableColumn<String, String> hardwareNameColumn;
     @FXML
     private ChoiceBox<String> softwareCheckbox;
     @FXML
@@ -40,11 +43,13 @@ public class WorkerEditController {
     private boolean okClicked = false;
     private SoftwareDao softwareDao;
     private WorkerDAO workerDAO;
+    private HardwareDao hardwareDao;
 
     @FXML
     private void initialize(){
         softwareDao = new SoftwareDaoImpl();
         workerDAO = new WorkerDAOImpl();
+        hardwareDao = new HardwareDaoImpl();
     }
 
     public void setDialogStage(Stage dialogStage){
@@ -60,11 +65,20 @@ public class WorkerEditController {
         softwareNameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());
         softwareVersionColumn.setCellValueFactory(cellDate -> cellDate.getValue().versionProperty());
         populateSoftware();
+
+        hardwareCheckbox.setItems(hardwareDao.findAllNamesOfHardware());
+        hardwareNameColumn.setCellValueFactory((data -> new SimpleStringProperty(data.getValue())));
+        populateHardware();
     }
 
     private void populateSoftware(){
         ObservableList<Software> software = workerDAO.findSoftwareOfWorker(worker.getId());
         softwareTable.setItems(software);
+    }
+
+    private void populateHardware(){
+        ObservableList<String> hardware = workerDAO.findNamesOfHardwareOfWorker(worker.getId());
+        hardwareTable.setItems(hardware);
     }
 
     public boolean isOkClicked(){
@@ -119,7 +133,7 @@ public class WorkerEditController {
         if (!softwareName.isEmpty()){
             int softwareId = softwareDao.findIdByName(softwareName);
             if (workerDAO.addSoftwareToWorker(softwareId, worker.getId())){
-
+                populateSoftware();
             }
         }
     }
@@ -128,5 +142,13 @@ public class WorkerEditController {
     private void handleDeleteHaving(){}
 
     @FXML
-    private void handleAddHardware(){}
+    private void handleAddHardware(){
+        String hardwareName = hardwareCheckbox.getValue();
+        if (!hardwareName.isEmpty()){
+            int hardwareId = hardwareDao.findIdByName(hardwareName);
+            if (workerDAO.addHardwareToWorker(hardwareId, worker.getId())){
+                populateHardware();
+            }
+        }
+    }
 }
