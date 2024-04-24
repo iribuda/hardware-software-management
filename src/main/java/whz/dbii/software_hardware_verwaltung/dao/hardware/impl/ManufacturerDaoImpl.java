@@ -1,33 +1,33 @@
-package whz.dbii.software_hardware_verwaltung.dao.software.impl;
+package whz.dbii.software_hardware_verwaltung.dao.hardware.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.DBException;
-import whz.dbii.software_hardware_verwaltung.dao.software.VendorDao;
+import whz.dbii.software_hardware_verwaltung.dao.hardware.ManufacturerDao;
+import whz.dbii.software_hardware_verwaltung.model.hardware.Manufacturer;
 import whz.dbii.software_hardware_verwaltung.model.software.Vendor;
 
 import java.sql.*;
 
-public class VendorDaoImpl implements VendorDao {
+public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
-    public Vendor findById(Integer id) {
+    public Manufacturer findById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * FROM vendor " +
-                "WHERE vendor_id = ?";
+        String query = "SELECT * FROM manufacturer WHERE id = ?";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try {
             statement = connection.prepareStatement(query);
-            statement.setInt(1, id);
+            statement.setInt(1,id);
             resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                return instantiateVendor(resultSet);
+            if (resultSet.next()){
+                return instantiateManufacturer(resultSet);
             }
         } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while getting the vendor.");
+            throw new DBException("Error occured by connecting while getting the manufacturer.");
         } finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
@@ -38,23 +38,24 @@ public class VendorDaoImpl implements VendorDao {
     }
 
     @Override
-    public ObservableList<Vendor> findAll() {
+    public ObservableList<Manufacturer> findAll() {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * FROM vendor";
+        String query = "SELECT * " +
+                "FROM manufacturer";
         Statement statement = null;
         ResultSet resultSet = null;
 
         try {
-            statement = connection.createStatement();
+            statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             throw new DBException("Error occurred by connecting while getting the vendor list.");
         }
 
-        ObservableList<Vendor> vendors = FXCollections.observableArrayList();
+        ObservableList<Manufacturer> manufacturers = FXCollections.observableArrayList();
         try {
             while (resultSet.next())
-                vendors.add(instantiateVendor(resultSet));
+                manufacturers.add(instantiateManufacturer(resultSet));
         } catch (SQLException e) {
             throw new DBException("Error occurred while getting the vendor list.");
         } finally {
@@ -63,29 +64,29 @@ public class VendorDaoImpl implements VendorDao {
             DBConnection.disconnect();
         }
 
-        return vendors;
+        return manufacturers;
     }
 
+
     @Override
-    public boolean insert(Vendor vendor) {
+    public boolean insert(Manufacturer manufacturer) {
         Connection connection = DBConnection.getConnection();
-        String query = "INSERT INTO vendor " +
-                "(vendor_name, email, mobile_number) " +
-                "VALUES (?, ?, ?)";
+        String query = "";
+
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try {
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, vendor.getName());
-            statement.setString(2, vendor.getEmail());
-            statement.setString(3, vendor.getMobileNumber());
+            statement.setString(1, manufacturer.getName());
+            statement.setString(2, manufacturer.getEmail());
+            statement.setString(3, manufacturer.getMobileNumber());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) {
-                    vendor.setId(resultSet.getInt(1));
+                    manufacturer.setId(resultSet.getInt(1));
                     return true;
                 }
             }
@@ -101,7 +102,7 @@ public class VendorDaoImpl implements VendorDao {
     }
 
     @Override
-    public boolean update(Vendor vendor) {
+    public boolean update(Manufacturer manufacturer) {
         Connection connection = DBConnection.getConnection();
         String query = "UPDATE vendor " +
                 "SET vendor_name = ?, email = ?, mobile_number = ? " +
@@ -110,10 +111,10 @@ public class VendorDaoImpl implements VendorDao {
 
         try {
             statement = connection.prepareStatement(query);
-            statement.setString(1, vendor.getName());
-            statement.setString(2, vendor.getEmail());
-            statement.setString(3, vendor.getMobileNumber());
-            statement.setInt(4, vendor.getId());
+            statement.setString(1, manufacturer.getName());
+            statement.setString(2, manufacturer.getEmail());
+            statement.setString(3, manufacturer.getMobileNumber());
+            statement.setInt(4, manufacturer.getId());
 
             if (statement.executeUpdate() == 1)
                 return true;
@@ -128,34 +129,17 @@ public class VendorDaoImpl implements VendorDao {
     }
 
     @Override
-    public boolean deleteById(Integer id) {
-        Connection connection = DBConnection.getConnection();
-        String query = "DELETE FROM vendor WHERE vendor_id = ?";
-        PreparedStatement statement = null;
-
-        try {
-            statement = connection.prepareStatement(query);
-            statement.setInt(1, id);
-
-            if (statement.executeUpdate() == 1)
-                return true;
-        } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while deleting the vendor.");
-        } finally {
-            DBConnection.closeStatement(statement);
-            DBConnection.disconnect();
-        }
-
-        return true;
+    public boolean delete(Manufacturer manufacturer) {
+        return false;
     }
 
-    private Vendor instantiateVendor(ResultSet resultSet) throws SQLException {
-        Vendor vendor = new Vendor();
-        vendor.setId(resultSet.getInt("vendor_id"));
-        vendor.setName(resultSet.getString("vendor_name"));
-        vendor.setEmail(resultSet.getString("email"));
-        vendor.setMobileNumber(resultSet.getString("mobile_number"));
+    private Manufacturer instantiateManufacturer(ResultSet resultSet) throws SQLException{
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setId(resultSet.getInt("manufacturer_id"));
+        manufacturer.setName(resultSet.getString("vendor_name"));
+        manufacturer.setEmail(resultSet.getString("email"));
+        manufacturer.setMobileNumber(resultSet.getString("mobile_number"));
 
-        return vendor;
+        return manufacturer;
     }
 }

@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import whz.dbii.software_hardware_verwaltung.controller.VendorOverviewController;
 import whz.dbii.software_hardware_verwaltung.controller.WorkerEditController;
 import whz.dbii.software_hardware_verwaltung.controller.WorkerOverviewController;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
@@ -50,6 +51,19 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+
+    // TODO: remove showVendorOverview to Software controller
+//    public void showVendorOverview(){
+//        try{
+//            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("vendor-overview.fxml"));
+//            SplitPane vendorOverview = (SplitPane) loader.load();
+//            rootLayout.setCenter(vendorOverview);
+//            VendorOverviewController vendorOverviewController = loader.getController();
+//            vendorOverviewController.setMainApp(this);
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
 
     public boolean showWorkerEditDialog(Worker worker){
         try {

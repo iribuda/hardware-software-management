@@ -1,20 +1,21 @@
-package whz.dbii.software_hardware_verwaltung.dao.software.impl;
+package whz.dbii.software_hardware_verwaltung.dao.hardware.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.DBException;
-import whz.dbii.software_hardware_verwaltung.dao.software.VendorDao;
-import whz.dbii.software_hardware_verwaltung.model.software.Vendor;
+import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
+import whz.dbii.software_hardware_verwaltung.model.hardware.Hardware;
 
 import java.sql.*;
 
-public class VendorDaoImpl implements VendorDao {
+public class HardwareDaoImpl implements HardwareDao {
+
     @Override
-    public Vendor findById(Integer id) {
+    public Hardware findById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * FROM vendor " +
-                "WHERE vendor_id = ?";
+        String query = "SELECT * FROM hardware WHERE id = ?";
+
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
@@ -22,12 +23,11 @@ public class VendorDaoImpl implements VendorDao {
             statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-
             if (resultSet.next()) {
-                return instantiateVendor(resultSet);
+                return instantiateHardware(resultSet);
             }
         } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while getting the vendor.");
+            throw new RuntimeException("Error occurred by connecting while getting the hardware.");
         } finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
@@ -38,9 +38,9 @@ public class VendorDaoImpl implements VendorDao {
     }
 
     @Override
-    public ObservableList<Vendor> findAll() {
+    public ObservableList<Hardware> findAll(){
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * FROM vendor";
+        String query = "SELECT * FROM hardware";
         Statement statement = null;
         ResultSet resultSet = null;
 
@@ -48,114 +48,108 @@ public class VendorDaoImpl implements VendorDao {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while getting the vendor list.");
+            throw new DBException("Error occurred by connecting while getting the hardware.");
         }
 
-        ObservableList<Vendor> vendors = FXCollections.observableArrayList();
+        ObservableList<Hardware> hardware = FXCollections.observableArrayList();
         try {
             while (resultSet.next())
-                vendors.add(instantiateVendor(resultSet));
+                hardware.add(instantiateHardware(resultSet));
+
         } catch (SQLException e) {
-            throw new DBException("Error occurred while getting the vendor list.");
-        } finally {
+            throw new DBException("Error occurred by connecting while getting the hardware.");
+        }
+        finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
-
-        return vendors;
+        return hardware;
     }
 
+    private Hardware instantiateHardware(ResultSet resultSet) throws SQLException {
+        Hardware hardware = new Hardware();
+        hardware.setId(resultSet.getInt("hardware_id"));
+        hardware.setName(resultSet.getString("hardware_name"));
+        hardware.setVersion(resultSet.getString("software_version"));
+
+        return hardware;
+    }
+
+
     @Override
-    public boolean insert(Vendor vendor) {
+    public boolean insert(Hardware hardware) {
         Connection connection = DBConnection.getConnection();
-        String query = "INSERT INTO vendor " +
-                "(vendor_name, email, mobile_number) " +
-                "VALUES (?, ?, ?)";
+        String query = "";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try {
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, vendor.getName());
-            statement.setString(2, vendor.getEmail());
-            statement.setString(3, vendor.getMobileNumber());
+            statement.setString(1, hardware.getName());
+            statement.setString(2, hardware.getVersion());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) {
-                    vendor.setId(resultSet.getInt(1));
+                    hardware.setId(resultSet.getInt(1));
                     return true;
                 }
             }
         } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while adding the vendor.");
+            throw new DBException("Error occurred by connecting while getting the hardware.");
         } finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
-
-        return false;
-    }
-
-    @Override
-    public boolean update(Vendor vendor) {
-        Connection connection = DBConnection.getConnection();
-        String query = "UPDATE vendor " +
-                "SET vendor_name = ?, email = ?, mobile_number = ? " +
-                "WHERE vendor_id = ?";
-        PreparedStatement statement = null;
-
-        try {
-            statement = connection.prepareStatement(query);
-            statement.setString(1, vendor.getName());
-            statement.setString(2, vendor.getEmail());
-            statement.setString(3, vendor.getMobileNumber());
-            statement.setInt(4, vendor.getId());
-
-            if (statement.executeUpdate() == 1)
-                return true;
-        } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while updating the vendor.");
-        } finally {
-            DBConnection.closeStatement(statement);
-            DBConnection.disconnect();
-        }
-
         return false;
     }
 
     @Override
     public boolean deleteById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "DELETE FROM vendor WHERE vendor_id = ?";
+        String query = "DELETE FROM hardware WHERE id = ?";
         PreparedStatement statement = null;
 
         try {
             statement = connection.prepareStatement(query);
             statement.setInt(1, id);
 
-            if (statement.executeUpdate() == 1)
-                return true;
         } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while deleting the vendor.");
+            throw new DBException("Error occurred by connecting while getting the hardware.");
         } finally {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
-
-        return true;
+        return false;
     }
 
-    private Vendor instantiateVendor(ResultSet resultSet) throws SQLException {
-        Vendor vendor = new Vendor();
-        vendor.setId(resultSet.getInt("vendor_id"));
-        vendor.setName(resultSet.getString("vendor_name"));
-        vendor.setEmail(resultSet.getString("email"));
-        vendor.setMobileNumber(resultSet.getString("mobile_number"));
+    @Override
+    public boolean update(Hardware hardware) {
+        Connection connection = DBConnection.getConnection();
+        String query = "";
+        PreparedStatement statement = null;
 
-        return vendor;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, hardware.getName());
+            statement.setString(2, hardware.getVersion());
+            statement.setInt(3, hardware.getManufacturer().getId());
+            statement.setInt(4, hardware.getId());
+
+            if (statement.executeUpdate() == 1) {
+                return true;
+            }
+        }
+        catch (SQLException e) {
+            throw new DBException("Error occurred by connecting while getting the hardware.");
+        }
+        finally {
+            DBConnection.closeStatement(statement);
+            DBConnection.disconnect();
+        }
+        return false;
     }
 }
