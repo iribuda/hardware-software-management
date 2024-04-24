@@ -10,16 +10,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.controller.WorkerEditController;
 import whz.dbii.software_hardware_verwaltung.controller.WorkerOverviewController;
-import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
-import whz.dbii.software_hardware_verwaltung.dao.WorkerDAO;
-import whz.dbii.software_hardware_verwaltung.dao.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class MainApp extends Application {
     private Stage primaryStage;
@@ -63,7 +56,7 @@ public class MainApp extends Application {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("worker-edit-view.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            SplitPane page = (SplitPane) loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
@@ -86,6 +79,10 @@ public class MainApp extends Application {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public Stage getPrimaryStage(){
+        return primaryStage;
     }
 
     public static void main(String[] args) {

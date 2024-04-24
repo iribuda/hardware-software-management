@@ -4,11 +4,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import whz.dbii.software_hardware_verwaltung.MainApp;
-import whz.dbii.software_hardware_verwaltung.dao.WorkerDAO;
-import whz.dbii.software_hardware_verwaltung.dao.WorkerDAOImpl;
+import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
+import whz.dbii.software_hardware_verwaltung.dao.worker.impl.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
+import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
-import java.sql.SQLException;
+import java.util.List;
 
 public class WorkerOverviewController {
 
@@ -52,6 +53,12 @@ public class WorkerOverviewController {
             nameLabel.setText(worker.getName());
             surnameLabel.setText(worker.getSurname());
             emailLabel.setText(worker.getEmail());
+            ObservableList<String> software = workerDAO.findNamesOfSoftwareOfWorker(worker.getId());
+            softwareCheckbox.setItems(software);
+            softwareCheckbox.setValue(softwareCheckbox.getItems().get(0));
+            ObservableList<String> hardware = workerDAO.findNamesOfHardwareOfWorker(worker.getId());
+            hardwareCheckbox.setItems(hardware);
+            hardwareCheckbox.setValue(hardwareCheckbox.getItems().get(0));
         }
     }
 
@@ -64,6 +71,7 @@ public class WorkerOverviewController {
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("Keine Mitarbeiter wurde gewählt");
             alert.setContentText("Wählen Sie bitte einen Mitarbeiter");
@@ -93,6 +101,7 @@ public class WorkerOverviewController {
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(mainApp.getPrimaryStage());
                 alert.setTitle("No Selection");
                 alert.setHeaderText("No Person Selected");
                 alert.setContentText("Please select a person in the table.");

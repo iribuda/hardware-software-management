@@ -9,6 +9,8 @@ import whz.dbii.software_hardware_verwaltung.dao.software.VendorDao;
 import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SoftwareDaoImpl implements SoftwareDao {
 
@@ -158,6 +160,56 @@ public class SoftwareDaoImpl implements SoftwareDao {
         }
 
         return false;
+    }
+
+    @Override
+    public ObservableList<String> findAllNameOfSoftware() {
+        Connection connection = DBConnection.getConnection();
+        String query = "SELECT software_name FROM software";
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            throw new DBException("Error occurred by connecting while getting the software list.");
+        }
+
+        ObservableList<String> software = FXCollections.observableArrayList();
+        try {
+            while (resultSet.next())
+                software.add(resultSet.getString("software_name"));
+        } catch (SQLException e) {
+            throw new DBException("Error occurred while getting the software list.");
+        } finally {
+            DBConnection.closeResultSet(resultSet);
+            DBConnection.closeStatement(statement);
+            DBConnection.disconnect();
+        }
+
+        return software;
+    }
+
+    @Override
+    public int findIdByName(String name) {
+        Connection connection = DBConnection.getConnection();
+        String query = "SELECT software_id FROM software WHERE software_name=?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int id = 0;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, name);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("software_id");
+            }
+        } catch (SQLException e) {
+            throw new DBException("Error occurred by connecting while getting the software list.");
+        }
+
+        return id;
     }
 
     private Software instantiateSoftware(ResultSet resultSet) throws SQLException {
