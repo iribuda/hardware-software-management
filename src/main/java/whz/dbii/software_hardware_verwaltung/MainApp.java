@@ -4,13 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import whz.dbii.software_hardware_verwaltung.controller.VendorOverviewController;
-import whz.dbii.software_hardware_verwaltung.controller.WorkerEditController;
-import whz.dbii.software_hardware_verwaltung.controller.WorkerOverviewController;
+import whz.dbii.software_hardware_verwaltung.controller.*;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
 
 import java.io.IOException;
@@ -32,6 +29,10 @@ public class MainApp extends Application {
             loader.setLocation(MainApp.class.getResource("mainpage.fxml"));
             rootLayout = (BorderPane) loader.load();
 
+            MainPageController controller = loader.getController();
+            controller.setRootLayout(rootLayout);
+            controller.setMainApp(this);
+
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -40,6 +41,7 @@ public class MainApp extends Application {
         }
     }
 
+    // ToDo: remove to main page controller?
     public void showWorkerOverview(){
         try{
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("worker-overview.fxml"));
@@ -51,19 +53,6 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-
-    // TODO: remove showVendorOverview to Software controller
-//    public void showVendorOverview(){
-//        try{
-//            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("vendor-overview.fxml"));
-//            SplitPane vendorOverview = (SplitPane) loader.load();
-//            rootLayout.setCenter(vendorOverview);
-//            VendorOverviewController vendorOverviewController = loader.getController();
-//            vendorOverviewController.setMainApp(this);
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
 
     public boolean showWorkerEditDialog(Worker worker){
         try {

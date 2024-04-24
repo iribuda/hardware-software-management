@@ -40,7 +40,7 @@ public class SoftwareDaoImpl implements SoftwareDao {
         } finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
-            DBConnection.disconnect();
+//            DBConnection.disconnect();
         }
 
         return null;

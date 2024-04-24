@@ -31,7 +31,7 @@ public class VendorDaoImpl implements VendorDao {
         } finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
-            DBConnection.disconnect();
+//            DBConnection.disconnect();
         }
 
         return null;
