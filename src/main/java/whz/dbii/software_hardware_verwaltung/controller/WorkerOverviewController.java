@@ -2,13 +2,18 @@ package whz.dbii.software_hardware_verwaltung.controller;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
 import whz.dbii.software_hardware_verwaltung.dao.worker.impl.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
 import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
+import java.io.IOException;
 import java.util.List;
 
 public class WorkerOverviewController {
@@ -30,7 +35,7 @@ public class WorkerOverviewController {
     @FXML
     private ChoiceBox<String> softwareCheckbox;
 
-    private MainApp mainApp;
+    private MainPageController mainPageController;
     private WorkerDAO workerDAO;
 
     @FXML
@@ -71,7 +76,7 @@ public class WorkerOverviewController {
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
+            alert.initOwner(mainPageController.getPrimaryStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("Keine Mitarbeiter wurde gewählt");
             alert.setContentText("Wählen Sie bitte einen Mitarbeiter");
@@ -83,7 +88,7 @@ public class WorkerOverviewController {
     @FXML
     private void handleNewWorker(){
         Worker worker = new Worker();
-        boolean okClicked = mainApp.showWorkerEditDialog(worker);
+        boolean okClicked = showWorkerEditDialog(worker);
         if (okClicked){
             workerDAO.save(worker);
             workerTable.getItems().add(worker);
@@ -94,25 +99,55 @@ public class WorkerOverviewController {
     private void handleEditWorker(){
         Worker selectedWorker = workerTable.getSelectionModel().getSelectedItem();
         if (selectedWorker != null){
-            boolean okClicked = mainApp.showWorkerEditDialog(selectedWorker);
+            boolean okClicked = showWorkerEditDialog(selectedWorker);
             if (okClicked){
                 workerDAO.update(selectedWorker);
                 showWorkerDetails(selectedWorker);
             }
-            else{
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(mainApp.getPrimaryStage());
-                alert.setTitle("No Selection");
-                alert.setHeaderText("No Person Selected");
-                alert.setContentText("Please select a person in the table.");
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainPageController.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table.");
 
-                alert.showAndWait();
-            }
+            alert.showAndWait();
         }
     }
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+    public boolean showWorkerEditDialog(Worker worker){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("worker-edit-view.fxml"));
+            SplitPane page = (SplitPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Bearbeitung des Mitarbeiters");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainPageController.getPrimaryStage());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            WorkerEditController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setWorker(worker);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void setMainApp(MainPageController mainPageController) {
+        this.mainPageController = mainPageController;
     }
 
 }

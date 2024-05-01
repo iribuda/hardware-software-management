@@ -5,6 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.HardwareDaoImpl;
@@ -18,6 +22,12 @@ import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
 public class WorkerEditController {
 
+    @FXML
+    private GridPane hardwareGrid;
+    @FXML
+    private GridPane softwareGrid;
+    @FXML
+    private VBox rightPane;
     @FXML
     private TableView<Software> softwareTable;
     @FXML
@@ -62,13 +72,22 @@ public class WorkerEditController {
         surnameTextField.setText(worker.getSurname());
         emailTextField.setText(worker.getEmail());
         softwareCheckbox.setItems(softwareDao.findAllNameOfSoftware());
-        softwareNameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());
-        softwareVersionColumn.setCellValueFactory(cellDate -> cellDate.getValue().versionProperty());
-        populateSoftware();
+        System.out.println(worker.getId());
+        if (worker.getId() != 0){
+            softwareNameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());
+            softwareVersionColumn.setCellValueFactory(cellDate -> cellDate.getValue().versionProperty());
+            populateSoftware();
 
-        hardwareCheckbox.setItems(hardwareDao.findAllNamesOfHardware());
-        hardwareNameColumn.setCellValueFactory((data -> new SimpleStringProperty(data.getValue())));
-        populateHardware();
+            hardwareCheckbox.setItems(hardwareDao.findAllNamesOfHardware());
+            hardwareNameColumn.setCellValueFactory((data -> new SimpleStringProperty(data.getValue())));
+            populateHardware();
+        }
+        else{
+            rightPane.setMaxWidth(0);
+            softwareGrid.setVisible(false);
+            hardwareGrid.setVisible(false);
+        }
+
     }
 
     private void populateSoftware(){

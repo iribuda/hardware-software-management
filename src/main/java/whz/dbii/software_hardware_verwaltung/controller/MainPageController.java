@@ -3,9 +3,13 @@ package whz.dbii.software_hardware_verwaltung.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
+import whz.dbii.software_hardware_verwaltung.model.Worker;
 
 import java.io.IOException;
 
@@ -25,6 +29,7 @@ public class MainPageController {
 
     private BorderPane rootLayout;
     private MainApp mainApp;
+    private Stage primaryStage;
 
     public void setRootLayout(BorderPane rootLayout) {
         this.rootLayout = rootLayout;
@@ -32,6 +37,14 @@ public class MainPageController {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     private void showVendorOverview(){
@@ -76,7 +89,7 @@ public class MainPageController {
             SplitPane workerOverview = (SplitPane) loader.load();
             rootLayout.setCenter(workerOverview);
             WorkerOverviewController workerOverviewController = loader.getController();
-            workerOverviewController.setMainApp(mainApp);
+            workerOverviewController.setMainApp(this);
         }catch (IOException e){
             e.printStackTrace();
         }
