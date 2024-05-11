@@ -24,7 +24,7 @@ public class VendorOverviewController {
     @FXML
     private TableColumn<Vendor, String> nameColumn;
 
-    private MainApp mainApp;
+    private MainPageController mainPageController;
     private VendorDao vendorDao;
 
     @FXML
@@ -47,8 +47,8 @@ public class VendorOverviewController {
             mobileLabel.setText(vendor.getMobileNumber());
         }
     }
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+    public void setMainPageController(MainPageController mainPageController) {
+        this.mainPageController = mainPageController;
     }
     public void handleNewVendor(ActionEvent actionEvent) {
     }

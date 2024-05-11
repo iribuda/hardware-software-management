@@ -146,7 +146,7 @@ public class WorkerOverviewController {
         }
     }
 
-    public void setMainApp(MainPageController mainPageController) {
+    public void setMainPageController(MainPageController mainPageController) {
         this.mainPageController = mainPageController;
     }
 

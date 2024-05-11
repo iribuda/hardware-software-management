@@ -31,11 +31,11 @@ public class LicenceOverviewController {
     @FXML
     private TableColumn<License, String> keyColumn;
 
-    private MainApp mainApp;
+    private MainPageController mainPageController;
     private LicenseDao licenseDao;
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+    public void setMainPageController(MainPageController mainPageController) {
+        this.mainPageController = mainPageController;
     }
 
     @FXML

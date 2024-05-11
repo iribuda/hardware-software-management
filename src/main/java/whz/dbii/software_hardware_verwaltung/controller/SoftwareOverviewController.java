@@ -23,11 +23,11 @@ public class SoftwareOverviewController {
     @FXML
     private TableColumn<Software, String> nameColumn;
 
-    private MainApp mainApp;
+    private MainPageController mainPageController;
     private SoftwareDao softwareDao;
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+    public void setMainPageController(MainPageController mainPageController) {
+        this.mainPageController = mainPageController;
     }
 
     @FXML
