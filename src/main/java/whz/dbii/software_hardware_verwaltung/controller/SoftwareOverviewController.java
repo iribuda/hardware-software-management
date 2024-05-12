@@ -85,7 +85,7 @@ public class SoftwareOverviewController {
         alert.initOwner(mainPageController.getPrimaryStage());
         alert.setTitle("No Selection");
         alert.setHeaderText("No software was selected.");
-        alert.setContentText("Please choose the software to delete!");
+        alert.setContentText("Please choose the software!");
 
         return alert;
     }

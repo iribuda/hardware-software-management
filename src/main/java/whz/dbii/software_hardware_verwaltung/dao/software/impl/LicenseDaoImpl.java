@@ -86,9 +86,9 @@ public class LicenseDaoImpl implements LicenseDao {
         try {
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, license.getKey());
-            statement.setDate(2, new java.sql.Date(license.getStartDate().getTime()));
-            statement.setDate(3, new java.sql.Date(license.getExpirationDate().getTime()));
-            statement.setDate(4, new java.sql.Date(license.getPurchaseDate().getTime()));
+            statement.setDate(2, java.sql.Date.valueOf(license.getStartDate()));
+            statement.setDate(3, java.sql.Date.valueOf(license.getExpirationDate()));
+            statement.setDate(4, java.sql.Date.valueOf(license.getPurchaseDate()));
             statement.setString(5, license.getStatus());
             statement.setFloat(6, license.getPrice());
             statement.setInt(7, license.getSoftware().getId());
@@ -117,15 +117,15 @@ public class LicenseDaoImpl implements LicenseDao {
         Connection connection = DBConnection.getConnection();
         String query = "UPDATE license " +
                 "SET license_key = ?, license_start_date = ?, expiration_date = ?, purchase_date = ?, license_status = ?, price = ?, software_id = ? " +
-                "WHERE licence_id = ?";
+                "WHERE license_id = ?";
         PreparedStatement statement = null;
 
         try {
             statement = connection.prepareStatement(query);
             statement.setInt(1, license.getKey());
-            statement.setDate(2, new java.sql.Date(license.getStartDate().getTime()));
-            statement.setDate(3, new java.sql.Date(license.getExpirationDate().getTime()));
-            statement.setDate(4, new java.sql.Date(license.getPurchaseDate().getTime()));
+            statement.setDate(2, java.sql.Date.valueOf(license.getStartDate()));
+            statement.setDate(3, java.sql.Date.valueOf(license.getExpirationDate()));
+            statement.setDate(4, java.sql.Date.valueOf(license.getPurchaseDate()));
             statement.setString(5, license.getStatus());
             statement.setFloat(6, license.getPrice());
             statement.setInt(7, license.getSoftware().getId());
@@ -134,6 +134,7 @@ public class LicenseDaoImpl implements LicenseDao {
             if (statement.executeUpdate() == 1)
                 return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DBException("Error occurred by connecting while updating the license.");
         } finally {
             DBConnection.closeStatement(statement);
@@ -146,7 +147,7 @@ public class LicenseDaoImpl implements LicenseDao {
     @Override
     public boolean deleteById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "DELETE FROM license WHERE licence_id = ?";
+        String query = "DELETE FROM license WHERE license_id = ?";
         PreparedStatement statement = null;
 
         try {
@@ -156,6 +157,7 @@ public class LicenseDaoImpl implements LicenseDao {
             if (statement.executeUpdate() == 1)
                 return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DBException("Error occurred by connecting while deleting the license.");
         } finally {
             DBConnection.closeStatement(statement);
@@ -169,9 +171,9 @@ public class LicenseDaoImpl implements LicenseDao {
         License license = new License();
         license.setId(resultSet.getInt("license_id"));
         license.setKey(resultSet.getInt("license_key"));
-        license.setStartDate(resultSet.getDate("license_start_date"));
-        license.setExpirationDate(resultSet.getDate("expiration_date"));
-        license.setPurchaseDate(resultSet.getDate("purchase_date"));
+        license.setStartDate(resultSet.getDate("license_start_date").toLocalDate());
+        license.setExpirationDate(resultSet.getDate("expiration_date").toLocalDate());
+        license.setPurchaseDate(resultSet.getDate("purchase_date").toLocalDate());
         license.setStatus(resultSet.getString("license_status"));
         license.setPrice(resultSet.getFloat("price"));
         license.setSoftware(softwareDao.findById(resultSet.getInt("software_id")));

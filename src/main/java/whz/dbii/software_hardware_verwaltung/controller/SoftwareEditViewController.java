@@ -40,6 +40,8 @@ public class SoftwareEditViewController {
         nameTextField.setText(software.getName());
         versionTextField.setText(software.getVersion());
         vendorCheckbox.setItems(vendorDao.findAllVendorNames());
+        if (software.getVendor() != null)
+            vendorCheckbox.setValue(software.getVendor().getName());
     }
     private boolean isInputValid() {
         StringBuilder errorMessage = new StringBuilder();
