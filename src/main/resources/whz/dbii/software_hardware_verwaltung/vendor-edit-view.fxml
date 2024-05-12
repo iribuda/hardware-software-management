@@ -35,9 +35,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label text="Mobile" GridPane.rowIndex="2" />
                         <Label text="Name" />
                         <Label text="E-Mail" GridPane.rowIndex="1" />
+                        <Label text="Mobile" GridPane.rowIndex="2" />
                         <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
                         <TextField fx:id="emailTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="mobileTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />

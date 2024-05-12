@@ -145,10 +145,10 @@ public class SoftwareDaoImpl implements SoftwareDao {
         try {
             statement = connection.prepareStatement(query);
             statement.setInt(1, id);
-
             if (statement.executeUpdate() == 1)
                 return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DBException("Error occurred by connecting while deleting the software.");
         } finally {
             DBConnection.closeStatement(statement);
@@ -202,7 +202,7 @@ public class SoftwareDaoImpl implements SoftwareDao {
                 id = resultSet.getInt("software_id");
             }
         } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while getting the software list.");
+            throw new DBException("Error occurred by connecting while getting the software id by name.");
         }
 
         return id;

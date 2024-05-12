@@ -9,4 +9,6 @@ public interface VendorDao {
     boolean insert(Vendor vendor);
     boolean update(Vendor vendor);
     boolean deleteById(Integer id);
+    ObservableList<String> findAllVendorNames();
+    int findIdByName(String name);
 }

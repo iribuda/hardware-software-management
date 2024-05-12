@@ -71,8 +71,9 @@ public class WorkerOverviewController {
     private void handleDeleteWorker() {
         int selectedIndex = workerTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
+            int workerId = workerTable.getSelectionModel().getSelectedItem().getId();
             workerTable.getItems().remove(selectedIndex);
-            workerDAO.delete(selectedIndex);
+            workerDAO.delete(workerId);
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);

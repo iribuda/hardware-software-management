@@ -3,36 +3,52 @@ package whz.dbii.software_hardware_verwaltung.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import whz.dbii.software_hardware_verwaltung.dao.software.SoftwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.software.VendorDao;
+import whz.dbii.software_hardware_verwaltung.dao.software.impl.SoftwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.software.impl.VendorDaoImpl;
-import whz.dbii.software_hardware_verwaltung.model.software.Vendor;
+import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
-public class VendorEditViewController {
+public class SoftwareEditViewController {
     @FXML
     public TextField nameTextField;
     @FXML
-    public TextField emailTextField;
+    public TextField versionTextField;
     @FXML
-    public TextField mobileTextField;
+    public ChoiceBox<String> vendorCheckbox;
+
     private Stage dialogStage;
-    private Vendor vendor;
+    private Software software;
     private boolean isOkClicked = false;
+    private SoftwareDao softwareDao;
     private VendorDao vendorDao;
 
-    public void setDialogStage(Stage dialogStage){
+    @FXML
+    private void initialize() {
+        this.softwareDao = new SoftwareDaoImpl();
+        this.vendorDao = new VendorDaoImpl();
+    }
+    public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
+    public void setSoftware(Software software) {
+        this.software = software;
+        nameTextField.setText(software.getName());
+        versionTextField.setText(software.getVersion());
+        vendorCheckbox.setItems(vendorDao.findAllVendorNames());
+    }
     private boolean isInputValid() {
         StringBuilder errorMessage = new StringBuilder();
         if (nameTextField.getText() == null || nameTextField.getText().isEmpty())
             errorMessage.append("Please enter the valid name!\n");
-        if (emailTextField.getText() == null || emailTextField.getText().isEmpty())
-            errorMessage.append("Please enter the valid Email!\n");
-        if (mobileTextField.getText() == null || mobileTextField.getText().isEmpty())
-            errorMessage.append("Please enter the valid Mobile number!");
+        if (versionTextField.getText() == null || versionTextField.getText().isEmpty())
+            errorMessage.append("Please enter the valid version!\n");
+        if (vendorCheckbox.getValue() == null || vendorCheckbox.getValue().isEmpty())
+            errorMessage.append("Please provide a valid vendor!\n");
 
         if (errorMessage.isEmpty()) return true;
 
@@ -45,18 +61,9 @@ public class VendorEditViewController {
 
         return false;
     }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-        nameTextField.setText(vendor.getName());
-        emailTextField.setText(vendor.getEmail());
-        mobileTextField.setText(vendor.getMobileNumber());
-    }
-
     public boolean isOkClicked() {
-        return this.isOkClicked;
+        return isOkClicked;
     }
-
     @FXML
     public void handleCancel(ActionEvent actionEvent) {
         dialogStage.close();
@@ -65,15 +72,12 @@ public class VendorEditViewController {
     public void handleOk(ActionEvent actionEvent) {
         if (!isInputValid()) return;
 
-        vendor.setName(nameTextField.getText());
-        vendor.setEmail(emailTextField.getText());
-        vendor.setMobileNumber(mobileTextField.getText());
+        software.setName(nameTextField.getText());
+        software.setVersion(versionTextField.getText());
+        int vendorId = vendorDao.findIdByName(vendorCheckbox.getValue());
+        software.setVendor(vendorDao.findById(vendorId));
+
         isOkClicked = true;
         dialogStage.close();
-    }
-
-    @FXML
-    private void initialize() {
-        this.vendorDao = new VendorDaoImpl();
     }
 }
