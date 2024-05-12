@@ -23,6 +23,8 @@ public class MainPageController {
     public void handleShowWorkers(ActionEvent actionEvent) {
         showWorkerOverview();
     }
+    @FXML
+    public void handleShowVendor(ActionEvent actionEvent) { showVendorOverview(); }
 
     private BorderPane rootLayout;
     private Stage primaryStage;

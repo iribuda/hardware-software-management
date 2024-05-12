@@ -35,9 +35,9 @@
             <Button layoutY="105.0" mnemonicParsing="false" onAction="#handleShowWorkers" prefHeight="34.0" prefWidth="204.0" text="Workers" />
             <Button layoutY="139.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Orders" />
             <Button layoutY="173.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Hardware" />
-            <Button layoutY="207.0" mnemonicParsing="false" onAction="#handleShowSoftware" prefHeight="34.0" prefWidth="204.0" text="Software" />
-            <Button layoutY="275.0" mnemonicParsing="false" onAction="#handleShowLicense" prefHeight="34.0" prefWidth="204.0" text="License" />
-            <Button layoutY="241.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Failure" />
+            <Button layoutY="241.0" mnemonicParsing="false" onAction="#handleShowSoftware" prefHeight="34.0" prefWidth="204.0" text="Software" />
+            <Button layoutY="309.0" mnemonicParsing="false" onAction="#handleShowLicense" prefHeight="34.0" prefWidth="204.0" text="License" />
+            <Button layoutY="207.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Failure" />
             <Button layoutX="18.0" layoutY="359.0" mnemonicParsing="false" text="Logout">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0">
@@ -47,6 +47,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button layoutY="275.0" mnemonicParsing="false" onAction="#handleShowVendor" prefHeight="34.0" prefWidth="204.0" text="Vendor" />
          </children>
       </AnchorPane>
    </left>
