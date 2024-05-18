@@ -12,11 +12,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="430.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="430.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.MainPageController">
    <left>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="356.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutY="119.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="204.0" text="Workers" />
             <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="14.0" layoutY="13.0">
                <image>
                   <Image url="@img/Sample_User_Icon.png" />
@@ -33,10 +32,12 @@
                </font>
             </Label>
             <Line endX="96.76800537109375" endY="-7.62939453125E-6" layoutX="100.0" layoutY="104.0" startX="-93.0" startY="-7.62939453125E-6" stroke="#afb1c7" />
-            <Button layoutY="164.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="204.0" text="Orders" />
-            <Button layoutY="209.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="204.0" text="Hardware" />
-            <Button layoutY="254.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="204.0" text="Software" />
-            <Button layoutY="299.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="204.0" text="Failure" />
+            <Button layoutY="105.0" mnemonicParsing="false" onAction="#handleShowWorkers" prefHeight="34.0" prefWidth="204.0" text="Workers" />
+            <Button layoutY="139.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Orders" />
+            <Button layoutY="173.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Hardware" />
+            <Button layoutY="241.0" mnemonicParsing="false" onAction="#handleShowSoftware" prefHeight="34.0" prefWidth="204.0" text="Software" />
+            <Button layoutY="309.0" mnemonicParsing="false" onAction="#handleShowLicense" prefHeight="34.0" prefWidth="204.0" text="License" />
+            <Button layoutY="207.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Failure" />
             <Button layoutX="18.0" layoutY="359.0" mnemonicParsing="false" text="Logout">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0">
@@ -46,6 +47,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button layoutY="275.0" mnemonicParsing="false" onAction="#handleShowVendor" prefHeight="34.0" prefWidth="204.0" text="Vendor" />
          </children>
       </AnchorPane>
    </left>

@@ -31,7 +31,7 @@ public class VendorDaoImpl implements VendorDao {
         } finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
-            DBConnection.disconnect();
+//            DBConnection.disconnect();
         }
 
         return null;
@@ -118,6 +118,7 @@ public class VendorDaoImpl implements VendorDao {
             if (statement.executeUpdate() == 1)
                 return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DBException("Error occurred by connecting while updating the vendor.");
         } finally {
             DBConnection.closeStatement(statement);
@@ -136,7 +137,6 @@ public class VendorDaoImpl implements VendorDao {
         try {
             statement = connection.prepareStatement(query);
             statement.setInt(1, id);
-
             if (statement.executeUpdate() == 1)
                 return true;
         } catch (SQLException e) {
@@ -147,6 +147,56 @@ public class VendorDaoImpl implements VendorDao {
         }
 
         return true;
+    }
+
+    @Override
+    public ObservableList<String> findAllVendorNames() {
+        Connection connection = DBConnection.getConnection();
+        String query = "SELECT vendor_name FROM vendor";
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            throw new DBException("Error occurred by connecting while getting the vendor names list.");
+        }
+
+        ObservableList<String> vendorNames = FXCollections.observableArrayList();
+        try {
+            while (resultSet.next())
+                vendorNames.add(resultSet.getString("vendor_name"));
+        } catch (SQLException e) {
+            throw new DBException("Error occurred while getting the vendor names list.");
+        } finally {
+            DBConnection.closeResultSet(resultSet);
+            DBConnection.closeStatement(statement);
+            DBConnection.disconnect();
+        }
+
+        return vendorNames;
+    }
+
+    @Override
+    public int findIdByName(String name) {
+        Connection connection = DBConnection.getConnection();
+        String query = "SELECT vendor_id FROM vendor WHERE vendor_name=?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int id = 0;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, name);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("vendor_id");
+            }
+        } catch (SQLException e) {
+            throw new DBException("Error occurred by connecting while getting the vendor id by name.");
+        }
+
+        return id;
     }
 
     private Vendor instantiateVendor(ResultSet resultSet) throws SQLException {

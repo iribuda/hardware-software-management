@@ -2,6 +2,7 @@ package whz.dbii.software_hardware_verwaltung.model.software;
 
 import javafx.beans.property.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -9,9 +10,9 @@ public class License {
 
     private final IntegerProperty id;
     private final SimpleIntegerProperty key;
-    private final SimpleObjectProperty<Date> startDate;
-    private final SimpleObjectProperty<Date> expirationDate;
-    private final SimpleObjectProperty<Date> purchaseDate;
+    private final SimpleObjectProperty<LocalDate> startDate;
+    private final SimpleObjectProperty<LocalDate> expirationDate;
+    private final SimpleObjectProperty<LocalDate> purchaseDate;
     private final SimpleStringProperty status;
     private final SimpleFloatProperty price;
     private final SimpleObjectProperty<Software> software;
@@ -26,7 +27,7 @@ public class License {
         this.price = new SimpleFloatProperty();
         this.software = new SimpleObjectProperty<>();
     }
-    public License(Integer id, Integer key, Date startDate, Date expirationDate, Date purchaseDate,
+    public License(Integer id, Integer key, LocalDate startDate, LocalDate expirationDate, LocalDate purchaseDate,
                    Float price, Software software) {
         this.id = new SimpleIntegerProperty(id);
         this.key = new SimpleIntegerProperty(key);
@@ -62,39 +63,39 @@ public class License {
         this.key.set(key);
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate.get();
     }
 
-    public SimpleObjectProperty<Date> startDateProperty() {
+    public SimpleObjectProperty<LocalDate> startDateProperty() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate.set(startDate);
     }
 
-    public Date getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate.get();
     }
 
-    public SimpleObjectProperty<Date> expirationDateProperty() {
+    public SimpleObjectProperty<LocalDate> expirationDateProperty() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate.set(expirationDate);
     }
 
-    public Date getPurchaseDate() {
+    public LocalDate getPurchaseDate() {
         return purchaseDate.get();
     }
 
-    public SimpleObjectProperty<Date> purchaseDateProperty() {
+    public SimpleObjectProperty<LocalDate> purchaseDateProperty() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate.set(purchaseDate);
     }
 

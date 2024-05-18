@@ -8,46 +8,73 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.7408026755852842" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.WorkerEditController">
+<SplitPane dividerPositions="0.5" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.WorkerEditController">
   <items>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0">
+      <VBox alignment="CENTER" prefWidth="400.0" spacing="10.0">
          <children>
-            <GridPane alignment="CENTER_LEFT" layoutX="92.0" layoutY="67.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
+            <Label text="Mitarbeiter">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <GridPane alignment="CENTER" vgap="10.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="63.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.5" minWidth="10.0" prefWidth="197.0" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="60.5" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <Label text="E-Mail" GridPane.rowIndex="2" />
-                  <Label text="Software" GridPane.rowIndex="3" />
-                  <ChoiceBox fx:id="softwareCheckbox" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Name" />
                   <Label text="Vorname" GridPane.rowIndex="1" />
                   <TextField fx:id="surnameTextField" GridPane.columnIndex="1" />
                   <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="emailTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Hardware" GridPane.rowIndex="4" />
-                  <ChoiceBox fx:id="hardwareCheckbox" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Button layoutX="302.0" layoutY="197.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleAddSoftware" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Button layoutX="302.0" layoutY="125.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleAddHardware" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <HBox alignment="BOTTOM_RIGHT" layoutX="86.0" layoutY="346.0" maxHeight="40.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="20.0">
+            <GridPane fx:id="hardwareGrid" alignment="CENTER" hgap="16.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="30.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Hardware" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="hardwareCheckbox" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleAddHardware" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane fx:id="softwareGrid" alignment="CENTER" hgap="16.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Software" />
+                  <ChoiceBox fx:id="softwareCheckbox" prefWidth="220.0" GridPane.columnIndex="1" />
+                  <Button fx:id="addSoftwareBtn" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleAddSoftware" text="Add" GridPane.columnIndex="2" />
+               </children>
+            </GridPane>
+            <HBox alignment="BOTTOM_RIGHT" maxHeight="40.0" prefHeight="100.0">
                <children>
                   <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel">
                      <HBox.margin>
@@ -61,36 +88,34 @@
                   </Button>
                </children>
             </HBox>
-            <Label layoutX="146.0" text="Mitarbeiter">
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="rightPane" alignment="CENTER" minWidth="0.0" spacing="10.0">
+         <children>
+            <Label alignment="CENTER" text="Software">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-         </children>
-      </AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-         <children>
-            <TableView fx:id="softwareTable" layoutX="13.0" layoutY="43.0" prefHeight="122.0" prefWidth="307.0">
+            <TableView fx:id="softwareTable" prefHeight="120.0">
               <columns>
-                <TableColumn fx:id="softwareNameColumn" prefWidth="202.5" text="Name" />
-                <TableColumn fx:id="softwareVersionColumn" prefWidth="102.5" text="Version" />
+                <TableColumn fx:id="softwareNameColumn" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Name" />
+                <TableColumn fx:id="softwareVersionColumn" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Version" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label layoutX="139.0" layoutY="14.0" text="Software">
+            <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Delete" />
+            <Label text="Hardware">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="269.0" layoutY="174.0" mnemonicParsing="false" text="Delete" />
-            <Label layoutX="139.0" layoutY="201.0" text="Hardware">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TableView fx:id="hardwareTable" layoutX="13.0" layoutY="228.0" prefHeight="122.0" prefWidth="307.0">
+            <TableView fx:id="hardwareTable" prefHeight="122.0">
                <columns>
                   <TableColumn fx:id="hardwareNameColumn" prefWidth="202.5" text="Name" />
                </columns>
@@ -98,7 +123,14 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button layoutX="269.0" layoutY="359.0" mnemonicParsing="false" text="Delete" />
-         </children></AnchorPane>
+            <Button mnemonicParsing="false" text="Delete" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
   </items>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
 </SplitPane>
