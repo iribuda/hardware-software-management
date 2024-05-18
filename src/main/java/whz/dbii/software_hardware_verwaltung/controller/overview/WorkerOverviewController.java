@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.overview;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,13 +8,13 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
+import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
+import whz.dbii.software_hardware_verwaltung.controller.editview.WorkerEditController;
 import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
 import whz.dbii.software_hardware_verwaltung.dao.worker.impl.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
-import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
 import java.io.IOException;
-import java.util.List;
 
 public class WorkerOverviewController {
 

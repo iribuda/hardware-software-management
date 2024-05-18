@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.editview;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

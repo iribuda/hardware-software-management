@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.overview;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
+import whz.dbii.software_hardware_verwaltung.controller.editview.LicenseEditViewController;
+import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.dao.software.LicenseDao;
 import whz.dbii.software_hardware_verwaltung.dao.software.impl.LicenseDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.software.License;

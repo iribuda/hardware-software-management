@@ -7,6 +7,10 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
+import whz.dbii.software_hardware_verwaltung.controller.overview.LicenceOverviewController;
+import whz.dbii.software_hardware_verwaltung.controller.overview.SoftwareOverviewController;
+import whz.dbii.software_hardware_verwaltung.controller.overview.VendorOverviewController;
+import whz.dbii.software_hardware_verwaltung.controller.overview.WorkerOverviewController;
 
 import java.io.IOException;
 

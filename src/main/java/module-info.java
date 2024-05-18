@@ -15,4 +15,8 @@ module whz.dbii.software_hardware_verwaltung {
     opens whz.dbii.software_hardware_verwaltung.controller to javafx.fxml;
     opens whz.dbii.software_hardware_verwaltung.dao.worker to javafx.fxml;
     opens whz.dbii.software_hardware_verwaltung to javafx.fxml;
+    exports whz.dbii.software_hardware_verwaltung.controller.overview;
+    opens whz.dbii.software_hardware_verwaltung.controller.overview to javafx.fxml;
+    exports whz.dbii.software_hardware_verwaltung.controller.editview;
+    opens whz.dbii.software_hardware_verwaltung.controller.editview to javafx.fxml;
 }

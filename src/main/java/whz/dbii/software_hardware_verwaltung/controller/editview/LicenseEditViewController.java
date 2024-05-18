@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.editview;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +15,6 @@ import whz.dbii.software_hardware_verwaltung.dao.software.impl.LicenseDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.software.impl.SoftwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.software.License;
 import whz.dbii.software_hardware_verwaltung.model.software.LicenseStatus;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class LicenseEditViewController {
     @FXML

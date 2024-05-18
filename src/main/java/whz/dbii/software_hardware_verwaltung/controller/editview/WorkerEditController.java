@@ -1,13 +1,10 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.editview;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
@@ -17,7 +14,6 @@ import whz.dbii.software_hardware_verwaltung.dao.software.impl.SoftwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
 import whz.dbii.software_hardware_verwaltung.dao.worker.impl.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
-import whz.dbii.software_hardware_verwaltung.model.hardware.Hardware;
 import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
 public class WorkerEditController {
