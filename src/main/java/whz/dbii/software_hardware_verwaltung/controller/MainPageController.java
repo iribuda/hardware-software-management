@@ -7,10 +7,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
-import whz.dbii.software_hardware_verwaltung.controller.overview.LicenceOverviewController;
-import whz.dbii.software_hardware_verwaltung.controller.overview.SoftwareOverviewController;
-import whz.dbii.software_hardware_verwaltung.controller.overview.VendorOverviewController;
-import whz.dbii.software_hardware_verwaltung.controller.overview.WorkerOverviewController;
+import whz.dbii.software_hardware_verwaltung.controller.overview.*;
 
 import java.io.IOException;
 
@@ -29,6 +26,10 @@ public class MainPageController {
     }
     @FXML
     public void handleShowVendor(ActionEvent actionEvent) { showVendorOverview(); }
+    @FXML
+    public void handleShowHardware(ActionEvent actionEvent) {
+        showHardwareOverview();
+    }
 
     private BorderPane rootLayout;
     private Stage primaryStage;
@@ -69,11 +70,23 @@ public class MainPageController {
         }
     }
 
+    private void showHardwareOverview(){
+        try{
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("hardware-overview.fxml"));
+            SplitPane hardwareOverview = (SplitPane) loader.load();
+            rootLayout.setCenter(hardwareOverview);
+            HardwareOverviewController hardwareOverviewController = loader.getController();
+            hardwareOverviewController.setMainPageController(this);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     private void showLicenseOverview(){
         try{
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("license-overview.fxml"));
-            SplitPane softwareOverview = (SplitPane) loader.load();
-            rootLayout.setCenter(softwareOverview);
+            SplitPane licenseOverview = (SplitPane) loader.load();
+            rootLayout.setCenter(licenseOverview);
             LicenceOverviewController licenceOverviewController = loader.getController();
             licenceOverviewController.setMainPageController(this);
         }catch (IOException e){

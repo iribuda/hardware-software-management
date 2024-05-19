@@ -6,13 +6,12 @@ import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.DBException;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.ManufacturerDao;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Manufacturer;
-import whz.dbii.software_hardware_verwaltung.model.software.Vendor;
 
 import java.sql.*;
 
 public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
-    public Manufacturer findById(Integer id) {
+    public String findById(Integer id) {
         Connection connection = DBConnection.getConnection();
         String query = "SELECT * FROM manufacturer WHERE id = ?";
         PreparedStatement statement = null;
@@ -24,7 +23,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             resultSet = statement.executeQuery();
 
             if (resultSet.next()){
-                return instantiateManufacturer(resultSet);
+                return String.valueOf(instantiateManufacturer(resultSet));
             }
         } catch (SQLException e) {
             throw new DBException("Error occured by connecting while getting the manufacturer.");
@@ -131,6 +130,16 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
     public boolean delete(Manufacturer manufacturer) {
         return false;
+    }
+
+    @Override
+    public ObservableList<String> findAllManufacturerNames() {
+        return null;
+    }
+
+    @Override
+    public int findByName(String name) {
+        return 0;
     }
 
     private Manufacturer instantiateManufacturer(ResultSet resultSet) throws SQLException{

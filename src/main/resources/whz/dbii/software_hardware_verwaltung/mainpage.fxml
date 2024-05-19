@@ -34,7 +34,7 @@
             <Line endX="96.76800537109375" endY="-7.62939453125E-6" layoutX="100.0" layoutY="104.0" startX="-93.0" startY="-7.62939453125E-6" stroke="#afb1c7" />
             <Button layoutY="105.0" mnemonicParsing="false" onAction="#handleShowWorkers" prefHeight="34.0" prefWidth="204.0" text="Workers" />
             <Button layoutY="139.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Orders" />
-            <Button layoutY="173.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Hardware" />
+            <Button layoutY="173.0" mnemonicParsing="false" onAction="#handleShowHardware" prefHeight="34.0" prefWidth="204.0" text="Hardware" />
             <Button layoutY="241.0" mnemonicParsing="false" onAction="#handleShowSoftware" prefHeight="34.0" prefWidth="204.0" text="Software" />
             <Button layoutY="309.0" mnemonicParsing="false" onAction="#handleShowLicense" prefHeight="34.0" prefWidth="204.0" text="License" />
             <Button layoutY="207.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Failure" />
