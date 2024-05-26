@@ -31,6 +31,9 @@ public class MainPageController {
         showHardwareOverview();
     }
 
+    @FXML
+    public void handleShowOrders(ActionEvent actionEvent){ showOrderOverview();}
+
     private BorderPane rootLayout;
     private Stage primaryStage;
 
@@ -44,6 +47,18 @@ public class MainPageController {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    private void showOrderOverview(){
+        try{
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("order-overview.fxml"));
+            SplitPane vendorOverview = (SplitPane) loader.load();
+            rootLayout.setCenter(vendorOverview);
+            OrderOverviewController orderOverviewController = loader.getController();
+            orderOverviewController.setMainPageController(this);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void showVendorOverview(){

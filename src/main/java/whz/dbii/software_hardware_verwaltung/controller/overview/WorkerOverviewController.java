@@ -60,10 +60,12 @@ public class WorkerOverviewController {
             emailLabel.setText(worker.getEmail());
             ObservableList<String> software = workerDAO.findNamesOfSoftwareOfWorker(worker.getId());
             softwareCheckbox.setItems(software);
-            softwareCheckbox.setValue(softwareCheckbox.getItems().get(0));
+            if (!softwareCheckbox.getItems().isEmpty())
+                softwareCheckbox.setValue(softwareCheckbox.getItems().get(0));
             ObservableList<String> hardware = workerDAO.findNamesOfHardwareOfWorker(worker.getId());
             hardwareCheckbox.setItems(hardware);
-            hardwareCheckbox.setValue(hardwareCheckbox.getItems().get(0));
+            if (!hardwareCheckbox.getItems().isEmpty())
+                hardwareCheckbox.setValue(hardwareCheckbox.getItems().get(0));
         }
     }
 

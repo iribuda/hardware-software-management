@@ -37,7 +37,7 @@
                      </color>
                   </InnerShadow>
                </effect></Button>
-            <Button layoutY="139.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Orders">
+            <Button layoutY="139.0" mnemonicParsing="false" onAction="#handleShowOrders" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Orders">
                <effect>
                   <InnerShadow>
                      <color>

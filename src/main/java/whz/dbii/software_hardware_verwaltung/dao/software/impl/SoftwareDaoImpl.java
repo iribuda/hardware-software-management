@@ -149,7 +149,7 @@ public class SoftwareDaoImpl implements SoftwareDao {
                 return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DBException("Error occurred by connecting while deleting the software.");
+            throw new DBException("Error occurred by connecting while deleting the software:" + e.getMessage());
         } finally {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();

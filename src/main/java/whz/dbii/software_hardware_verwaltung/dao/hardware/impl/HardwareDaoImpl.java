@@ -14,7 +14,7 @@ public class HardwareDaoImpl implements HardwareDao {
     @Override
     public Hardware findById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * FROM hardware WHERE id = ?";
+        String query = "SELECT * FROM hardware WHERE hardware_id = ?";
 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -27,11 +27,11 @@ public class HardwareDaoImpl implements HardwareDao {
                 return instantiateHardware(resultSet);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error occurred by connecting while getting the hardware.");
+            throw new RuntimeException("Error occurred by connecting while getting the hardware: " + e.getMessage());
         } finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
-            DBConnection.disconnect();
+//            DBConnection.disconnect();
         }
 
         return null;
