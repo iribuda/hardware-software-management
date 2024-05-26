@@ -328,9 +328,11 @@ VALUES
 	(1, 20, '2024-02-05'),
 	(2, 19, '2024-02-16');
 
+GO
 CREATE VIEW vw_order_details 
 AS
 SELECT o.*, h.hardware_name, m.manufacturer_id, m.manufacturer_name
 FROM h_order o
 JOIN hardware h ON h.hardware_id = o.hardware_id
 JOIN manufacturer m ON m.manufacturer_id = h.manufacturer_id;
+GO

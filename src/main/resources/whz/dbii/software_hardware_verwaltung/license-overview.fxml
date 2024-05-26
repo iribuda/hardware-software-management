@@ -28,7 +28,7 @@
             </children></AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #EBEFFF;">
             <children>
-                <Label alignment="CENTER" layoutX="152.0" layoutY="14.0" maxWidth="200.0" text="Software" textFill="#3b2e59" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="36.0">
+                <Label alignment="CENTER" layoutX="152.0" layoutY="14.0" maxWidth="200.0" text="License" textFill="#3b2e59" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="36.0">
                     <font>
                         <Font name="Segoe UI" size="18.0" />
                     </font>
