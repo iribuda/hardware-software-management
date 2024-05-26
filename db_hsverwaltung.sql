@@ -98,33 +98,34 @@ CREATE TABLE worker_software(
     ON UPDATE CASCADE
 );
 
+
 -- inserting values
 INSERT INTO worker (worker_name, worker_surname, email) 
 VALUES 
-('Emily', 'Jones', 'emily.jones@example.com'),
-('Michael', 'Brown', 'michael.brown@example.com'),
-('Sophia', 'Davis', 'sophia.davis@example.com'),
-('Matthew', 'Wilson', 'matthew.wilson@example.com'),
-('Emma', 'Martinez', 'emma.martinez@example.com'),
-('William', 'Anderson', 'william.anderson@example.com'),
-('Olivia', 'Taylor', 'olivia.taylor@example.com'),
-('James', 'Thomas', 'james.thomas@example.com'),
-('Amelia', 'Hernandez', 'amelia.hernandez@example.com'),
-('Benjamin', 'Young', 'benjamin.young@example.com');
+	('Emily', 'Jones', 'emily.jones@example.com'),
+	('Michael', 'Brown', 'michael.brown@example.com'),
+	('Sophia', 'Davis', 'sophia.davis@example.com'),
+	('Matthew', 'Wilson', 'matthew.wilson@example.com'),
+	('Emma', 'Martinez', 'emma.martinez@example.com'),
+	('William', 'Anderson', 'william.anderson@example.com'),
+	('Olivia', 'Taylor', 'olivia.taylor@example.com'),
+	('James', 'Thomas', 'james.thomas@example.com'),
+	('Amelia', 'Hernandez', 'amelia.hernandez@example.com'),
+	('Benjamin', 'Young', 'benjamin.young@example.com');
+
 
 INSERT INTO manufacturer (manufacturer_name, mobile_number, email) 
 VALUES 
-('Apple', '123-456-7890', 'contact@apple.com'),
-('Samsung', '234-567-8901', 'support@samsung.com'),
-('Dell', '345-678-9012', 'info@dell.com'),
-('HP', '456-789-0123', 'help@hp.com'),
-('Lenovo', '567-890-1234', 'service@lenovo.com'),
-('Asus', '678-901-2345', 'contact@asus.com'),
-('Acer', '789-012-3456', 'support@acer.com'),
-('Microsoft', '890-123-4567', 'info@microsoft.com'),
-('Sony', '901-234-5678', 'service@sony.com'),
-('LG', '012-345-6789', 'contact@lg.com');
-
+	('Apple', '123-456-7890', 'contact@apple.com'),
+	('Samsung', '234-567-8901', 'support@samsung.com'),
+	('Dell', '345-678-9012', 'info@dell.com'),
+	('HP', '456-789-0123', 'help@hp.com'),
+	('Lenovo', '567-890-1234', 'service@lenovo.com'),
+	('Asus', '678-901-2345', 'contact@asus.com'),
+	('Acer', '789-012-3456', 'support@acer.com'),
+	('Microsoft', '890-123-4567', 'info@microsoft.com'),
+	('Sony', '901-234-5678', 'service@sony.com'),
+	('LG', '012-345-6789', 'contact@lg.com');
 
 
 INSERT INTO warranty (warranty_status, expiration_date, w_start_date)
@@ -155,49 +156,48 @@ VALUES
 
 INSERT INTO hardware (hardware_name, manufacturer_id, warranty_id) 
 VALUES 
-('MacBook Pro', 1, 1),
-('Galaxy S21', 2, 2),
-('Inspiron 15', 3, 3),
-('Pavilion x360', 4, 4),
-('ThinkPad X1', 5, 5),
-('ZenBook 14', 6, 6),
-('Aspire 5', 7, 7),
-('Surface Pro 7', 8, 8),
-('PlayStation 5', 9, 9),
-('OLED TV', 10, 10),
-('iMac', 1, 11),
-('Galaxy Tab S7', 2, 12),
-('XPS 13', 3, 13),
-('Envy 13', 4, 14),
-('Yoga 920', 5, 15),
-('ROG Strix', 6, 16),
-('Swift 3', 7, 17),
-('Surface Laptop 3', 8, 18),
-('Bravia TV', 9, 19),
-('Gram 17', 10, 20);
-
+	('MacBook Pro', 1, 1),
+	('Galaxy S21', 2, 2),
+	('Inspiron 15', 3, 3),
+	('Pavilion x360', 4, 4),
+	('ThinkPad X1', 5, 5),
+	('ZenBook 14', 6, 6),
+	('Aspire 5', 7, 7),
+	('Surface Pro 7', 8, 8),
+	('PlayStation 5', 9, 9),
+	('OLED TV', 10, 10),
+	('iMac', 1, 11),
+	('Galaxy Tab S7', 2, 12),
+	('XPS 13', 3, 13),
+	('Envy 13', 4, 14),
+	('Yoga 920', 5, 15),
+	('ROG Strix', 6, 16),
+	('Swift 3', 7, 17),
+	('Surface Laptop 3', 8, 18),
+	('Bravia TV', 9, 19),
+	('Gram 17', 10, 20);
 
 
 INSERT INTO failure (failure_date, failure_type, failure_status, hardware_id) 
 VALUES 
-('2024-01-05', 'Screen failure', 'Repaired', 1),
-('2024-01-20', 'Battery failure', 'Repaired', 2),
-('2024-02-15', 'Hard drive failure', 'Replacement ordered', 3),
-('2024-02-28', 'Overheating', 'Repaired', 4),
-('2024-03-10', 'Keyboard failure', 'Repaired', 5),
-('2024-03-25', 'Screen failure', 'Not repairable', 6),
-('2024-04-05', 'Power supply failure', 'Repaired', 7),
-('2024-04-12', 'Wi-Fi failure', 'Repaired', 8),
-('2024-04-20', 'Hardware failure', 'Replacement ordered', 9),
-('2024-04-28', 'Screen failure', 'Under inspection', 10),
-('2024-05-02', 'Graphics card failure', 'Awaiting parts', 11),
-('2024-05-10', 'Battery failure', 'Not repairable', 12),
-('2024-05-12', 'Touchscreen failure', 'To repair', 13),
-('2024-05-15', 'Cooling system failure', 'Under inspection', 14),
-('2024-05-18', 'USB port failure', 'Replacement ordered', 15);
+	('2024-01-05', 'Screen failure', 'Repaired', 1),
+	('2024-01-20', 'Battery failure', 'Repaired', 2),
+	('2024-02-15', 'Hard drive failure', 'Replacement ordered', 3),
+	('2024-02-28', 'Overheating', 'Repaired', 4),
+	('2024-03-10', 'Keyboard failure', 'Repaired', 5),
+	('2024-03-25', 'Screen failure', 'Not repairable', 6),
+	('2024-04-05', 'Power supply failure', 'Repaired', 7),
+	('2024-04-12', 'Wi-Fi failure', 'Repaired', 8),
+	('2024-04-20', 'Hardware failure', 'Replacement ordered', 9),
+	('2024-04-28', 'Screen failure', 'Under inspection', 10),
+	('2024-05-02', 'Graphics card failure', 'Awaiting parts', 11),
+	('2024-05-10', 'Battery failure', 'Not repairable', 12),
+	('2024-05-12', 'Touchscreen failure', 'To repair', 13),
+	('2024-05-15', 'Cooling system failure', 'Under inspection', 14),
+	('2024-05-18', 'USB port failure', 'Replacement ordered', 15);
 
 
-    -- Insert data into the h_order table
+-- Insert data into the h_order table
 INSERT INTO h_order (order_date, order_status, hardware_id) 
 VALUES 
 	('2023-12-20', 'Delivered', 1),
@@ -223,7 +223,8 @@ VALUES
 
 
 -- Inserting into vendor table
-INSERT INTO vendor (vendor_name, email, mobile_number) VALUES
+INSERT INTO vendor (vendor_name, email, mobile_number) 
+VALUES
 	('Microsoft', 'contact@microsoft.com', '1234567890'),
 	('Adobe', 'contact@adobe.com', '0987654321'),
 	('Apple', 'contact@apple.com', '1112223333'),
@@ -244,31 +245,35 @@ INSERT INTO vendor (vendor_name, email, mobile_number) VALUES
 	('Sony', 'contact@sony.com', '8889996664'),
 	('ASUS', 'contact@asus.com', '3332221111');
 
--- Inserting into software table
-INSERT INTO software (software_name, software_version, vendor_id) VALUES
-	('Microsoft Office', '365', 1),
-	('Photoshop', 'CC 2023', 2),
-	('Adobe Acrobat', 'Pro DC', 2),
-	('Adobe Premiere Pro', '2023', 2),
-	('iTunes', '12.12', 3),
-	('Google Chrome', '99', 4),
-	('Android', '12', 4),
-	('Amazon Web Services', 'S3', 5),
-	('Oracle Database', '19c', 6),
-	('IBM Watson', '2.0', 7),
-	('Salesforce CRM', 'Winter 22', 8),
-	('Cisco Webex', '5.0', 9),
-	('VMware vSphere', '7.0', 10),
-	('HP LaserJet', 'MFP M234dwe', 11),
-	('Dell Precision', '3561', 12),
-	('SAP ERP', 'S/4HANA', 13),
-	('Lenovo ThinkPad', 'X1 Carbon', 14),
-	('Nvidia GeForce', 'RTX 4090', 15),
-	('Qualcomm Snapdragon', '888', 16),
-	('PlayStation', 'PS5', 17);
+
+-- Inserting values into the software table
+INSERT INTO software (software_name, software_version, vendor_id) 
+VALUES
+    ('Windows', '10.0', 1),      -- Microsoft
+    ('Photoshop', '2023', 2),    -- Adobe
+    ('iOS', '16.0', 3),          -- Apple
+    ('Android', '13.0', 4),      -- Google
+    ('AWS', '2023', 5),          -- Amazon
+    ('Oracle DB', '19c', 6),     -- Oracle
+    ('WebSphere', '9.0', 7),     -- IBM
+    ('Salesforce CRM', '2023', 8), -- Salesforce
+    ('IOS XR', '7.5', 9),        -- Cisco
+    ('Intel OneAPI', '2023', 10), -- Intel
+    ('vSphere', '7.0', 11),      -- VMware
+    ('HP UFT', '15.0', 12),      -- HP
+    ('Dell BIOS', '1.2.3', 13),  -- Dell
+    ('SAP HANA', '2.0', 14),     -- SAP
+    ('Lenovo Vantage', '10.0', 15), -- Lenovo
+    ('CUDA', '11.6', 16),        -- Nvidia
+    ('Snapdragon', '865', 17),   -- Qualcomm
+    ('PlayStation OS', '5.0', 18), -- Sony
+    ('ASUS Aura', '3.0', 19),    -- ASUS
+    ('Office 365', '2023', 1);   -- Microsoft
+
 
 -- Inserting into license table
-INSERT INTO license (license_key, license_start_date, expiration_date, purchase_date, license_status, price, software_id) VALUES
+INSERT INTO license (license_key, license_start_date, expiration_date, purchase_date, license_status, price, software_id) 
+VALUES
 	(123456, '2023-01-01 00:00:00', '2024-01-01 00:00:00', '2022-12-01 00:00:00', 'expired', 1000.00, 1),
 	(654321, '2022-12-01 00:00:00', '2023-12-01 00:00:00', '2022-11-01 00:00:00', 'expired', 500.00, 2),
 	(987654, '2023-01-15 00:00:00', '2024-01-15 00:00:00', '2022-12-15 00:00:00', 'expired', 1200.00, 3),
@@ -292,33 +297,36 @@ INSERT INTO license (license_key, license_start_date, expiration_date, purchase_
 
 
 -- Sample data for worker_hardware table
-INSERT INTO worker_hardware (worker_id, hardware_id, usage_start_date) VALUES
-(1, 1, '2023-01-01'),
-(2, 2, '2023-02-15'),
-(3, 3, '2023-03-10'),
-(4, 4, '2023-04-20'),
-(5, 5, '2023-05-25'),
-(6, 6, '2023-06-30'),
-(7, 7, '2023-07-12'),
-(8, 8, '2023-08-18'),
-(9, 9, '2023-09-22'),
-(10, 10, '2023-10-05');
+INSERT INTO worker_hardware (worker_id, hardware_id, usage_start_date) 
+VALUES
+	(1, 1, '2023-01-01'),
+	(2, 2, '2023-02-15'),
+	(3, 3, '2023-03-10'),
+	(4, 4, '2023-04-20'),
+	(5, 5, '2023-05-25'),
+	(6, 6, '2023-06-30'),
+	(7, 7, '2023-07-12'),
+	(8, 8, '2023-08-18'),
+	(9, 9, '2023-09-22'),
+	(10, 10, '2023-10-05');
+
 
 -- Sample data for worker_software table
-INSERT INTO worker_software (worker_id, software_id, usage_start_date) VALUES
-(1, 1, '2023-01-01'),
-(2, 2, '2023-02-15'),
-(3, 3, '2023-03-10'),
-(4, 4, '2023-04-20'),
-(5, 5, '2023-05-25'),
-(6, 6, '2023-06-30'),
-(7, 7, '2023-07-12'),
-(8, 8, '2023-08-18'),
-(9, 9, '2023-09-22'),
-(10, 10, '2023-10-05'),
-(3, 18, '2024-01-06'),
-(1, 20, '2024-02-05'),
-(2, 19, '2024-02-16');
+INSERT INTO worker_software (worker_id, software_id, usage_start_date) 
+VALUES
+	(1, 1, '2023-01-01'),
+	(2, 2, '2023-02-15'),
+	(3, 3, '2023-03-10'),
+	(4, 4, '2023-04-20'),
+	(5, 5, '2023-05-25'),
+	(6, 6, '2023-06-30'),
+	(7, 7, '2023-07-12'),
+	(8, 8, '2023-08-18'),
+	(9, 9, '2023-09-22'),
+	(10, 10, '2023-10-05'),
+	(3, 18, '2024-01-06'),
+	(1, 20, '2024-02-05'),
+	(2, 19, '2024-02-16');
 
 CREATE VIEW vw_order_details 
 AS
