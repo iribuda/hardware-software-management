@@ -33,6 +33,10 @@ public class MainPageController {
 
     @FXML
     public void handleShowOrders(ActionEvent actionEvent){ showOrderOverview();}
+    @FXML
+    public void handleShowFailure(ActionEvent actionEvent){
+        showFailureOverview();
+    }
 
     private BorderPane rootLayout;
     private Stage primaryStage;
@@ -47,6 +51,18 @@ public class MainPageController {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public void showFailureOverview(){
+        try{
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("failure-overview.fxml"));
+            SplitPane workerOverview = (SplitPane) loader.load();
+            rootLayout.setCenter(workerOverview);
+            FailureOverviewController workerOverviewController = loader.getController();
+            workerOverviewController.setMainPageController(this);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void showOrderOverview(){

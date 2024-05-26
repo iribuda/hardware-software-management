@@ -69,7 +69,7 @@
                      </color>
                   </InnerShadow>
                </effect></Button>
-            <Button layoutY="207.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Failure">
+            <Button layoutY="207.0" mnemonicParsing="false" onAction="#handleShowFailure" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Failure">
                <effect>
                   <InnerShadow>
                      <color>
