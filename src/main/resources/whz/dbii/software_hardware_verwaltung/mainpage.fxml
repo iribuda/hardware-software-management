@@ -5,39 +5,78 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="430.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.MainPageController">
    <left>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="356.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="356.0" prefWidth="200.0" style="-fx-background-color: #AFB3FF;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="14.0" layoutY="13.0">
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="7.0" layoutY="-18.0">
                <image>
-                  <Image url="@img/Sample_User_Icon.png" />
+                  <Image url="@img/user.png" />
                </image>
             </ImageView>
-            <Label layoutX="119.0" layoutY="38.0" text="Welcome,">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="130.0" layoutY="55.0" text="User">
+            <Label layoutX="142.0" layoutY="45.0" text="User" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
             <Line endX="96.76800537109375" endY="-7.62939453125E-6" layoutX="100.0" layoutY="104.0" startX="-93.0" startY="-7.62939453125E-6" stroke="#afb1c7" />
-            <Button layoutY="105.0" mnemonicParsing="false" onAction="#handleShowWorkers" prefHeight="34.0" prefWidth="204.0" text="Workers" />
-            <Button layoutY="139.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Orders" />
-            <Button layoutY="173.0" mnemonicParsing="false" onAction="#handleShowHardware" prefHeight="34.0" prefWidth="204.0" text="Hardware" />
-            <Button layoutY="241.0" mnemonicParsing="false" onAction="#handleShowSoftware" prefHeight="34.0" prefWidth="204.0" text="Software" />
-            <Button layoutY="309.0" mnemonicParsing="false" onAction="#handleShowLicense" prefHeight="34.0" prefWidth="204.0" text="License" />
-            <Button layoutY="207.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" text="Failure" />
+            <Button layoutY="105.0" mnemonicParsing="false" onAction="#handleShowWorkers" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Workers">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.5648000240325928" green="0.5440000295639038" blue="0.6399999856948853" opacity="0.16623187065124512" />
+                     </color>
+                  </InnerShadow>
+               </effect></Button>
+            <Button layoutY="139.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Orders">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.5648000240325928" green="0.5440000295639038" blue="0.6399999856948853" opacity="0.16623187065124512" />
+                     </color>
+                  </InnerShadow>
+               </effect></Button>
+            <Button layoutY="173.0" mnemonicParsing="false" onAction="#handleShowHardware" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Hardware">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.5648000240325928" green="0.5440000295639038" blue="0.6399999856948853" opacity="0.16623187065124512" />
+                     </color>
+                  </InnerShadow>
+               </effect></Button>
+            <Button layoutY="241.0" mnemonicParsing="false" onAction="#handleShowSoftware" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Software">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.5648000240325928" green="0.5440000295639038" blue="0.6399999856948853" opacity="0.16623187065124512" />
+                     </color>
+                  </InnerShadow>
+               </effect></Button>
+            <Button layoutY="309.0" mnemonicParsing="false" onAction="#handleShowLicense" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="License">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.5648000240325928" green="0.5440000295639038" blue="0.6399999856948853" opacity="0.16623187065124512" />
+                     </color>
+                  </InnerShadow>
+               </effect></Button>
+            <Button layoutY="207.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Failure">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.5648000240325928" green="0.5440000295639038" blue="0.6399999856948853" opacity="0.16623187065124512" />
+                     </color>
+                  </InnerShadow>
+               </effect></Button>
             <Button layoutX="18.0" layoutY="359.0" mnemonicParsing="false" text="Logout">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0">
@@ -47,7 +86,14 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutY="275.0" mnemonicParsing="false" onAction="#handleShowVendor" prefHeight="34.0" prefWidth="204.0" text="Vendor" />
+            <Button layoutY="275.0" mnemonicParsing="false" onAction="#handleShowVendor" prefHeight="34.0" prefWidth="204.0" style="-fx-background-color: #EBEFFF;" text="Vendor">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.5648000240325928" green="0.5440000295639038" blue="0.6399999856948853" opacity="0.16623187065124512" />
+                     </color>
+                  </InnerShadow>
+               </effect></Button>
          </children>
       </AnchorPane>
    </left>

@@ -26,11 +26,11 @@
                     </columnResizePolicy>
                 </TableView>
             </children></AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #EBEFFF;">
             <children>
-                <Label alignment="CENTER" layoutX="152.0" layoutY="14.0" maxWidth="200.0" text="Software" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="36.0">
+                <Label alignment="CENTER" layoutX="152.0" layoutY="14.0" maxWidth="200.0" text="Software" textFill="#3b2e59" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="36.0">
                     <font>
-                        <Font size="18.0" />
+                        <Font name="Segoe UI" size="18.0" />
                     </font>
                 </Label>
                 <GridPane alignment="CENTER_LEFT" hgap="10.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="80.0">
@@ -67,17 +67,26 @@
                 </GridPane>
                 <HBox alignment="BOTTOM_RIGHT" layoutX="32.0" layoutY="344.0" maxHeight="40.0" prefHeight="100.0" prefWidth="300.0">
                     <children>
-                        <Button maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewLicense" text="New License">
+                        <Button maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewLicense" style="-fx-background-color: #656ED3;" text="New License" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="80.0" />
                             </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.288000106811523" />
+                     </font>
                         </Button>
-                        <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteLicense" text="Delete">
+                        <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteLicense" style="-fx-background-color: #656ED3;" text="Delete" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.288000106811523" />
+                     </font>
                         </Button>
-                        <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditLicense" text="Edit" />
+                        <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditLicense" style="-fx-background-color: #656ED3;" text="Edit" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.288000106811523" />
+                     </font></Button>
                     </children>
                 </HBox>
             </children></AnchorPane>
