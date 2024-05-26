@@ -22,10 +22,10 @@ public class MainApp extends Application {
     public void initRootLayout(){
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("mainpage.fxml"));
+            loader.setLocation(MainApp.class.getResource("login.fxml"));
             rootLayout = (BorderPane) loader.load();
 
-            MainPageController controller = loader.getController();
+            LoginController controller = loader.getController();
             controller.setRootLayout(rootLayout);
             controller.setPrimaryStage(primaryStage);
 
