@@ -7,8 +7,10 @@ import whz.dbii.software_hardware_verwaltung.dao.DBException;
 import whz.dbii.software_hardware_verwaltung.dao.software.LicenseDao;
 import whz.dbii.software_hardware_verwaltung.dao.software.SoftwareDao;
 import whz.dbii.software_hardware_verwaltung.model.software.License;
+import whz.dbii.software_hardware_verwaltung.model.software.LicenseStatus;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class LicenseDaoImpl implements LicenseDao {
 
@@ -159,6 +161,39 @@ public class LicenseDaoImpl implements LicenseDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DBException("Error occurred by connecting while deleting the license.");
+        } finally {
+            DBConnection.closeStatement(statement);
+            DBConnection.disconnect();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean renewLicense(License license) {
+        Connection connection = DBConnection.getConnection();
+        String query = "UPDATE license " +
+                "SET license_start_date = ?, expiration_date = ?, license_status = ? " +
+                "WHERE license_id = ?";
+        PreparedStatement statement = null;
+
+        LocalDate currDate = java.time.LocalDate.now();
+        license.setStartDate(currDate);
+        license.setExpirationDate(currDate.plusMonths(1));
+        license.setStatus(LicenseStatus.ACTIVE.toString());
+
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setDate(1, java.sql.Date.valueOf(license.getStartDate()));
+            statement.setDate(2, java.sql.Date.valueOf(license.getExpirationDate()));
+            statement.setString(3, license.getStatus());
+            statement.setInt(4, license.getId());
+
+            if (statement.executeUpdate() == 1)
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DBException("Error occurred by connecting while renewing the license.");
         } finally {
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();

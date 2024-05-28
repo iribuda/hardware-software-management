@@ -40,9 +40,14 @@ public class LicenceOverviewController {
     @FXML
     public Button btn_edit;
     @FXML
+    public Button btn_renew;
+
+    @FXML
     private TableView<License> licenseTable;
     @FXML
     private TableColumn<License, String> keyColumn;
+    @FXML
+    public TableColumn<License, String> softwareColumn;
 
     private MainPageController mainPageController;
     private LicenseDao licenseDao;
@@ -55,6 +60,7 @@ public class LicenceOverviewController {
     private void initialize(){
         licenseDao = new LicenseDaoImpl();
         keyColumn.setCellValueFactory(cellData -> cellData.getValue().keyProperty().asString());
+        softwareColumn.setCellValueFactory(cellData -> cellData.getValue().getSoftware().nameProperty());
         populateLicenses();
         licenseTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showLicenseDetails((License) newValue));
@@ -67,10 +73,12 @@ public class LicenceOverviewController {
             btn_delete.setVisible(true);
             btn_edit.setVisible(true);
             btn_new.setVisible(true);
+            btn_renew.setVisible(true);
         } else {
             btn_delete.setVisible(false);
             btn_edit.setVisible(DBConnection.hasWriteRights());
             btn_new.setVisible(DBConnection.hasWriteRights());
+            btn_renew.setVisible(DBConnection.hasWriteRights());
         }
     }
 
@@ -152,6 +160,17 @@ public class LicenceOverviewController {
                 licenseDao.update(selectedLicense);
                 showLicenseDetails(selectedLicense);
             }
+        } else {
+            getLicenseWasNotSelectedAlert().showAndWait();
+        }
+    }
+
+    @FXML
+    public void handleRenewLicense(ActionEvent actionEvent) {
+        License selectedLicense = licenseTable.getSelectionModel().getSelectedItem();
+        if (selectedLicense != null) {
+            licenseDao.renewLicense(selectedLicense);
+            showLicenseDetails(selectedLicense);
         } else {
             getLicenseWasNotSelectedAlert().showAndWait();
         }
