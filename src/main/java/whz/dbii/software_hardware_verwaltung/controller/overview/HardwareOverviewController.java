@@ -133,11 +133,11 @@ public class HardwareOverviewController {
 
     @FXML
     public void handleDeleteHardware(ActionEvent actionEvent) {
-        int selectedIdx = hardwareTable.getSelectionModel().getSelectedItem().getId();
+        int selectedIdx = hardwareTable.getSelectionModel().getSelectedIndex();
         if (selectedIdx >= 0) {
             int hardwareId = hardwareTable.getSelectionModel().getSelectedItem().getId();
-            hardwareTable.getItems().remove(selectedIdx);
             hardwareDao.deleteById(hardwareId);
+            hardwareTable.getItems().remove(selectedIdx);
         } else {
             getHardwareWasNotSelectedAlert().showAndWait();
         }

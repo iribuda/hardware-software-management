@@ -40,7 +40,7 @@ CREATE TABLE failure(
     failure_id int Primary Key IDENTITY(1, 1) NOT NULL,
     failure_date Date NOT NULL,
     failure_type VARCHAR(50),
-    failure_status VARCHAR(50) NOT NULL DEFAULT 'To repair', 
+    failure_status VARCHAR(50) NOT NULL DEFAULT 'To repair',
     hardware_id int NOT NULL FOREIGN KEY(hardware_id) REFERENCES hardware(hardware_id) ON DELETE CASCADE
 );
 
