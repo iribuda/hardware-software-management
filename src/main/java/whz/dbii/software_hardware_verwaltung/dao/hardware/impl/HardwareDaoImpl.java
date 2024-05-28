@@ -92,8 +92,21 @@ public class HardwareDaoImpl implements HardwareDao {
 
     @Override
     public ObservableList<String> findAllNamesOfHardware() {
-        Connection connection = DBConnection.getConnection();
         String query = "SELECT hardware_name FROM hardware";
+        return getStringObservableList(query);
+    }
+
+    @Override
+    public ObservableList<String> findAllNamesOfAvailableHardware() {
+        String query = "SELECT h.hardware_name FROM hardware h\n" +
+                "LEFT JOIN worker_hardware wh ON h.hardware_id = wh.hardware_id\n" +
+                "LEFT JOIN failure f ON h.hardware_id = f.hardware_id\n" +
+                "WHERE wh.worker_id IS NULL AND (f.hardware_id IS NULL OR f.failure_status IN ('Repaired'))";
+        return getStringObservableList(query);
+    }
+
+    private ObservableList<String> getStringObservableList(String query) {
+        Connection connection = DBConnection.getConnection();
         Statement statement = null;
         ResultSet resultSet = null;
         ObservableList<String> hardware = FXCollections.observableArrayList();
@@ -104,7 +117,7 @@ public class HardwareDaoImpl implements HardwareDao {
                 hardware.add(resultSet.getString("hardware_name"));
 
         } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while getting the software list.");
+            throw new DBException("Error occurred by connecting while getting the hardware list: " + e.getMessage());
         } finally {
             DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
@@ -137,30 +150,37 @@ public class HardwareDaoImpl implements HardwareDao {
     @Override
     public boolean insert(Hardware hardware) {
         Connection connection = DBConnection.getConnection();
-        String query = "";
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+        String query = "{call sp_insert_hardware(?, ?, ?, ?)}";
+        CallableStatement statement = null;
+//        ResultSet resultSet = null;
 
         try {
-            statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement = connection.prepareCall(query);
             statement.setString(1, hardware.getName());
+            statement.setDate(2, Date.valueOf(hardware.getWarranty().getStartDate()));
+            statement.setDate(3, Date.valueOf(hardware.getWarranty().getExpirationDate()));
+            statement.setString(4, hardware.getManufacturer().getName());
+            statement.execute();
 
-            int rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0) {
-                resultSet = statement.getGeneratedKeys();
-                if (resultSet.next()) {
-                    hardware.setId(resultSet.getInt(1));
-                    return true;
-                }
-            }
+
+//            int rowsAffected = statement.executeUpdate();
+//            if (rowsAffected > 0) {
+//                resultSet = statement.getGeneratedKeys();
+//                if (resultSet.next()) {
+//                    hardware.setId(resultSet.getInt(1));
+//                    return true;
+//                }
+//            }
         } catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while getting the hardware.");
+            e.printStackTrace();
+            throw new DBException("Error occurred by connecting while inserting hardware: " + e.getMessage());
+
         } finally {
-            DBConnection.closeResultSet(resultSet);
+//            DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(statement);
             DBConnection.disconnect();
         }
-        return false;
+        return true;
     }
 
     @Override

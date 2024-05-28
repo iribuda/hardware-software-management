@@ -45,8 +45,14 @@ public class HardwareEditViewController {
         manufacturerCheckbox.setItems(manufacturerDao.findAllManufacturerNames());
         if (hardware.getManufacturer() != null)
             manufacturerCheckbox.setValue(hardware.getManufacturer().getName());
-        startDatePicker.setValue(hardware.getWarranty().getStartDate());
-        expDatePicker.setValue(hardware.getWarranty().getExpirationDate());
+        if (hardware.getWarranty() != null){
+            startDatePicker.setValue(hardware.getWarranty().getStartDate());
+            expDatePicker.setValue(hardware.getWarranty().getExpirationDate());
+
+        } else{
+            this.hardware.setWarranty(new Warranty());
+        }
+
 
     }
     private boolean isInputValid() {

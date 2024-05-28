@@ -126,7 +126,7 @@ public class HardwareOverviewController {
         if (showHardwareEditDialog(hardware)){
             hardwareDao.insert(hardware);
             hardwareTable.getItems().add(hardware);
-
+            populateHardware();
         }
     }
 

@@ -68,13 +68,13 @@ public class WorkerEditController {
         surnameTextField.setText(worker.getSurname());
         emailTextField.setText(worker.getEmail());
         softwareCheckbox.setItems(softwareDao.findAllNameOfSoftware());
+        hardwareCheckbox.setItems(hardwareDao.findAllNamesOfAvailableHardware());
         System.out.println(worker.getId());
         if (worker.getId() != 0){
             softwareNameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());
             softwareVersionColumn.setCellValueFactory(cellDate -> cellDate.getValue().versionProperty());
             populateSoftware();
 
-            hardwareCheckbox.setItems(hardwareDao.findAllNamesOfHardware());
             hardwareNameColumn.setCellValueFactory((data -> new SimpleStringProperty(data.getValue())));
             populateHardware();
         }

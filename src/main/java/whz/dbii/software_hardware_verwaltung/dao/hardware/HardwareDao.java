@@ -8,6 +8,9 @@ public interface HardwareDao {
     int findIdByName(String name);
     ObservableList<Hardware> findAll();
     ObservableList<String> findAllNamesOfHardware();
+
+    ObservableList<String> findAllNamesOfAvailableHardware();
+
     boolean insert(Hardware hardware);
     boolean deleteById(Integer id);
     boolean update(Hardware hardware);
