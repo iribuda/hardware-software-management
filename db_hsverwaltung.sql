@@ -102,6 +102,9 @@ CREATE TABLE worker_software(
 -- inserting values
 INSERT INTO worker (worker_name, worker_surname, email) 
 VALUES 
+	('James', 'Stone', 'james.stone@example.com'),
+	('John', 'Smith', 'john.smith@example.com'),
+	('Alice', 'Waterson', 'alice.waterson@example.com'),
 	('Emily', 'Jones', 'emily.jones@example.com'),
 	('Michael', 'Brown', 'michael.brown@example.com'),
 	('Sophia', 'Davis', 'sophia.davis@example.com'),

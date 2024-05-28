@@ -62,7 +62,7 @@
                 </GridPane>
                 <HBox alignment="BOTTOM_RIGHT" layoutX="32.0" layoutY="344.0" maxHeight="40.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                     <children>
-                        <Button maxHeight="36.0" minWidth="96.0" mnemonicParsing="false" onAction="#handleNewFailure" style="-fx-background-color: #656ED3;" text="New Failure" textFill="WHITE">
+                        <Button fx:id="btn_new" maxHeight="36.0" minWidth="96.0" mnemonicParsing="false" onAction="#handleNewFailure" style="-fx-background-color: #656ED3;" text="New Failure" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="50.0" />
                             </HBox.margin>
@@ -70,7 +70,7 @@
                         <Font name="System Bold" size="12.288000106811523" />
                      </font>
                         </Button>
-                        <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteFailure" style="-fx-background-color: #656ED3;" text="Delete" textFill="WHITE">
+                        <Button fx:id="btn_delete" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteFailure" style="-fx-background-color: #656ED3;" text="Delete" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>
@@ -78,7 +78,7 @@
                         <Font name="System Bold" size="12.288000106811523" />
                      </font>
                         </Button>
-                        <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditFailure" style="-fx-background-color: #656ED3;" text="Edit" textFill="WHITE">
+                        <Button fx:id="btn_edit" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditFailure" style="-fx-background-color: #656ED3;" text="Edit" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.288000106811523" />
                      </font></Button>

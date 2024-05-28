@@ -62,18 +62,27 @@ public class WorkerDAOImpl implements WorkerDAO {
         Connection conn = DBConnection.getConnection();
         String sql = "INSERT INTO worker(worker_name, worker_surname, email) VALUES(?, ?, ?)";
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         try {
-            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, worker.getName());
             preparedStatement.setString(2, worker.getSurname());
             preparedStatement.setString(3, worker.getEmail());
+
             int rs = preparedStatement.executeUpdate();
-            if (rs==1)
-                return true;
+            if (rs > 0) {
+                resultSet = preparedStatement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    worker.setId(resultSet.getInt(1));
+                    return true;
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DBException(e.getMessage());
         }finally {
+            DBConnection.closeResultSet(resultSet);
             DBConnection.closeStatement(preparedStatement);
             DBConnection.disconnect();
         }

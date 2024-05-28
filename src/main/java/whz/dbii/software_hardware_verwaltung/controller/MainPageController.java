@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.controller.overview.*;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 
 import java.io.IOException;
 
@@ -40,7 +41,11 @@ public class MainPageController {
 
     private BorderPane rootLayout;
     private Stage primaryStage;
+    private MainApp mainApp;
 
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
     public void setRootLayout(BorderPane rootLayout) {
         this.rootLayout = rootLayout;
     }
@@ -135,5 +140,11 @@ public class MainPageController {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void handleLogout(ActionEvent actionEvent) {
+        DBConnection.logout();
+        mainApp.showAuthorizationPage();
     }
 }

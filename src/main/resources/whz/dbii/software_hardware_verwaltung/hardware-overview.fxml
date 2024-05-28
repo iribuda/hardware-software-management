@@ -60,17 +60,17 @@
                 </GridPane>
                 <HBox alignment="BOTTOM_RIGHT" layoutX="32.0" layoutY="344.0" maxHeight="40.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                     <children>
-                        <Button maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewHardware" text="New Hardware">
+                        <Button fx:id="btn_new" maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewHardware" text="New Hardware">
                             <HBox.margin>
                                 <Insets right="70.0" />
                             </HBox.margin>
                         </Button>
-                        <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteHardware" text="Delete">
+                        <Button fx:id="btn_delete" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteHardware" text="Delete">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>
                         </Button>
-                        <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditHardware" text="Edit" />
+                        <Button fx:id="btn_edit" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditHardware" text="Edit" />
                     </children>
                 </HBox>
             </children></AnchorPane>

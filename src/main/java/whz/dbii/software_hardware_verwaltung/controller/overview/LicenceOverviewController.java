@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.controller.editview.LicenseEditViewController;
 import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.software.LicenseDao;
 import whz.dbii.software_hardware_verwaltung.dao.software.impl.LicenseDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.software.License;
@@ -33,6 +34,12 @@ public class LicenceOverviewController {
     @FXML
     public Label softwareLabel;
     @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
+    @FXML
     private TableView<License> licenseTable;
     @FXML
     private TableColumn<License, String> keyColumn;
@@ -51,6 +58,20 @@ public class LicenceOverviewController {
         populateLicenses();
         licenseTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showLicenseDetails((License) newValue));
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+        }
     }
 
     private void showLicenseDetails(License license) {

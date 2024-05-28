@@ -16,7 +16,25 @@ public class MainApp extends Application {
     public void start(Stage stage) {
         this.primaryStage = stage;
         stage.setTitle("Software und Hardware Verwaltung");
-        initRootLayout();
+//        initRootLayout();
+        showAuthorizationPage();
+    }
+
+    public void showAuthorizationPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            rootLayout = (BorderPane) loader.load();
+
+            LoginController controller = loader.getController();
+            controller.setMainApp(this);
+
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Authorization");
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initRootLayout(){
@@ -28,6 +46,7 @@ public class MainApp extends Application {
             MainPageController controller = loader.getController();
             controller.setRootLayout(rootLayout);
             controller.setPrimaryStage(primaryStage);
+            controller.setMainApp(this);
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);

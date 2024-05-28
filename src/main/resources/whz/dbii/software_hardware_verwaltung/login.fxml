@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.LoginController">
    <left>
       <AnchorPane prefHeight="401.0" prefWidth="345.0" style="-fx-background-color: EBEFFF;" BorderPane.alignment="CENTER">
@@ -38,7 +37,7 @@
                   <Font name="Montserrat Regular" size="12.288000106811523" />
                </font>
             </Label>
-            <TextField layoutX="53.75999835937503" layoutY="151.06399535937516" prefHeight="25.0" prefWidth="178.0" promptText="Benutzernamen eingeben" AnchorPane.rightAnchor="113.66399653125012" AnchorPane.topAnchor="151.06399535937516">
+            <TextField fx:id="login" layoutX="53.75999835937503" layoutY="151.06399535937516" prefHeight="25.0" prefWidth="178.0" promptText="Benutzernamen eingeben" AnchorPane.rightAnchor="113.66399653125012" AnchorPane.topAnchor="151.06399535937516">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
@@ -48,12 +47,12 @@
                   <Font name="Montserrat Regular" size="12.288000106811523" />
                </font>
             </Label>
-            <TextField layoutX="54.0" layoutY="210.0" prefHeight="25.0" prefWidth="178.0" promptText="Passwort eingeben">
+            <TextField fx:id="password" layoutX="54.0" layoutY="210.0" prefHeight="25.0" prefWidth="178.0" promptText="Passwort eingeben">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </TextField>
-            <Button contentDisplay="CENTER" layoutX="53.0" layoutY="283.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="190.0" style="-fx-background-color: #656ED3;" text="Anmelden" textAlignment="CENTER" textFill="#fdfafa">
+            <Button contentDisplay="CENTER" layoutX="53.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAuthorisation" prefHeight="20.0" prefWidth="190.0" style="-fx-background-color: #656ED3;" text="Anmelden" textAlignment="CENTER" textFill="#fdfafa">
                <font>
                   <Font name="Segoe UI" size="15.288000106811523" />
                </font>

@@ -12,6 +12,7 @@ import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.controller.editview.LicenseEditViewController;
 import whz.dbii.software_hardware_verwaltung.controller.editview.OrderEditViewController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.OrderDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.OrderDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Order;
@@ -27,6 +28,12 @@ public class OrderOverviewController {
     public Label manufacturerLabel;
     public Label orderDateLabel;
     public Label statusLabel;
+    @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
     private MainPageController mainPageController;
     private OrderDao orderDao;
 
@@ -42,6 +49,20 @@ public class OrderOverviewController {
         populateLicenses();
         orderTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showOrderDetails((Order) newValue));
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+        }
     }
 
     private void showOrderDetails(Order order) {

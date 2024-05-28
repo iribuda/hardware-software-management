@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.controller.editview.WorkerEditController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
 import whz.dbii.software_hardware_verwaltung.dao.worker.impl.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
@@ -18,6 +19,12 @@ import java.io.IOException;
 
 public class WorkerOverviewController {
 
+    @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
     @FXML
     private Label surnameLabel;
     @FXML
@@ -46,6 +53,20 @@ public class WorkerOverviewController {
         populateWorkers();
         workerTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showWorkerDetails((Worker) newValue));
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+        }
     }
 
     private void populateWorkers(){

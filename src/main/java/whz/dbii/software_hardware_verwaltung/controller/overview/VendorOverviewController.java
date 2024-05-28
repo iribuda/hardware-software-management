@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.controller.editview.VendorEditViewController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.software.VendorDao;
 import whz.dbii.software_hardware_verwaltung.dao.software.impl.VendorDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.software.Vendor;
@@ -24,6 +25,12 @@ public class VendorOverviewController {
     public Label mobileLabel;
     @FXML
     public Label nameLabel;
+    @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
     @FXML
     private TableView<Vendor> vendorTable;
     @FXML
@@ -40,6 +47,20 @@ public class VendorOverviewController {
         vendorTable.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> showVendorDetails((Vendor) newValue))
         );
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+        }
     }
     private void populateVendors() {
         ObservableList<Vendor> vendors = vendorDao.findAll();

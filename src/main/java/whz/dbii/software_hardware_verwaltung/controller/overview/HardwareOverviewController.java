@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.controller.editview.HardwareEditViewController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.HardwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Hardware;
@@ -32,6 +33,12 @@ public class HardwareOverviewController {
     public Label warrantyExpirationDateLabel;
     @FXML
     public TableColumn<Hardware, String> nameColumn;
+    @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
 
 
     private MainPageController mainPageController;
@@ -48,6 +55,20 @@ public class HardwareOverviewController {
         populateHardware();
         hardwareTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showHardwareDetails((Hardware) newValue));
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+        }
     }
 
     private void showHardwareDetails(Hardware hardware) {

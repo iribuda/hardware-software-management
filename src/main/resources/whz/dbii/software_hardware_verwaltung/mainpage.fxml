@@ -77,7 +77,7 @@
                      </color>
                   </InnerShadow>
                </effect></Button>
-            <Button layoutX="18.0" layoutY="359.0" mnemonicParsing="false" text="Logout">
+            <Button layoutX="18.0" layoutY="359.0" onAction="#handleLogout" mnemonicParsing="false" text="Logout">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0">
                      <image>

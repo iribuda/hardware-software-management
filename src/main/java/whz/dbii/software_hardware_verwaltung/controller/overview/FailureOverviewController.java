@@ -12,6 +12,7 @@ import whz.dbii.software_hardware_verwaltung.MainApp;
 import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.controller.editview.FailureEditViewController;
 import whz.dbii.software_hardware_verwaltung.controller.editview.OrderEditViewController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.FailureDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.OrderDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.FailureDaoImpl;
@@ -34,6 +35,12 @@ public class FailureOverviewController {
     public Label statusLabel;
     public Label workerLabel;
     public Label dateLabel;
+    @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
 
     private MainPageController mainPageController;
     private FailureDao failureDao;
@@ -52,6 +59,17 @@ public class FailureOverviewController {
         populateFailures();
         failureTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showFailureDetails((Failure) newValue));
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        boolean canDelete = DBConnection.hasDeleteRights();
+        btn_delete.setDisable(canDelete);
+
+        boolean canWrite = DBConnection.hasWriteRights();
+        btn_new.setDisable(canWrite);
+        btn_edit.setDisable(canWrite);
     }
 
     private void showFailureDetails(Failure failure) {
