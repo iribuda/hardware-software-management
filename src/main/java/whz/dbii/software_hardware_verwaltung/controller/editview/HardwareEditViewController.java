@@ -3,7 +3,7 @@ package whz.dbii.software_hardware_verwaltung.controller.editview;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
@@ -12,31 +12,22 @@ import whz.dbii.software_hardware_verwaltung.dao.hardware.ManufacturerDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.HardwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.ManufacturerDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Hardware;
-
-import java.awt.event.ActionEvent;
+import whz.dbii.software_hardware_verwaltung.model.hardware.Warranty;
 
 public class HardwareEditViewController {
 
     @FXML
     public TextField nameTextField;
     @FXML
-    public TextField versionTextField;
-    @FXML
-    public ChoiceBox<String> manufactuterCheckbox;
+    public ChoiceBox<String> manufacturerCheckbox;
+    public DatePicker startDatePicker;
+    public DatePicker expDatePicker;
 
     private Stage dialogStage;
     private Hardware hardware;
     private HardwareDao hardwareDao;
     private ManufacturerDao manufacturerDao;
-
-
-    private MainPageController mainPageController;
     private boolean isOkClicked;
-
-    public void setMainPageController(MainPageController mainPageController) {
-        this.mainPageController = mainPageController;
-    }
-
 
     @FXML
     private void initialize() {
@@ -51,19 +42,18 @@ public class HardwareEditViewController {
     public void setHardware(Hardware hardware) {
         this.hardware = hardware;
         nameTextField.setText(hardware.getName());
-        versionTextField.setText(hardware.getVersion());
-        manufactuterCheckbox.setItems(manufacturerDao.findAllManufacturerNames());
+        manufacturerCheckbox.setItems(manufacturerDao.findAllManufacturerNames());
         if (hardware.getManufacturer() != null)
-            manufactuterCheckbox.setValue(hardware.getManufacturer().getName());
+            manufacturerCheckbox.setValue(hardware.getManufacturer().getName());
+        startDatePicker.setValue(hardware.getWarranty().getStartDate());
+        expDatePicker.setValue(hardware.getWarranty().getExpirationDate());
 
     }
     private boolean isInputValid() {
         StringBuilder errowMessage = new StringBuilder();
         if (nameTextField.getText() == null || nameTextField.getText().isEmpty())
             errowMessage.append("Name cannot be empty\n");
-        if(versionTextField.getText() == null || versionTextField.getText().isEmpty())
-            errowMessage.append("Version cannot be empty\n");
-        if (manufactuterCheckbox.getValue() == null || manufactuterCheckbox.getValue().isEmpty())
+        if (manufacturerCheckbox.getValue() == null || manufacturerCheckbox.getValue().isEmpty())
             errowMessage.append("Manufacturer cannot be empty\n");
         
         if(errowMessage.isEmpty()) return true;
@@ -78,7 +68,7 @@ public class HardwareEditViewController {
         return false;
     }
     public boolean isOkClicked(){
-        return isOkClicked();
+        return isOkClicked;
     }
 
     @FXML
@@ -88,12 +78,15 @@ public class HardwareEditViewController {
 
     @FXML
     public void handleOk(javafx.event.ActionEvent actionEvent) {
-        if (isInputValid()) return;
+        if (!isInputValid()) return;
 
         hardware.setName(nameTextField.getText());
-        hardware.setVersion(versionTextField.getText());
-        int manufacturerId = manufacturerDao.findByName(manufactuterCheckbox.getValue());
-        hardware.setVersion(manufacturerDao.findById(manufacturerId));
+        int manufacturerId = manufacturerDao.findByName(manufacturerCheckbox.getValue());
+        hardware.setManufacturer(manufacturerDao.findById(manufacturerId));
+        Warranty warranty = hardware.getWarranty();
+        warranty.setStartDate(startDatePicker.getValue());
+        warranty.setExpirationDate(expDatePicker.getValue());
+        hardware.setWarranty(warranty);
 
         isOkClicked = true;
         dialogStage.close();

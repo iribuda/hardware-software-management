@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
@@ -24,7 +25,7 @@ public class HardwareOverviewController {
     @FXML
     public Label nameLabel;
     @FXML
-    public Label versionLabel;
+    public Label manufacturerLabel;
     @FXML
     public Label warrantyStatusLabel;
     @FXML
@@ -40,7 +41,6 @@ public class HardwareOverviewController {
     @FXML
     public Button btn_edit;
 
-
     private MainPageController mainPageController;
     private HardwareDao hardwareDao;
 
@@ -55,7 +55,6 @@ public class HardwareOverviewController {
         populateHardware();
         hardwareTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showHardwareDetails((Hardware) newValue));
-
         controlRights();
     }
 
@@ -74,10 +73,10 @@ public class HardwareOverviewController {
     private void showHardwareDetails(Hardware hardware) {
         if (hardware == null) return;
         nameLabel.setText(hardware.getName());
-        versionLabel.setText(hardware.getVersion());
-//        warrantyStatusLabel.setText(hardware.getWarranty().getStatus());
-//        warrantyStartDateLabel.setText(hardware.getWarranty().getStartDate().toString());
-//        warrantyExpirationDateLabel.setText(hardware.getWarranty().getExpirationDate().toString());
+        manufacturerLabel.setText(hardware.getManufacturer().getName());
+        warrantyStatusLabel.setText(hardware.getWarranty().getStatus());
+        warrantyStartDateLabel.setText(hardware.getWarranty().getStartDate().toString());
+        warrantyExpirationDateLabel.setText(hardware.getWarranty().getExpirationDate().toString());
     }
 
     private void populateHardware() {
@@ -147,8 +146,10 @@ public class HardwareOverviewController {
     public void handleEditHardware(ActionEvent actionEvent){
         Hardware selectedHardware = hardwareTable.getSelectionModel().getSelectedItem();
         if (selectedHardware != null){
-            hardwareDao.update(selectedHardware);
-            showHardwareDetails(selectedHardware);
+            if (showHardwareEditDialog(selectedHardware)){
+                hardwareDao.update(selectedHardware);
+                showHardwareDetails(selectedHardware);
+            }
         } else {
             getHardwareWasNotSelectedAlert().showAndWait();
         }

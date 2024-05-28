@@ -6,6 +6,8 @@ import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.DBException;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Hardware;
+import whz.dbii.software_hardware_verwaltung.model.hardware.Manufacturer;
+import whz.dbii.software_hardware_verwaltung.model.hardware.Warranty;
 
 import java.sql.*;
 
@@ -14,7 +16,7 @@ public class HardwareDaoImpl implements HardwareDao {
     @Override
     public Hardware findById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * FROM hardware WHERE hardware_id = ?";
+        String query = "SELECT * FROM vw_hardware_details WHERE hardware_id = ?";
 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -24,7 +26,7 @@ public class HardwareDaoImpl implements HardwareDao {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return instantiateHardware(resultSet);
+                return instantiateHardwareDetails(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error occurred by connecting while getting the hardware: " + e.getMessage());
@@ -61,7 +63,7 @@ public class HardwareDaoImpl implements HardwareDao {
     @Override
     public ObservableList<Hardware> findAll(){
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * FROM hardware";
+        String query = "SELECT * FROM vw_hardware_details";
         Statement statement = null;
         ResultSet resultSet = null;
 
@@ -75,7 +77,7 @@ public class HardwareDaoImpl implements HardwareDao {
         ObservableList<Hardware> hardware = FXCollections.observableArrayList();
         try {
             while (resultSet.next())
-                hardware.add(instantiateHardware(resultSet));
+                hardware.add(instantiateHardwareDetails(resultSet));
 
         } catch (SQLException e) {
             throw new DBException("Error occurred by connecting while getting the hardware.");
@@ -112,12 +114,22 @@ public class HardwareDaoImpl implements HardwareDao {
         return hardware;
     }
 
-    private Hardware instantiateHardware(ResultSet resultSet) throws SQLException {
+    private Hardware instantiateHardwareDetails(ResultSet resultSet) throws SQLException {
         Hardware hardware = new Hardware();
+        Manufacturer manufacturer = new Manufacturer();
+        Warranty warranty = new Warranty();
         hardware.setId(resultSet.getInt("hardware_id"));
         hardware.setName(resultSet.getString("hardware_name"));
-//        hardware.setVersion(resultSet.getString("software_version"));
-
+        manufacturer.setId(resultSet.getInt("manufacturer_id"));
+        manufacturer.setName(resultSet.getString("manufacturer_name"));
+        manufacturer.setEmail(resultSet.getString("email"));
+        manufacturer.setMobileNumber("mobile_number");
+        warranty.setId(resultSet.getInt("warranty_id"));
+        warranty.setStatus(resultSet.getString("warranty_status"));
+        warranty.setExpirationDate(resultSet.getDate("expiration_date").toLocalDate());
+        warranty.setStartDate(resultSet.getDate("w_start_date").toLocalDate());
+        hardware.setManufacturer(manufacturer);
+        hardware.setWarranty(warranty);
         return hardware;
     }
 
@@ -132,7 +144,6 @@ public class HardwareDaoImpl implements HardwareDao {
         try {
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, hardware.getName());
-            statement.setString(2, hardware.getVersion());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -155,7 +166,7 @@ public class HardwareDaoImpl implements HardwareDao {
     @Override
     public boolean deleteById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "DELETE FROM hardware WHERE id = ?";
+        String query = "DELETE FROM hardware WHERE hardware_id = ?";
         PreparedStatement statement = null;
 
         try {
@@ -174,22 +185,26 @@ public class HardwareDaoImpl implements HardwareDao {
     @Override
     public boolean update(Hardware hardware) {
         Connection connection = DBConnection.getConnection();
-        String query = "";
+        String query = "UPDATE hardware SET hardware_name=?, manufacturer_id=? WHERE hardware_id=?;" +
+                "UPDATE warranty SET warranty_status=?, w_start_date=?, expiration_date=? WHERE warranty_id=?";
         PreparedStatement statement = null;
 
         try {
             statement = connection.prepareStatement(query);
             statement.setString(1, hardware.getName());
-            statement.setString(2, hardware.getVersion());
-            statement.setInt(3, hardware.getManufacturer().getId());
-            statement.setInt(4, hardware.getId());
+            statement.setInt(2, hardware.getManufacturer().getId());
+            statement.setInt(3, hardware.getId());
+            statement.setString(4, hardware.getWarranty().getStatus());
+            statement.setDate(5, Date.valueOf(hardware.getWarranty().getStartDate()));
+            statement.setDate(6, Date.valueOf(hardware.getWarranty().getExpirationDate()));
+            statement.setInt(7, hardware.getWarranty().getId());
 
             if (statement.executeUpdate() == 1) {
                 return true;
             }
         }
         catch (SQLException e) {
-            throw new DBException("Error occurred by connecting while getting the hardware.");
+            throw new DBException("Error occurred by connecting while getting the hardware." + e.getMessage());
         }
         finally {
             DBConnection.closeStatement(statement);

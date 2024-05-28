@@ -6,6 +6,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -48,14 +50,23 @@
                     <children>
                         <Label text="Name" />
                         <Label fx:id="nameLabel" GridPane.columnIndex="1" />
-                        <Label text="Version" GridPane.rowIndex="1" />
-                        <Label fx:id="versionLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="manufacturerLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Warranty Status" GridPane.rowIndex="2" />
                         <Label fx:id="warrantyStatusLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Warranty Start Date" GridPane.rowIndex="3" />
                         <Label fx:id="warrantyStartDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Warranty Expiration Date" GridPane.rowIndex="4" />
                         <Label fx:id="warrantyExpirationDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0" spacing="6.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <children>
+                              <Label text="Manufacturer" />
+<!--                        <ImageView fx:id="infoIcon" fitHeight="20.0" fitWidth="20.0">-->
+<!--                           <image>-->
+<!--                              <Image url="@img/info.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
+                     </children>
+                  </HBox>
                     </children>
                 </GridPane>
                 <HBox alignment="BOTTOM_RIGHT" layoutX="32.0" layoutY="344.0" maxHeight="40.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
