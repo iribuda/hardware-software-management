@@ -9,4 +9,6 @@ public interface LicenseDao {
     boolean insert(License license);
     boolean update(License license);
     boolean deleteById(Integer id);
+
+    boolean renewLicense(License license);
 }

@@ -19,7 +19,8 @@
             <children>
                 <TableView fx:id="licenseTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                        <TableColumn fx:id="keyColumn" prefWidth="75.0" text="License key" />
+                        <TableColumn fx:id="keyColumn" prefWidth="50.0" text="License key" />
+                  <TableColumn fx:id="softwareColumn" prefWidth="75.0" text="Software" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -68,12 +69,20 @@
                     <children>
                         <Button fx:id="btn_new" maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewLicense" style="-fx-background-color: #656ED3;" text="New License" textFill="WHITE">
                             <HBox.margin>
-                                <Insets right="80.0" />
+                                <Insets right="10.0" />
                             </HBox.margin>
                      <font>
                         <Font name="System Bold" size="12.288000106811523" />
                      </font>
                         </Button>
+                  <Button fx:id="btn_renew" layoutX="180.0" layoutY="14.0" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleRenewLicense" style="-fx-background-color: #656ED3;" text="Renew " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.288000106811523" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
                         <Button fx:id="btn_delete" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteLicense" style="-fx-background-color: #656ED3;" text="Delete" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
