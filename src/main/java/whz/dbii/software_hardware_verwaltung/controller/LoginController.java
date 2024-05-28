@@ -3,6 +3,7 @@ package whz.dbii.software_hardware_verwaltung.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
@@ -15,7 +16,7 @@ public class LoginController {
     @FXML
     public TextField login;
     @FXML
-    public TextField password;
+    public PasswordField password;
 
     private MainApp mainApp;
     private Stage primaryStage;

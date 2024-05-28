@@ -64,12 +64,15 @@ public class FailureOverviewController {
     }
 
     private void controlRights() {
-        boolean canDelete = DBConnection.hasDeleteRights();
-        btn_delete.setDisable(canDelete);
-
-        boolean canWrite = DBConnection.hasWriteRights();
-        btn_new.setDisable(canWrite);
-        btn_edit.setDisable(canWrite);
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+        }
     }
 
     private void showFailureDetails(Failure failure) {
