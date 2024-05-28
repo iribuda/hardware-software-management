@@ -154,7 +154,7 @@ public class WorkerOverviewController {
             JAXBContext context = JAXBContext.newInstance(WorkerList.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            File file = new File("xml/workers.xml");
+            File file = new File("outputXML/workers.xml");
             outputStream = new FileOutputStream(file);
             marshaller.marshal(workerList, outputStream);
             outputStream.flush();
