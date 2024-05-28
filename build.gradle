@@ -1,9 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.javamodularity.moduleplugin' version '1.8.12'
     id 'org.openjfx.javafxplugin' version '0.0.13'
-    id 'org.beryx.jlink' version '2.25.0'
 }
 
 group 'whz.dbII'
@@ -24,36 +22,30 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-application {
-    mainModule = 'whz.dbii.software_hardware_verwaltung'
-    mainClass = 'whz.dbii.software_hardware_verwaltung.MainApp'
-}
-
 javafx {
     version = '17.0.6'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
+mainClassName = "whz.dbii.software_hardware_verwaltung.MainApp"
+
 dependencies {
+    implementation 'com.microsoft.sqlserver:mssql-jdbc:12.4.2.jre11'
+//    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+//    implementation 'org.glassfish.jaxb:jaxb-runtime:3.0.1'
+    // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.1'
+    implementation 'org.javassist:javassist:3.25.0-GA'
+
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
-    implementation 'com.microsoft.sqlserver:mssql-jdbc:12.4.2.jre11'
+
 }
 
 test {
     useJUnitPlatform()
-}
-
-jlink {
-    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-    launcher {
-        name = 'app'
-    }
-}
-
-jlinkZip {
-    group = 'distribution'
 }

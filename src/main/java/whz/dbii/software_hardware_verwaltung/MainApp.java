@@ -1,13 +1,20 @@
 package whz.dbii.software_hardware_verwaltung;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.controller.*;
+import whz.dbii.software_hardware_verwaltung.model.Worker;
 
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.IOException;
+import java.io.StringWriter;
 
 public class MainApp extends Application {
     private Stage primaryStage;
@@ -55,7 +62,7 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JAXBException, JAXBException {
         launch();
     }
 }

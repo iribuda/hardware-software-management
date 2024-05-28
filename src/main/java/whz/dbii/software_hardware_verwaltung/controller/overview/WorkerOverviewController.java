@@ -14,8 +14,14 @@ import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
 import whz.dbii.software_hardware_verwaltung.dao.worker.impl.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
+import whz.dbii.software_hardware_verwaltung.model.xml.WorkerList;
 
-import java.io.IOException;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import java.io.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class WorkerOverviewController {
 
@@ -138,6 +144,38 @@ public class WorkerOverviewController {
 
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleExport(){
+        WorkerList workerList = new WorkerList(workerTable.getItems());
+        OutputStream outputStream = null;
+        try {
+            JAXBContext context = JAXBContext.newInstance(WorkerList.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            File file = new File("xml/workers.xml");
+            outputStream = new FileOutputStream(file);
+            marshaller.marshal(workerList, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainPageController.getPrimaryStage());
+            alert.setTitle("XML Failed");
+            alert.setHeaderText("XML was not created");
+            alert.setContentText("Please select a person in the table.");
+
+            alert.showAndWait();
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(mainPageController.getPrimaryStage());
+        alert.setTitle("XML Saved");
+        alert.setHeaderText("XML was successfully created");
+        alert.setContentText("You can read it after closing the program");
+
+        alert.showAndWait();
     }
 
     public boolean showWorkerEditDialog(Worker worker){
