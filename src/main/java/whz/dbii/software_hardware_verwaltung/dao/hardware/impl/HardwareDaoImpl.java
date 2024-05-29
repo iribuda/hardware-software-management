@@ -101,7 +101,7 @@ public class HardwareDaoImpl implements HardwareDao {
         String query = "SELECT h.hardware_name FROM hardware h\n" +
                 "LEFT JOIN worker_hardware wh ON h.hardware_id = wh.hardware_id\n" +
                 "LEFT JOIN failure f ON h.hardware_id = f.hardware_id\n" +
-                "WHERE wh.worker_id IS NULL AND (f.hardware_id IS NULL OR f.failure_status IN ('Repaired'))";
+                "WHERE wh.worker_id IS NULL AND (f.hardware_id IS NULL OR f.failure_status IN ('repariert'))";
         return getStringObservableList(query);
     }
 
