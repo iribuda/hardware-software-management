@@ -67,26 +67,26 @@ public class LicenseEditViewController {
     private boolean isInputValid() {
         StringBuilder errorMessage = new StringBuilder();
         if (keyTextField.getText() == null || keyTextField.getText().isEmpty())
-            errorMessage.append("Please enter a valid license key!\n");
+            errorMessage.append("Bitte geben Sie einen gültigen Lizenzschlüssel ein!\n");
         if (startDatePicker.getValue() == null)
-            errorMessage.append("Please provide start date!\n");
+            errorMessage.append("Bitte geben Sie ein Startdatum an!\n");
         if (expirationDatePicker.getValue() == null)
-            errorMessage.append("Please provide expiration date!\n");
+            errorMessage.append("Bitte geben Sie ein Ablaufdatum an!\n");
         if (purchaseDatePicker.getValue() == null)
-            errorMessage.append("Please provide purchase date!\n");
+            errorMessage.append("Bitte geben Sie ein Kaufdatum an!\n");
         if (statusCheckbox.getValue() == null || statusCheckbox.getValue().isEmpty())
-            errorMessage.append("Please provide license status!\n");
+            errorMessage.append("Bitte geben Sie den Lizenzstatus an!\n");
         if (priceTextField.getText() == null || priceTextField.getText().isEmpty() || !isNumeric(priceTextField.getText()))
-            errorMessage.append("Please enter the valid license price!\n");
+            errorMessage.append("Bitte geben Sie einen gültigen Lizenzpreis ein!\n");
         if (softwareCheckbox.getValue() == null || softwareCheckbox.getValue().isEmpty())
-            errorMessage.append("Please provide the software for license!\n");
+            errorMessage.append("Bitte geben Sie die Software für die Lizenz an!\n");
 
         if (errorMessage.isEmpty()) return true;
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(dialogStage);
-        alert.setTitle("Invalid Fields");
-        alert.setHeaderText("Please correct invalid fields");
+        alert.setTitle("Ungültige Felder");
+        alert.setHeaderText("Bitte korrigieren Sie die ungültigen Felder");
         alert.setContentText(errorMessage.toString());
         alert.showAndWait();
 
