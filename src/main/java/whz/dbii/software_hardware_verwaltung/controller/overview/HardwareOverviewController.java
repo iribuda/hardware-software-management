@@ -154,4 +154,7 @@ public class HardwareOverviewController {
             getHardwareWasNotSelectedAlert().showAndWait();
         }
     }
+
+    @FXML
+    private void handleExport(){}
 }

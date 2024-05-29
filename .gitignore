@@ -4,7 +4,6 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 src/main/resources/whz/dbii/software_hardware_verwaltung/db.properties
-outputXML/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

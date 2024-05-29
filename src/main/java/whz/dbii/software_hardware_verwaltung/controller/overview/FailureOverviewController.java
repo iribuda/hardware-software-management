@@ -156,4 +156,7 @@ public class FailureOverviewController {
             getFailureWasNotSelectedAlert().showAndWait();
         }
     }
+
+    @FXML
+    private void handleExport(){}
 }
