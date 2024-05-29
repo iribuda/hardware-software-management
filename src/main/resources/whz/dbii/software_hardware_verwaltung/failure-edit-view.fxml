@@ -21,7 +21,7 @@
             <children>
                 <VBox prefWidth="400.0" spacing="10.0" style="-fx-background-color: #EBEFFF;">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="Failure" textAlignment="CENTER" textFill="#453a65">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="Ausfall" textAlignment="CENTER" textFill="#453a65">
                             <font>
                                 <Font name="Segoe UI Bold" size="14.0" />
                             </font>
@@ -38,11 +38,11 @@
                         <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="ALWAYS" />
                             </rowConstraints>
                             <children>
-                                <Label text="Failure date" textFill="#443f53" GridPane.rowIndex="2">
+                                <Label text="Ausfallsdatum" textFill="#443f53" GridPane.rowIndex="2">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Status" textFill="#443f53" GridPane.rowIndex="3">
+                                <Label text="Ausfallstatus" textFill="#443f53" GridPane.rowIndex="3">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
@@ -53,13 +53,13 @@
                                 <DatePicker fx:id="failureDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <ChoiceBox fx:id="statusCheckbox" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 <ChoiceBox fx:id="hardwareCheckbox" prefWidth="220.0" GridPane.columnIndex="1" />
-                        <Label text="Failure Type" GridPane.rowIndex="1" />
+                        <Label text="Ausfallstyp" GridPane.rowIndex="1" />
                         <TextField fx:id="typeTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             </children>
                         </GridPane>
                         <HBox alignment="CENTER">
                             <children>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Cancel" textFill="WHITE">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Abbrechen" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets right="10.0" />
                                     </HBox.margin>
