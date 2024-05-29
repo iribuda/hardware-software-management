@@ -1,7 +1,75 @@
+*{
+    -fx-purple-color: #AFB2FF;
+}
+.pane, .vbox{
+    -fx-background-color: #ECEFFF;
+}
+
 Label {
-    -fx-font-size: 14
+    -fx-font-size: 14;
 }
 
 .title{
-    -fx-font-size: 20
+    -fx-font-size: 20;
+    -fx-font-family: "Montserrat SemiBold";
+}
+
+.table-button {
+    -fx-background-color: -fx-primary-color;
+    -fx-cursor: hand;
+}
+
+.table-view {
+    -fx-font-size: 14;
+    -fx-border-color: -fx-purple-color;
+    -fx-background-color: transparent; /* OR  -fx-background-insets: 0.0; */
+}
+
+.table-view .column-header-background,
+.table-view .column-header-background .filler,
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+.table-view .column-header {
+    -fx-background-color: -fx-purple-color;
+}
+.table-view .column-header .label{
+    -fx-font-weight: bold;
+}
+/* This is just magic */
+.table-row-cell:filled {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent -fx-lightest-grey-color -fx-lightest-grey-color -fx-lightest-grey-color, transparent;
+    -fx-border-insets: 0, 1;
+}
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+.table-row-cell:filled:hover {
+    -fx-background-color: -fx-light-grey-color;
+}
+.table-row-cell:filled:selected:hover {
+    -fx-background-color: -fx-light-grey-color;
+}
+.table-row-cell:filled:selected {
+    -fx-background-color: #eaeaea;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 0.0;
+}
+.table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: black;
+}
+.table-view .cell:filled{
+    -fx-cell-size: 30;
+    -fx-alignment: center-left;
+}
+.check-box-table-cell > .check-box:selected .box .mark {
+    -fx-background-color: white;
+}
+.check-box-table-cell > .check-box:selected .box{
+    -fx-background-color: -fx-accent-color;
+}
+.table-view .placeholder .label {
+    -fx-text-fill: red;
+    -fx-padding:20px;
 }

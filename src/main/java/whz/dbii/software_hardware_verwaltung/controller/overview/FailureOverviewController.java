@@ -130,7 +130,7 @@ public class FailureOverviewController {
         if (showFailureEditDialog(failure)) {
             failureDao.insert(failure);
             failureTable.getItems().add(failure);
-            populateFailures();
+//            populateFailures();
         }
     }
     @FXML

@@ -35,6 +35,7 @@ public class LoginController {
             credentials.loadUserRoles();
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(primaryStage);
             alert.setTitle("Authentifizierung fehlgeschlagen");
