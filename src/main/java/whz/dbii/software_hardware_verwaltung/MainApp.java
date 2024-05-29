@@ -4,6 +4,7 @@ package whz.dbii.software_hardware_verwaltung;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.controller.*;
@@ -23,6 +24,9 @@ public class MainApp extends Application {
     public void start(Stage stage) {
         this.primaryStage = stage;
         stage.setTitle("Software und Hardware Verwaltung");
+
+        Image image = new Image("whz/dbii/software_hardware_verwaltung/img/logo.png");
+        primaryStage.getIcons().add(image);
 //        initRootLayout();
         showAuthorizationPage();
     }
