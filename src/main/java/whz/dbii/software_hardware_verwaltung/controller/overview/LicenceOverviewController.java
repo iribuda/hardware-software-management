@@ -175,4 +175,7 @@ public class LicenceOverviewController {
             getLicenseWasNotSelectedAlert().showAndWait();
         }
     }
+
+    @FXML
+    public void handleExport(){}
 }

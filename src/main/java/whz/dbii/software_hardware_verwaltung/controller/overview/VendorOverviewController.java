@@ -141,4 +141,7 @@ public class VendorOverviewController {
             getVendorWasNotSelectedAlert().showAndWait();
         }
     }
+
+    @FXML
+    public void handleExport(){}
 }

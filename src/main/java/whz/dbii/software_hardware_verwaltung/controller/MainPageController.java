@@ -3,6 +3,7 @@ package whz.dbii.software_hardware_verwaltung.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -13,6 +14,8 @@ import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import java.io.IOException;
 
 public class MainPageController {
+    @FXML
+    public Label lblusername;
     @FXML
     public void handleShowSoftware(ActionEvent actionEvent) {
         showSoftwareOverview();
@@ -56,6 +59,21 @@ public class MainPageController {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    @FXML
+    private void initialize() {
+        String currUserName = DBConnection.getUserName();
+        if (currUserName != null && !currUserName.isEmpty()) {
+            char firstLetter = currUserName.charAt(0);
+            if (Character.isLowerCase(firstLetter)) {
+                currUserName = currUserName.replaceFirst(Character.toString(firstLetter),
+                        Character.toString(Character.toUpperCase(firstLetter)));
+            }
+
+            lblusername.setText(currUserName);
+            lblusername.setStyle("-fx-font-weight: bold");
+        }
     }
 
     public void showFailureOverview(){

@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.3879598662207358" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.overview.SoftwareOverviewController">
+<SplitPane stylesheets="@css/styles.css"  dividerPositions="0.3879598662207358" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.overview.SoftwareOverviewController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
-                <TableView fx:id="softwareTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <TableView fx:id="softwareTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Software" />
                     </columns>
@@ -25,6 +25,11 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
+            <Button layoutX="65.0" layoutY="357.0" maxHeight="36.0" mnemonicParsing="false" onAction="#handleExport" style="-fx-background-color: #656ED3;" text="Export to XML" textFill="WHITE" AnchorPane.bottomAnchor="12.0">
+               <font>
+                  <Font name="System Bold" size="12.288000106811523" />
+               </font>
+            </Button>
             </children></AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #ECEFFF;">
             <children>
@@ -56,8 +61,7 @@
                 </GridPane>
                 <HBox alignment="BOTTOM_RIGHT" layoutX="32.0" layoutY="344.0" maxHeight="40.0" prefHeight="100.0" prefWidth="300.0">
                     <children>
-                        <Button fx:id="btn_new" maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewSoftware" text="New Software"
-                                style="-fx-background-color: #656ED3;" textFill="WHITE">
+                        <Button fx:id="btn_new" maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewSoftware" style="-fx-background-color: #656ED3;" text="New Software" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="70.0" />
                             </HBox.margin>
@@ -65,8 +69,7 @@
                                 <Font name="System Bold" size="12.288000106811523" />
                             </font>
                         </Button>
-                        <Button fx:id="btn_delete" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteSoftware" text="Delete"
-                            style="-fx-background-color: #656ED3;" textFill="WHITE">
+                        <Button fx:id="btn_delete" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteSoftware" style="-fx-background-color: #656ED3;" text="Delete" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>
@@ -74,8 +77,7 @@
                                 <Font name="System Bold" size="12.288000106811523" />
                             </font>
                         </Button>
-                        <Button fx:id="btn_edit" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditSoftware" text="Edit"
-                                style="-fx-background-color: #656ED3;" textFill="WHITE">
+                        <Button fx:id="btn_edit" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditSoftware" style="-fx-background-color: #656ED3;" text="Edit" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="12.288000106811523" />
                             </font>

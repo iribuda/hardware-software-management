@@ -147,4 +147,7 @@ public class SoftwareOverviewController {
             getSoftwareWasNotSelectedAlert().showAndWait();
         }
     }
+
+    @FXML
+    public void handleExport(){}
 }
