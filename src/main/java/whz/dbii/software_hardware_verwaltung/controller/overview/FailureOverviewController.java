@@ -117,9 +117,9 @@ public class FailureOverviewController {
     private Alert getFailureWasNotSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No failure was selected.");
-        alert.setContentText("Please choose the failure!");
+        alert.setTitle("Keine Auswahl");
+        alert.setHeaderText("Es wurde kein Fehler ausgewählt.");
+        alert.setContentText("Bitte wählen Sie den Fehler!");
 
         return alert;
     }

@@ -132,8 +132,8 @@ public class WorkerEditController {
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle("Ungültige Felder");
+            alert.setHeaderText("Bitte korrigieren Sie ungültige Felder");
             alert.setContentText(errorMsg);
 
             alert.showAndWait();

@@ -37,8 +37,8 @@ public class LoginController {
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(primaryStage);
-            alert.setTitle("Authentication failed");
-            alert.setHeaderText("Please provide a valid credentials!");
+            alert.setTitle("Authentifizierung fehlgeschlagen");
+            alert.setHeaderText("Bitte geben Sie einen gültigen Berechtigungsnachweis an!");
             alert.showAndWait();
         }
 
@@ -50,16 +50,16 @@ public class LoginController {
         StringBuilder errorMessage = new StringBuilder();
 
         if (username == null || username.isEmpty())
-            errorMessage.append("Username must not be empty!\n");
+            errorMessage.append("Der Benutzername darf nicht leer sein!\n");
         if (password == null || password.isEmpty())
-            errorMessage.append("Password must not be empty!\n");
+            errorMessage.append("Das Passwort darf nicht leer sein!\n");
 
         if (errorMessage.isEmpty()) return true;
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(primaryStage);
-        alert.setTitle("Invalid Fields");
-        alert.setHeaderText("Please correct invalid fields");
+        alert.setTitle("Ungültige Felder");
+        alert.setHeaderText("Bitte korrigieren Sie ungültige Felder");
         alert.setContentText(errorMessage.toString());
         alert.showAndWait();
 

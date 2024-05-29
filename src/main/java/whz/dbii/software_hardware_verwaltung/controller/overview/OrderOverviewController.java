@@ -106,9 +106,9 @@ public class OrderOverviewController {
     private Alert getOrderWasNotSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No order was selected.");
-        alert.setContentText("Please choose the order!");
+        alert.setTitle("Keine Auswahl");
+        alert.setHeaderText("Es wurde kein Auftrag ausgewählt.");
+        alert.setContentText("Bitte wählen Sie die Reihenfolge!");
 
         return alert;
     }

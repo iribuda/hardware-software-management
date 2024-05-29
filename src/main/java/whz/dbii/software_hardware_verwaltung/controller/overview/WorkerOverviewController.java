@@ -138,9 +138,9 @@ public class WorkerOverviewController {
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainPageController.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setTitle("Keine Auswahl");
+            alert.setHeaderText("Keine Person ausgewählt");
+            alert.setContentText("Bitte wählen Sie eine Person in der Tabelle aus.");
 
             alert.showAndWait();
         }
@@ -163,17 +163,17 @@ public class WorkerOverviewController {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainPageController.getPrimaryStage());
-            alert.setTitle("XML Failed");
-            alert.setHeaderText("XML was not created");
-            alert.setContentText("Please select a person in the table.");
+            alert.setTitle("XML fehlgeschlagen");
+            alert.setHeaderText("XML wurde nicht erstellt");
+            alert.setContentText("Bitte wählen Sie eine Person in der Tabelle aus.");
 
             alert.showAndWait();
         }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("XML Saved");
-        alert.setHeaderText("XML was successfully created");
-        alert.setContentText("You can read it after closing the program");
+        alert.setTitle("XML Gespeichert");
+        alert.setHeaderText("XML wurde erfolgreich erstellt");
+        alert.setContentText("Sie können sie nach dem Schließen des Programms lesen");
 
         alert.showAndWait();
     }

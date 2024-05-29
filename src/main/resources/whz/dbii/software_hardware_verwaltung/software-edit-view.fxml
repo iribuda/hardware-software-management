@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane stylesheets="@css/styles.css"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.SoftwareEditViewController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.SoftwareEditViewController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0">
             <children>
                 <VBox prefWidth="400.0" spacing="10.0" style="-fx-background-color: #EBEFFF;">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="Software" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" styleClass="title" text="Software" textAlignment="CENTER">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -38,7 +38,7 @@
                             <children>
                                 <Label text="Name" />
                                 <Label text="Version" GridPane.rowIndex="1" />
-                                <Label text="Vendor" GridPane.rowIndex="2" />
+                                <Label text="Anbieter" GridPane.rowIndex="2" />
                                 <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
                                 <TextField fx:id="versionTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <ChoiceBox fx:id="vendorCheckbox" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -46,7 +46,7 @@
                         </GridPane>
                         <HBox alignment="CENTER">
                             <children>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Cancel" textFill="WHITE">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Abbrechnen" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets right="10.0" />
                                     </HBox.margin>

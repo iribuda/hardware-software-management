@@ -112,9 +112,9 @@ public class HardwareOverviewController {
     private Alert getHardwareWasNotSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("No selection");
-        alert.setHeaderText("no hardware was selected");
-        alert.setContentText("Please select a hardware");
+        alert.setTitle("Keine Auswahl");
+        alert.setHeaderText("keine Hardware ausgewählt wurde");
+        alert.setContentText("Bitte wählen Sie eine Hardware");
 
         return alert;
     }

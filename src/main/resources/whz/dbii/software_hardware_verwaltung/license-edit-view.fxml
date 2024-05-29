@@ -21,7 +21,7 @@
             <children>
                 <VBox prefWidth="400.0" spacing="10.0" style="-fx-background-color: #EBEFFF;">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="License" textAlignment="CENTER" textFill="#453a65">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="Lizenz" textAlignment="CENTER" textFill="#453a65">
                             <font>
                                 <Font name="Segoe UI Bold" size="14.0" />
                             </font>
@@ -35,25 +35,25 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
                             </rowConstraints>
                             <children>
-                                <Label text="License key" textFill="#443f53">
+                                <Label text="Lizenzsnummer" textFill="#443f53">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Start date" textFill="#443f53" GridPane.rowIndex="1">
+                                <Label text="Startdatum" textFill="#443f53" GridPane.rowIndex="1">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Expiration date" textFill="#443f53" GridPane.rowIndex="2">
+                                <Label text="Ablaufsdatum" textFill="#443f53" GridPane.rowIndex="2">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Purchase date" textFill="#443f53" GridPane.rowIndex="3">
+                                <Label text="Kaufdatum" textFill="#443f53" GridPane.rowIndex="3">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
@@ -61,14 +61,14 @@
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Price" textFill="#443f53" GridPane.rowIndex="5">
+                                <Label text="Preise" textFill="#443f53" GridPane.rowIndex="5">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
                                 <Label text="Software" textFill="#443f53" GridPane.rowIndex="6">
-                           <font>
-                              <Font name="Segoe UI" size="12.288000106811523" />
-                           </font></Label>
+                                    <font>
+                                        <Font name="Segoe UI" size="12.288000106811523" />
+                                    </font></Label>
                                 <TextField fx:id="keyTextField" GridPane.columnIndex="1" />
                                 <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <DatePicker fx:id="expirationDatePicker" layoutX="119.0" layoutY="53.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -80,13 +80,13 @@
                         </GridPane>
                         <HBox alignment="CENTER">
                             <children>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Cancel" textFill="WHITE">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Abbrechen" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets right="10.0" />
                                     </HBox.margin>
-                           <font>
-                              <Font name="Segoe UI Bold" size="12.288000106811523" />
-                           </font>
+                                    <font>
+                                        <Font name="Segoe UI Bold" size="12.288000106811523" />
+                                    </font>
                                 </Button>
                                 <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleOk" style="-fx-background-color: #656ED3;" text="OK" textFill="WHITE">
                                     <HBox.margin>
