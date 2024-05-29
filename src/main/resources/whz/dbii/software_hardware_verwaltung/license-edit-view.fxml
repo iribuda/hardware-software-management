@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane  stylesheets="@css/styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.LicenseEditViewController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.LicenseEditViewController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0">
             <children>
                 <VBox prefWidth="400.0" spacing="10.0" style="-fx-background-color: #EBEFFF;">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="License" textAlignment="CENTER" textFill="#453a65">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="Lizenz" textAlignment="CENTER" textFill="#453a65">
                             <font>
                                 <Font name="Segoe UI Bold" size="14.0" />
                             </font>
@@ -41,19 +41,19 @@
                         <RowConstraints />
                             </rowConstraints>
                             <children>
-                                <Label text="License key" textFill="#443f53">
+                                <Label text="Lizenzsnummer" textFill="#443f53">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Start date" textFill="#443f53" GridPane.rowIndex="1">
+                                <Label text="Startdatum" textFill="#443f53" GridPane.rowIndex="1">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Expiration date" textFill="#443f53" GridPane.rowIndex="2">
+                                <Label text="Ablaufsdatum" textFill="#443f53" GridPane.rowIndex="2">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Purchase date" textFill="#443f53" GridPane.rowIndex="3">
+                                <Label text="Kaufdatum" textFill="#443f53" GridPane.rowIndex="3">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
@@ -61,7 +61,7 @@
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
-                                <Label text="Price" textFill="#443f53" GridPane.rowIndex="5">
+                                <Label text="Preise" textFill="#443f53" GridPane.rowIndex="5">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
@@ -80,7 +80,7 @@
                         </GridPane>
                         <HBox alignment="CENTER">
                             <children>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Cancel" textFill="WHITE">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Abbrechnen" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets right="10.0" />
                                     </HBox.margin>

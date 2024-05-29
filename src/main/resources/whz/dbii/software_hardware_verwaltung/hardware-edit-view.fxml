@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane  stylesheets="@css/styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" style="-fx-background-color: #ECEFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.HardwareEditViewController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" style="-fx-background-color: #ECEFFF;" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.HardwareEditViewController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0">
             <children>
@@ -39,26 +39,32 @@
                             </rowConstraints>
                             <children>
                                 <Label text="Name" />
-                                <Label text="Warranty start date" GridPane.rowIndex="1" />
-                                <Label text="Manufacturer" GridPane.rowIndex="3" />
+                                <Label text="Beginn der Garantie" GridPane.rowIndex="1" />
+                                <Label text="Hersteller" GridPane.rowIndex="3" />
                                 <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
                                 <ChoiceBox fx:id="manufacturerCheckbox" prefWidth="220.0" style="-fx-background-color: #AFB2FF;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Warranty expiration date" GridPane.rowIndex="2" />
+                        <Label text="Ablaufdatum der Garantie" GridPane.rowIndex="2" />
                         <DatePicker fx:id="expDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                             </children>
                         </GridPane>
                         <HBox alignment="CENTER">
                             <children>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #AFB2FF;" text="Cancel">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Abbrechnen" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets right="10.0" />
                                     </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                                 </Button>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleOk" style="-fx-background-color: #AFB2FF;" text="OK">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleOk" style="-fx-background-color: #656ED3;" text="OK" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets />
                                     </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                                 </Button>
                             </children>
                             <VBox.margin>

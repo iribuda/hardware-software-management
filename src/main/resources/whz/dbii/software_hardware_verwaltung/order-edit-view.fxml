@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane stylesheets="@css/styles.css"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.OrderEditViewController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.OrderEditViewController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0">
             <children>
                 <VBox prefWidth="400.0" spacing="10.0" style="-fx-background-color: #EBEFFF;">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="Order" textAlignment="CENTER" textFill="#453a65">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" styleClass="title" text="Bestellung" textAlignment="CENTER" textFill="#453a65">
                             <font>
                                 <Font name="Segoe UI Bold" size="14.0" />
                             </font>
@@ -36,7 +36,7 @@
                         <RowConstraints />
                             </rowConstraints>
                             <children>
-                                <Label text="Order date" textFill="#443f53" GridPane.rowIndex="1">
+                                <Label text="Kaufdatum" textFill="#443f53" GridPane.rowIndex="1">
                            <font>
                               <Font name="Segoe UI" size="12.288000106811523" />
                            </font></Label>
@@ -55,7 +55,7 @@
                         </GridPane>
                         <HBox alignment="CENTER">
                             <children>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Cancel" textFill="WHITE">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Abbrechnen" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets right="10.0" />
                                     </HBox.margin>
