@@ -171,9 +171,9 @@ public class WorkerOverviewController {
         }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("XML Saved");
-        alert.setHeaderText("XML was successfully created");
-        alert.setContentText("You can read it after closing the program");
+        alert.setTitle("XML Gespeichert");
+        alert.setHeaderText("XML wurde erfolgreich erstellt");
+        alert.setContentText("Sie können sie nach dem Schließen des Programms lesen");
 
         alert.showAndWait();
     }
