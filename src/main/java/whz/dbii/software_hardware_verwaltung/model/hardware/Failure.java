@@ -105,6 +105,9 @@ public class Failure {
     }
 
     public void setWorkerName(String name, String surname) {
-        this.workerName.set(name + " " + surname);
+        if (name == null || surname == null)
+            this.workerName.set("kein Mitarbeiter");
+        else
+            this.workerName.set(name + " " + surname);
     }
 }

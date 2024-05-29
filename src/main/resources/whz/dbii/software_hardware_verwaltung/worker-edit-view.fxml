@@ -148,7 +148,4 @@
          </padding>
       </VBox>
   </items>
-   <padding>
-      <Insets top="10.0" />
-   </padding>
 </SplitPane>
