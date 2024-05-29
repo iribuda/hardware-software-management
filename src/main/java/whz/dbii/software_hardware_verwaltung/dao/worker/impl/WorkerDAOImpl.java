@@ -135,6 +135,28 @@ public class WorkerDAOImpl implements WorkerDAO {
     }
 
     @Override
+    public boolean deleteWorkersHardware(int hardwareId, int workerId) {
+        Connection conn = DBConnection.getConnection();
+        String sql = "DELETE FROM worker_hardware WHERE worker_id=? AND hardware_id=?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, workerId);
+            preparedStatement.setInt(2, hardwareId);
+            preparedStatement.executeUpdate();
+            int rs = preparedStatement.executeUpdate();
+            if (rs==1)
+                return true;
+        } catch (SQLException e) {
+            throw new DBException(e.getMessage());
+        }finally {
+            DBConnection.closeStatement(preparedStatement);
+            DBConnection.disconnect();
+        }
+        return false;
+    }
+
+    @Override
     public ObservableList<Software> findSoftwareOfWorker(int id){
         Connection conn = DBConnection.getConnection();
         PreparedStatement preparedStatement = null;

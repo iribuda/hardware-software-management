@@ -138,7 +138,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button mnemonicParsing="false" style="-fx-background-color: #DC7700;" text="Delete" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleDeleteHardware" style="-fx-background-color: #DC7700;" text="Delete" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font></Button>

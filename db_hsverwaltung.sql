@@ -77,11 +77,10 @@ CREATE TABLE worker_hardware(
     hardware_id int NOT NULL,
     usage_start_date Date NOT NULL,
     PRIMARY KEY(worker_id, hardware_id, usage_start_date),
-    FOREIGN KEY(worker_id) REFERENCES worker(worker_id) 
+    FOREIGN KEY(worker_id) REFERENCES worker(worker_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
     FOREIGN KEY(hardware_id) REFERENCES hardware(hardware_id)
-    ON DELETE CASCADE
     ON UPDATE CASCADE
 );
 
@@ -90,7 +89,7 @@ CREATE TABLE worker_software(
     software_id int NOT NULL,
     usage_start_date Date NOT NULL,
     PRIMARY KEY(worker_id, software_id, usage_start_date),
-    FOREIGN KEY(worker_id) REFERENCES worker(worker_id) 
+    FOREIGN KEY(worker_id) REFERENCES worker(worker_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
     FOREIGN KEY(software_id) REFERENCES software(software_id)

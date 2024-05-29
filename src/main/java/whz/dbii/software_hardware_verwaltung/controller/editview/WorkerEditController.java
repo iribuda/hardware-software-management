@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.HardwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.software.SoftwareDao;
@@ -50,6 +51,7 @@ public class WorkerEditController {
     private SoftwareDao softwareDao;
     private WorkerDAO workerDAO;
     private HardwareDao hardwareDao;
+
 
     @FXML
     private void initialize(){
@@ -154,7 +156,23 @@ public class WorkerEditController {
     }
 
     @FXML
-    private void handleDeleteHaving(){}
+    private void handleDeleteHardware(){
+        int selectedIndex = hardwareTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            int hardwareId = hardwareDao.findIdByName(hardwareTable.getSelectionModel().getSelectedItem());
+            hardwareTable.getItems().remove(selectedIndex);
+            workerDAO.deleteWorkersHardware(hardwareId, worker.getId());
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(dialogStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("Keine Mitarbeiter wurde gewählt");
+            alert.setContentText("Wählen Sie bitte ein Hardware!");
+
+            alert.showAndWait();
+        }
+    }
 
     @FXML
     private void handleAddHardware(){
