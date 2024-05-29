@@ -9,6 +9,9 @@ public interface SoftwareDao {
     Software findById(Integer id);
     ObservableList<Software> findAll();
     ObservableList<String> findAllNameOfSoftware();
+
+    ObservableList<String> findAllNameOfActiveSoftware();
+
     int findIdByName(String name);
     boolean insert(Software software);
     boolean update(Software software);

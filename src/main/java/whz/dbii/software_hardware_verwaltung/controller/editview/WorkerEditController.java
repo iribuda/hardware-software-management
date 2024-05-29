@@ -67,7 +67,7 @@ public class WorkerEditController {
         nameTextField.setText(worker.getName());
         surnameTextField.setText(worker.getSurname());
         emailTextField.setText(worker.getEmail());
-        softwareCheckbox.setItems(softwareDao.findAllNameOfSoftware());
+        softwareCheckbox.setItems(softwareDao.findAllNameOfActiveSoftware());
         hardwareCheckbox.setItems(hardwareDao.findAllNamesOfAvailableHardware());
         System.out.println(worker.getId());
         if (worker.getId() != 0){

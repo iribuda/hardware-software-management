@@ -9,8 +9,6 @@ import whz.dbii.software_hardware_verwaltung.dao.software.VendorDao;
 import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SoftwareDaoImpl implements SoftwareDao {
 
@@ -160,8 +158,20 @@ public class SoftwareDaoImpl implements SoftwareDao {
 
     @Override
     public ObservableList<String> findAllNameOfSoftware() {
-        Connection connection = DBConnection.getConnection();
         String query = "SELECT software_name FROM software";
+        return getStringsNames(query);
+    }
+
+    @Override
+    public ObservableList<String> findAllNameOfActiveSoftware() {
+        String query = "SELECT s.software_name FROM software s\n" +
+                "JOIN dbo.license l on s.software_id = l.software_id\n" +
+                "WHERE license_status='aktiv'";
+        return getStringsNames(query);
+    }
+
+    private ObservableList<String> getStringsNames(String query) {
+        Connection connection = DBConnection.getConnection();
         Statement statement = null;
         ResultSet resultSet = null;
 
