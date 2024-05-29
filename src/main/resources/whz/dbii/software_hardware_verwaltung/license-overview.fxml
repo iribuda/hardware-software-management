@@ -20,7 +20,7 @@
                 <TableView fx:id="licenseTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="keyColumn" prefWidth="50.0" text="License key" />
-                  <TableColumn fx:id="softwareColumn" prefWidth="75.0" text="Software" />
+                        <TableColumn fx:id="softwareColumn" prefWidth="75.0" text="Software" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -44,9 +44,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
                     </rowConstraints>
                     <children>
                         <Label text="License key" />
@@ -67,34 +67,34 @@
                 </GridPane>
                 <HBox alignment="BOTTOM_RIGHT" layoutX="32.0" layoutY="344.0" maxHeight="40.0" prefHeight="100.0" prefWidth="300.0">
                     <children>
-                        <Button fx:id="btn_new" maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewLicense" style="-fx-background-color: #656ED3;" text="New License" textFill="WHITE">
+                        <Button fx:id="btn_new" maxHeight="36.0" mnemonicParsing="false" onAction="#handleNewLicense" style="-fx-background-color: #656ED3;" text="Neu" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.288000106811523" />
-                     </font>
+                            <font>
+                                <Font name="System Bold" size="12.288000106811523" />
+                            </font>
                         </Button>
-                  <Button fx:id="btn_renew" layoutX="180.0" layoutY="14.0" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleRenewLicense" style="-fx-background-color: #656ED3;" text="Renew " textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.288000106811523" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Button>
-                        <Button fx:id="btn_delete" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteLicense" style="-fx-background-color: #656ED3;" text="Delete" textFill="WHITE">
+                        <Button fx:id="btn_renew" layoutX="180.0" layoutY="14.0" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleRenewLicense" style="-fx-background-color: #656ED3;" text="Erneuern" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.288000106811523" />
+                            </font>
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.288000106811523" />
-                     </font>
                         </Button>
-                        <Button fx:id="btn_edit" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditLicense" style="-fx-background-color: #656ED3;" text="Edit" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.288000106811523" />
-                     </font></Button>
+                        <Button fx:id="btn_delete" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleDeleteLicense" style="-fx-background-color: #656ED3;" text="Löschen" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets right="10.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.288000106811523" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btn_edit" maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleEditLicense" style="-fx-background-color: #656ED3;" text="Bearbeiten" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.288000106811523" />
+                            </font></Button>
                     </children>
                 </HBox>
             </children></AnchorPane>

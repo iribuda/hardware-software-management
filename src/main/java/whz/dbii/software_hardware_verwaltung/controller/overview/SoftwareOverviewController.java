@@ -106,9 +106,9 @@ public class SoftwareOverviewController {
     private Alert getSoftwareWasNotSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No software was selected.");
-        alert.setContentText("Please choose the software!");
+        alert.setTitle("Keine Auswahl");
+        alert.setHeaderText("Es wurde keine Software ausgewählt.");
+        alert.setContentText("Bitte wählen Sie die Software!");
 
         return alert;
     }

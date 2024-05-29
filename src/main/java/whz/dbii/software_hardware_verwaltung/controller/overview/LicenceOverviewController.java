@@ -105,7 +105,7 @@ public class LicenceOverviewController {
             SplitPane page = (SplitPane) loader.load();
 
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Adding/Editing the license");
+            dialogStage.setTitle("Lizenz hinzufügen/bearbeiten");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainPageController.getPrimaryStage());
             Scene scene = new Scene(page);
@@ -126,9 +126,9 @@ public class LicenceOverviewController {
     private Alert getLicenseWasNotSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No license was selected.");
-        alert.setContentText("Please choose the license!");
+        alert.setTitle("Keine Auswahl");
+        alert.setHeaderText("Es wurde keine Lizenz ausgewählt.");
+        alert.setContentText("Bitte wählen Sie die Lizenz aus!");
 
         return alert;
     }

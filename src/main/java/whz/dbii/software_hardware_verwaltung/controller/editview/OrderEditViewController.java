@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.OrderDao;
@@ -15,13 +14,14 @@ import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.HardwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.OrderDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Order;
 import whz.dbii.software_hardware_verwaltung.model.hardware.OrderStatus;
-import whz.dbii.software_hardware_verwaltung.model.software.LicenseStatus;
 
 public class OrderEditViewController {
 
-
+    @FXML
     public DatePicker orderDatePicker;
+    @FXML
     public ChoiceBox<String> statusCheckbox;
+    @FXML
     public ChoiceBox<String> hardwareCheckbox;
     private Stage dialogStage;
     private Order order;
@@ -52,21 +52,22 @@ public class OrderEditViewController {
         if (order.getHardware() != null)
             hardwareCheckbox.setValue(order.getHardware().getName());
     }
+
     private boolean isInputValid() {
         StringBuilder errorMessage = new StringBuilder();
         if (orderDatePicker.getValue() == null)
-            errorMessage.append("Please provide order date!\n");
+            errorMessage.append("Bitte geben Sie das Bestelldatum an!\n");
         if (statusCheckbox.getValue() == null || statusCheckbox.getValue().isEmpty())
-            errorMessage.append("Please provide order status!\n");
+            errorMessage.append("Bitte geben Sie den Bestellstatus an!\n");
         if (hardwareCheckbox.getValue() == null || hardwareCheckbox.getValue().isEmpty())
-            errorMessage.append("Please provide the hardware for order!\n");
+            errorMessage.append("Bitte geben Sie die Hardware für die Bestellung an!\n");
 
         if (errorMessage.isEmpty()) return true;
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(dialogStage);
-        alert.setTitle("Invalid Fields");
-        alert.setHeaderText("Please correct invalid fields");
+        alert.setTitle("Ungültige Felder");
+        alert.setHeaderText("Bitte korrigieren Sie die ungültigen Felder");
         alert.setContentText(errorMessage.toString());
         alert.showAndWait();
 
@@ -76,6 +77,7 @@ public class OrderEditViewController {
     public boolean isOkClicked() {
         return isOkClicked;
     }
+
     @FXML
     public void handleCancel(ActionEvent actionEvent) {
         dialogStage.close();

@@ -103,9 +103,9 @@ public class VendorOverviewController {
     private Alert getVendorWasNotSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No vendor was selected.");
-        alert.setContentText("Please choose the vendor to delete!");
+        alert.setTitle("Keine Auswahl");
+        alert.setHeaderText("Es wurde kein Lieferant ausgewählt..");
+        alert.setContentText("Bitte wählen Sie den zu löschenden Lieferanten!");
 
         return alert;
     }

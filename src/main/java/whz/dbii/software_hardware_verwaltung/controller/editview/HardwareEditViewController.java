@@ -6,7 +6,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.ManufacturerDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.HardwareDaoImpl;
@@ -20,7 +19,9 @@ public class HardwareEditViewController {
     public TextField nameTextField;
     @FXML
     public ChoiceBox<String> manufacturerCheckbox;
+    @FXML
     public DatePicker startDatePicker;
+    @FXML
     public DatePicker expDatePicker;
 
     private Stage dialogStage;
@@ -45,35 +46,34 @@ public class HardwareEditViewController {
         manufacturerCheckbox.setItems(manufacturerDao.findAllManufacturerNames());
         if (hardware.getManufacturer() != null)
             manufacturerCheckbox.setValue(hardware.getManufacturer().getName());
-        if (hardware.getWarranty() != null){
+        if (hardware.getWarranty() != null) {
             startDatePicker.setValue(hardware.getWarranty().getStartDate());
             expDatePicker.setValue(hardware.getWarranty().getExpirationDate());
-
-        } else{
+        } else {
             this.hardware.setWarranty(new Warranty());
         }
-
-
     }
+
     private boolean isInputValid() {
-        StringBuilder errowMessage = new StringBuilder();
+        StringBuilder errorMessage = new StringBuilder();
         if (nameTextField.getText() == null || nameTextField.getText().isEmpty())
-            errowMessage.append("Name cannot be empty\n");
+            errorMessage.append("Name darf nicht leer sein\n");
         if (manufacturerCheckbox.getValue() == null || manufacturerCheckbox.getValue().isEmpty())
-            errowMessage.append("Manufacturer cannot be empty\n");
-        
-        if(errowMessage.isEmpty()) return true;
+            errorMessage.append("Hersteller darf nicht leer sein\n");
+
+        if (errorMessage.isEmpty()) return true;
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(dialogStage);
-        alert.setTitle("invalid");
-        alert.setHeaderText("Invalid name");
-        alert.setContentText(errowMessage.toString());
+        alert.setTitle("Ungültige Felder");
+        alert.setHeaderText("Bitte korrigieren Sie die ungültigen Felder");
+        alert.setContentText(errorMessage.toString());
         alert.showAndWait();
-        
+
         return false;
     }
-    public boolean isOkClicked(){
+
+    public boolean isOkClicked() {
         return isOkClicked;
     }
 
