@@ -49,6 +49,13 @@ public class DBConnection {
         return false;
     }
 
+    public static String getUserName() {
+        if (credentials != null)
+            return credentials.getUsername();
+
+        return null;
+    }
+
     public static Connection getConnection(){
         if (credentials == null)
             throw new IllegalStateException("Connection has not been authenticated.");;

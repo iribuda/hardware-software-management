@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane stylesheets="@css/styles.css"  prefHeight="430.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.MainPageController">
+<BorderPane prefHeight="430.0" prefWidth="800.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.MainPageController">
    <left>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="356.0" prefWidth="200.0" style="-fx-background-color: #AFB3FF;" BorderPane.alignment="CENTER">
          <children>
@@ -23,9 +23,9 @@
                   <Image url="@img/user.png" />
                </image>
             </ImageView>
-            <Label layoutX="142.0" layoutY="45.0" text="User" textFill="WHITE">
+            <Label fx:id="lblusername" layoutX="142.0" layoutY="45.0" text="User" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <Line endX="96.76800537109375" endY="-7.62939453125E-6" layoutX="100.0" layoutY="104.0" startX="-93.0" startY="-7.62939453125E-6" stroke="#afb1c7" />
@@ -77,7 +77,7 @@
                      </color>
                   </InnerShadow>
                </effect></Button>
-            <Button layoutX="18.0" layoutY="359.0" onAction="#handleLogout" mnemonicParsing="false" text="Logout">
+            <Button layoutX="18.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleLogout" text="Logout">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0">
                      <image>
