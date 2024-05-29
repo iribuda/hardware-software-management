@@ -17,7 +17,7 @@ CREATE TABLE manufacturer (
 
 CREATE TABLE warranty(
     warranty_id int Primary Key IDENTITY(1, 1) NOT NULL,
-    warranty_status VARCHAR(50) DEFAULT 'active' NOT NULL,
+    warranty_status VARCHAR(50) DEFAULT 'aktiv' NOT NULL,
     w_start_date Date NOT NULL,
     expiration_date Date NOT NULL
 );
@@ -67,7 +67,7 @@ CREATE TABLE license (
     license_start_date DATETIME NOT NULL, 
     expiration_date DATETIME NOT NULL,
     purchase_date DATETIME NOT NULL,
-	license_status VARCHAR(50) NOT NULL DEFAULT 'active',
+	license_status VARCHAR(50) NOT NULL DEFAULT 'aktiv',
 	price FLOAT DEFAULT 0,
 	software_id int NOT NULL FOREIGN KEY(software_id) REFERENCES software(software_id) ON DELETE CASCADE
 );
@@ -133,28 +133,28 @@ VALUES
 
 INSERT INTO warranty (warranty_status, expiration_date, w_start_date)
 VALUES 
-    ('Available', '2025-12-31', '2022-01-01'),
-    ('Expired', '2020-06-30', '2018-07-01'),
-    ('Active', '2024-12-31', '2023-01-01'),
-    ('Active', '2026-06-30', '2025-07-01'),
-    ('Expired', '2022-06-30', '2020-07-01'),
-    ('Active', '2025-12-31', '2022-01-01'),
-    ('Active', '2023-06-30', '2022-07-01'),
-    ('Expired', '2021-12-31', '2020-01-01'),
-    ('Expired', '2023-06-30', '2021-07-01'),
-    ('Active', '2024-12-31', '2023-01-01'),
-    ('Expired', '2021-06-30', '2019-07-01'),
-    ('Active', '2025-12-31', '2022-01-01'),
-    ('Expired', '2023-12-31', '2021-01-01'),
-    ('Active', '2024-06-30', '2021-07-01'),
-    ('Active', '2023-12-31', '2020-01-01'),
-    ('Expired', '2021-06-30', '2019-07-01'),
-    ('Active', '2025-12-31', '2022-01-01'),
-    ('Active', '2024-06-30', '2021-07-01'),
-    ('Expired', '2022-12-31', '2020-01-01'),
-    ('Active', '2026-06-30', '2023-07-01'),
-    ('Expired', '2023-06-30', '2021-07-01'),
-    ('Active', '2025-12-31', '2022-01-01');
+    ('aktiv', '2025-12-31', '2022-01-01'),
+    ('abgelaufen', '2020-06-30', '2018-07-01'),
+    ('aktiv', '2024-12-31', '2023-01-01'),
+    ('aktiv', '2026-06-30', '2025-07-01'),
+    ('abgelaufen', '2022-06-30', '2020-07-01'),
+    ('aktiv', '2025-12-31', '2022-01-01'),
+    ('aktiv', '2025-06-30', '2022-07-01'),
+    ('abgelaufen', '2021-12-31', '2020-01-01'),
+    ('abgelaufen', '2023-06-30', '2021-07-01'),
+    ('aktiv', '2024-12-31', '2023-01-01'),
+    ('abgelaufen', '2021-06-30', '2019-07-01'),
+    ('aktiv', '2025-12-31', '2022-01-01'),
+    ('abgelaufen', '2023-12-31', '2021-01-01'),
+    ('aktiv', '2024-06-30', '2021-07-01'),
+    ('aktiv', '2025-12-31', '2020-01-01'),
+    ('abgelaufen', '2021-06-30', '2019-07-01'),
+    ('aktiv', '2025-12-31', '2022-01-01'),
+    ('aktiv', '2026-06-30', '2021-07-01'),
+    ('abgelaufen', '2022-12-31', '2020-01-01'),
+    ('aktiv', '2026-06-30', '2023-07-01'),
+    ('abgelaufen', '2023-06-30', '2021-07-01'),
+    ('aktiv', '2025-12-31', '2022-01-01');
 
 
 INSERT INTO hardware (hardware_name, manufacturer_id, warranty_id) 
@@ -183,46 +183,46 @@ VALUES
 
 INSERT INTO failure (failure_date, failure_type, failure_status, hardware_id) 
 VALUES 
-	('2024-01-05', 'Screen failure', 'Repaired', 1),
-	('2024-01-20', 'Battery failure', 'Repaired', 2),
-	('2024-02-15', 'Hard drive failure', 'Replacement ordered', 3),
-	('2024-02-28', 'Overheating', 'Repaired', 4),
-	('2024-03-10', 'Keyboard failure', 'Repaired', 5),
-	('2024-03-25', 'Screen failure', 'Not repairable', 6),
-	('2024-04-05', 'Power supply failure', 'Repaired', 7),
-	('2024-04-12', 'Wi-Fi failure', 'Repaired', 8),
-	('2024-04-20', 'Hardware failure', 'Replacement ordered', 9),
-	('2024-04-28', 'Screen failure', 'Under inspection', 10),
-	('2024-05-02', 'Graphics card failure', 'Awaiting parts', 11),
-	('2024-05-10', 'Battery failure', 'Not repairable', 12),
-	('2024-05-12', 'Touchscreen failure', 'To repair', 13),
-	('2024-05-15', 'Cooling system failure', 'Under inspection', 14),
-	('2024-05-18', 'USB port failure', 'Replacement ordered', 15);
+	('2024-01-05', 'Bildschirmausfall', 'repariert', 1),
+	('2024-01-20', 'Ausfall der Batterie', 'repariert', 2),
+	('2024-02-15', 'Ausfall des Festplattenlaufwerks', 'Ersatz bestellt', 3),
+	('2024-02-28', 'Überhitzung', 'repariert', 4),
+	('2024-03-10', 'Ausfall der Tastatur', 'repariert', 5),
+	('2024-03-25', 'Bildschirmausfall', 'nicht reparaturfähig', 6),
+	('2024-04-05', 'Ausfall der Stromversorgung', 'repariert', 7),
+	('2024-04-12', 'Wi-Fi-Ausfall', 'repariert', 8),
+	('2024-04-20', 'Hardware-Ausfall', 'Ersatz bestellt', 9),
+	('2024-04-28', 'Bildschirmausfall', 'unter Kontrolle', 10),
+	('2024-05-02', 'Ausfall der Grafikkarte', 'warten auf Teile', 11),
+	('2024-05-10', 'Ausfall der Batterie', 'nicht reparaturfähig', 12),
+	('2024-05-12', 'Ausfall des Touchscreens', 'zur Reparatur', 13),
+	('2024-05-15', 'Ausfall des Kühlsystems', 'unter Kontrolle', 14),
+	('2024-05-18', 'Fehler am USB-Anschluss', 'Ersatz bestellt', 15);
 
 
 -- Insert data into the h_order table
 INSERT INTO h_order (order_date, order_status, hardware_id) 
 VALUES 
-	('2023-12-20', 'Delivered', 1),
-	('2023-12-25', 'Delivered', 2),
-	('2023-12-30', 'Delivered', 3),
-	('2024-01-05', 'Delivered', 4),
-	('2024-01-10', 'Delivered', 5),
-	('2024-01-15', 'Delivered', 6),
-	('2024-01-20', 'Delivered', 7),
-	('2024-01-25', 'Delivered', 8),
-	('2024-02-01', 'Delivered', 9),
-	('2024-02-05', 'Delivered', 10),
-	('2024-02-10', 'Pending Purchase', 11),
-	('2024-02-15', 'Canceled', 12),
-	('2024-02-20', 'Purchased', 13),
-	('2024-02-25', 'Delivered', 14),
-	('2024-03-01', 'Pending Purchase', 15),
-	('2024-03-05', 'Canceled', 16),
-	('2024-03-10', 'Purchased', 17),
-	('2024-03-15', 'Delivered', 18),
-	('2024-03-20', 'Pending Purchase', 19),
-	('2024-03-25', 'Pending Purchase', 20);
+	('2023-12-20', 'geliefert', 1),
+	('2023-12-25', 'geliefert', 2),
+	('2023-12-30', 'geliefert', 3),
+	('2024-01-05', 'geliefert', 4),
+	('2024-01-10', 'geliefert', 5),
+	('2024-01-15', 'geliefert', 6),
+	('2024-01-20', 'geliefert', 7),
+	('2024-01-25', 'geliefert', 8),
+	('2024-02-01', 'geliefert', 9),
+	('2024-02-05', 'geliefert', 10),
+	('2024-02-10', 'anstehender Kauf', 11),
+	('2024-02-15', 'storniert', 12),
+	('2024-02-20', 'gekauft', 13),
+	('2024-02-25', 'geliefert', 14),
+	('2024-03-01', 'anstehender Kauf', 15),
+	('2024-03-05', 'storniert', 16),
+	('2024-03-10', 'gekauft', 17),
+	('2024-03-15', 'geliefert', 18),
+	('2024-03-20', 'anstehender Kauf', 19),
+	('2024-03-25', 'anstehender Kauf', 20);
 
 
 -- Inserting into vendor table
@@ -277,26 +277,26 @@ VALUES
 -- Inserting into license table
 INSERT INTO license (license_key, license_start_date, expiration_date, purchase_date, license_status, price, software_id) 
 VALUES
-	(123456, '2023-01-01 00:00:00', '2024-01-01 00:00:00', '2022-12-01 00:00:00', 'expired', 1000.00, 1),
-	(654321, '2022-12-01 00:00:00', '2023-12-01 00:00:00', '2022-11-01 00:00:00', 'expired', 500.00, 2),
-	(987654, '2023-01-15 00:00:00', '2024-01-15 00:00:00', '2022-12-15 00:00:00', 'expired', 1200.00, 3),
-	(123987, '2022-11-15 00:00:00', '2023-11-15 00:00:00', '2022-10-15 00:00:00', 'inactive', 800.00, 4),
-	(456321, '2023-02-01 00:00:00', '2024-02-01 00:00:00', '2022-12-01 00:00:00', 'inactive', 1500.00, 5),
-	(789654, '2022-12-20 00:00:00', '2023-12-20 00:00:00', '2022-11-20 00:00:00', 'expired', 900.00, 6),
-	(321987, '2023-01-10 00:00:00', '2024-01-10 00:00:00', '2022-12-10 00:00:00', 'expired', 2000.00, 7),
-	(654987, '2022-11-10 00:00:00', '2023-11-10 00:00:00', '2022-10-10 00:00:00', 'active', 700.00, 8),
-	(987321, '2023-02-15 00:00:00', '2024-02-15 00:00:00', '2022-12-15 00:00:00', 'active', 1800.00, 9),
-	(159357, '2022-12-01 00:00:00', '2023-12-01 00:00:00', '2022-11-01 00:00:00', 'active', 1000.00, 10),
-	(357159, '2023-01-20 00:00:00', '2024-01-20 00:00:00', '2022-12-20 00:00:00', 'active', 1200.00, 11),
-	(753951, '2022-11-20 00:00:00', '2023-11-20 00:00:00', '2022-10-20 00:00:00', 'inactive', 1400.00, 12),
-	(147258, '2023-02-05 00:00:00', '2024-02-05 00:00:00', '2022-12-05 00:00:00', 'inactive', 1600.00, 13),
-	(258369, '2022-12-05 00:00:00', '2023-12-05 00:00:00', '2022-11-05 00:00:00', 'expired', 2000.00, 14),
-	(369258, '2023-01-25 00:00:00', '2024-01-25 00:00:00', '2022-12-25 00:00:00', 'expired', 1500.00, 15),
-	(456123, '2024-03-25 00:00:00', '2025-11-25 00:00:00', '2022-10-25 00:00:00', 'active', 1700.00, 16),
-	(789123, '2024-02-10 00:00:00', '2026-02-10 00:00:00', '2022-12-10 00:00:00', 'active', 1900.00, 17),
-	(123789, '2024-01-05 00:00:00', '2027-01-05 00:00:00', '2022-12-05 00:00:00', 'inactive', 2100.00, 18),
-	(456789, '2024-02-15 00:00:00', '2028-12-15 00:00:00', '2022-11-15 00:00:00', 'inactive', 2300.00, 19),
-	(987654, '2024-01-30 00:00:00', '2025-01-30 00:00:00', '2022-12-30 00:00:00', 'expired', 2500.00, 20);
+	(123456, '2023-01-01 00:00:00', '2024-01-01 00:00:00', '2022-12-01 00:00:00', 'abgelaufen', 1000.00, 1),
+	(654321, '2022-12-01 00:00:00', '2023-12-01 00:00:00', '2022-11-01 00:00:00', 'abgelaufen', 500.00, 2),
+	(987654, '2023-01-15 00:00:00', '2024-01-15 00:00:00', '2022-12-15 00:00:00', 'abgelaufen', 1200.00, 3),
+	(123987, '2022-11-15 00:00:00', '2023-11-15 00:00:00', '2022-10-15 00:00:00', 'inaktiv', 800.00, 4),
+	(456321, '2023-02-01 00:00:00', '2024-02-01 00:00:00', '2022-12-01 00:00:00', 'inaktiv', 1500.00, 5),
+	(789654, '2022-12-20 00:00:00', '2023-12-20 00:00:00', '2022-11-20 00:00:00', 'abgelaufen', 900.00, 6),
+	(321987, '2023-01-10 00:00:00', '2024-01-10 00:00:00', '2022-12-10 00:00:00', 'abgelaufen', 2000.00, 7),
+	(654987, '2022-11-10 00:00:00', '2024-11-10 00:00:00', '2022-10-10 00:00:00', 'inaktiv', 700.00, 8),
+	(987321, '2023-02-15 00:00:00', '2024-10-15 00:00:00', '2022-12-15 00:00:00', 'inaktiv', 1800.00, 9),
+	(159357, '2022-12-01 00:00:00', '2024-12-01 00:00:00', '2022-11-01 00:00:00', 'inaktiv', 1000.00, 10),
+	(357159, '2023-01-20 00:00:00', '2024-09-20 00:00:00', '2022-12-20 00:00:00', 'inaktiv', 1200.00, 11),
+	(753951, '2022-11-20 00:00:00', '2023-11-20 00:00:00', '2022-10-20 00:00:00', 'inaktiv', 1400.00, 12),
+	(147258, '2023-02-05 00:00:00', '2024-02-05 00:00:00', '2022-12-05 00:00:00', 'inaktiv', 1600.00, 13),
+	(258369, '2022-12-05 00:00:00', '2023-12-05 00:00:00', '2022-11-05 00:00:00', 'abgelaufen', 2000.00, 14),
+	(369258, '2023-01-25 00:00:00', '2024-01-25 00:00:00', '2022-12-25 00:00:00', 'abgelaufen', 1500.00, 15),
+	(456123, '2024-03-25 00:00:00', '2025-11-25 00:00:00', '2022-10-25 00:00:00', 'aktiv', 1700.00, 16),
+	(789123, '2024-02-10 00:00:00', '2026-02-10 00:00:00', '2022-12-10 00:00:00', 'aktiv', 1900.00, 17),
+	(123789, '2024-01-05 00:00:00', '2027-01-05 00:00:00', '2022-12-05 00:00:00', 'inaktiv', 2100.00, 18),
+	(456789, '2024-02-15 00:00:00', '2028-12-15 00:00:00', '2022-11-15 00:00:00', 'inaktiv', 2300.00, 19),
+	(987654, '2024-01-30 00:00:00', '2023-01-30 00:00:00', '2022-12-30 00:00:00', 'abgelaufen', 2500.00, 20);
 
 
 -- Sample data for worker_hardware table
@@ -331,6 +331,7 @@ VALUES
 	(1, 20, '2024-02-05'),
 	(2, 19, '2024-02-16');
 
+-- Views and Procedures
 GO
 CREATE VIEW vw_order_details 
 AS
@@ -338,4 +339,40 @@ SELECT o.*, h.hardware_name, m.manufacturer_id, m.manufacturer_name
 FROM h_order o
 JOIN hardware h ON h.hardware_id = o.hardware_id
 JOIN manufacturer m ON m.manufacturer_id = h.manufacturer_id;
+GO
+
+GO
+CREATE VIEW vw_failure_details
+WITH SCHEMABINDING
+AS 
+        (SELECT f.failure_id, f.failure_type, f.failure_status, f.failure_date, f.hardware_id, h.hardware_name, w.worker_name, w.worker_surname
+        FROM dbo.failure f
+                 JOIN dbo.hardware h ON f.hardware_id = h.hardware_id
+                 JOIN dbo.worker_hardware wh ON h.hardware_id = wh.hardware_id
+                 JOIN dbo.worker w ON w.worker_id = wh.hardware_id);
+GO
+
+GO
+CREATE PROCEDURE sp_insert_hardware(
+	@hardware_name varchar(50),
+	@warranty_start_date date,
+	@warranty_exp_date date,
+	@manufacturer_name varchar(50)
+)
+AS
+BEGIN
+	DECLARE @manufacturer_id int = (SELECT manufacturer_id FROM manufacturer WHERE manufacturer_name = @manufacturer_name);
+	INSERT INTO warranty (warranty_status, w_start_date, expiration_date) VALUES ('Active', @warranty_start_date, @warranty_exp_date);
+	INSERT INTO hardware (hardware_name, manufacturer_id, warranty_id) VALUES (@hardware_name, @manufacturer_id, IDENT_CURRENT('warranty')); 
+END;
+GO
+
+GO
+CREATE VIEW vw_hardware_details
+WITH SCHEMABINDING
+AS 
+SELECT h.hardware_id, h.hardware_name, h.manufacturer_id, h.warranty_id, m.manufacturer_name, m.mobile_number, m.email, w.warranty_status, w.w_start_date, w.expiration_date
+FROM dbo.hardware h
+JOIN dbo.manufacturer m ON h.manufacturer_id=m.manufacturer_id
+JOIN dbo.warranty w ON w.warranty_id = h.warranty_id
 GO

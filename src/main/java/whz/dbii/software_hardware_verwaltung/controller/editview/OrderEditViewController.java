@@ -44,7 +44,7 @@ public class OrderEditViewController {
         orderDatePicker.setValue(order.getOrder_date());
         ObservableList<String> statuses = FXCollections.observableArrayList();
         for (OrderStatus status : OrderStatus.values())
-            statuses.add(status.toString());
+            statuses.add(status.getStatus());
         statusCheckbox.setItems(statuses);
         if (order.getOrder_status() != null)
             statusCheckbox.setValue(order.getOrder_status());

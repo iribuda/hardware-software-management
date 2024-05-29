@@ -34,7 +34,7 @@ public class License {
         this.startDate = new SimpleObjectProperty<>(startDate);
         this.expirationDate = new SimpleObjectProperty<>(expirationDate);
         this.purchaseDate = new SimpleObjectProperty<>(purchaseDate);
-        this.status = new SimpleStringProperty(LicenseStatus.ACTIVE.toString());
+        this.status = new SimpleStringProperty(LicenseStatus.ACTIVE.getStatus());
         this.price = new SimpleFloatProperty(price);
         this.software = new SimpleObjectProperty<>(software);
     }

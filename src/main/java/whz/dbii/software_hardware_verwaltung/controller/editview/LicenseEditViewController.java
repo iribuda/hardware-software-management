@@ -55,7 +55,7 @@ public class LicenseEditViewController {
         purchaseDatePicker.setValue(license.getPurchaseDate());
         ObservableList<String> statuses = FXCollections.observableArrayList();
         for (LicenseStatus status : LicenseStatus.values())
-            statuses.add(status.toString());
+            statuses.add(status.getStatus());
         statusCheckbox.setItems(statuses);
         if (license.getStatus() != null)
             statusCheckbox.setValue(license.getStatus());

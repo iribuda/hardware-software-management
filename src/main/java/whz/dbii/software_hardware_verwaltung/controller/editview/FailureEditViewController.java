@@ -50,7 +50,7 @@ public class FailureEditViewController {
         failureDatePicker.setValue(failure.getDate());
         ObservableList<String> statuses = FXCollections.observableArrayList();
         for (FailureStatus status : FailureStatus.values())
-            statuses.add(status.toString());
+            statuses.add(status.getStatus());
         statusCheckbox.setItems(statuses);
         if (failure.getStatus() != null)
             statusCheckbox.setValue(failure.getStatus().toString());

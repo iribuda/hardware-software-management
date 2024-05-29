@@ -180,7 +180,7 @@ public class LicenseDaoImpl implements LicenseDao {
         LocalDate currDate = java.time.LocalDate.now();
         license.setStartDate(currDate);
         license.setExpirationDate(currDate.plusMonths(1));
-        license.setStatus(LicenseStatus.ACTIVE.toString());
+        license.setStatus(LicenseStatus.ACTIVE.getStatus());
 
         try {
             statement = connection.prepareStatement(query);
