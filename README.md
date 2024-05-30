@@ -23,14 +23,13 @@ Diese Benutzergruppe hat volle Zugriffsrechte, einschließlich administrativer P
 
 | SR No | Activities                                | Author                         |
 |-------|-------------------------------------------|--------------------------------|
-| 1     | Created the project, connected to DB      | Aygerim Budaichieva            |
-| 2     | Set up `.gitignore`                       | Aygerim Budaichieva            |
-| 3     | Established database connections          | Aygerim Budaichieva            |
-| 4     | Developed the Worker feature              | Aygerim Budaichieva            |
-| 5     | Implemented CRUD functions                | Aygerim Budaichieva            |
+| 1     | Created the project, connected to DB      | Aygerim Budaychieva            |
+| 2     | Established database connections          | Aygerim Budaychieva            |
+| 4     | Developed the Worker feature              | Aygerim Budaychieva            |
+| 5     | Implemented CRUD functions                | Aygerim Budaychieva            |
 | 6     | Added Software feature                    | Bekzhan Chandaev               |
 | 7     | Developed Hardware feature                | Cholpon Sultanova              |
 | 8     | Developed Vendor feature                  | Bekzhan Chandaev               |
 | 9     | Implemented Licence feature               | Bekzhan Chandaev               |
 | 10    | Set up Authorisation                      | Bekzhan Chandaev               |
-| 11    | Conducted code refactoring                | Aygerim Budaichieva, Bekzhan Chandaev |
+| 11    | Conducted code refactoring                | Aygerim Budaychieva, Bekzhan Chandaev |
