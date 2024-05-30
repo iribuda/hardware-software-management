@@ -3,7 +3,7 @@
 ## Projektarbeit Beschreibung
 Im Rahmen der Projektarbeit im Fach Datenbank 2 entwickelten wir ein Projekt zum Thema "Hard- und Software-Verwaltung einer Einrichtung / eines Betriebes". Im Rahmen unserer Arbeit haben wir das in den Vorlesungen und Lehrmaterialien erlernte Wissen praktisch angewendet. So konnten wir unser Wissen zum Thema vertiefen und auch Erfahrungen in der Teamarbeit sammeln. Wir verteilten Aufgaben, planten, testeten und arbeiteten an der Umsetzung des Projekts.
 
-##Beschreibung des Themas 
+## Beschreibung des Themas 
 Der Zweck unseres Programms ist es, dem Unternehmen die Verwaltung der Hardware und Software der Mitarbeiter zu erleichtern. Grundlegende Funktionalität - das Programm bietet einen Überblick über die Liste der Software, Hardware und Mitarbeiter. Software und Hardware können zu einem Mitarbeiter hinzugefügt werden. Informationen, die über die Software abgerufen werden können: Unternehmen und Lizenz. Wenn die Lizenz abläuft, kann sie erneuert werden. Weiter für die Hardware: Hersteller, Garantie. Wenn ein Gerät beschädigt wurde und repariert werden muss, gibt es eine Tabelle, um Ausfälle zu verfolgen. Wann sie aufgetreten sind, der Status (ob es repariert wurde oder noch nicht). Und man kann hinzufügen, wann der Kauf einer neuen Hardware stattgefunden hat. 
 
 
