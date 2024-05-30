@@ -19,8 +19,16 @@ import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.FailureDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.OrderDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Failure;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Order;
+import whz.dbii.software_hardware_verwaltung.model.xml.FailureList;
+import whz.dbii.software_hardware_verwaltung.model.xml.WorkerList;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 public class FailureOverviewController {
 
@@ -158,5 +166,34 @@ public class FailureOverviewController {
     }
 
     @FXML
-    private void handleExport(){}
+    private void handleExport(){
+        FailureList workerList = new FailureList(failureTable.getItems());
+        OutputStream outputStream = null;
+        try {
+            JAXBContext context = JAXBContext.newInstance(FailureList.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            File file = new File("xml/failures.xml");
+            outputStream = new FileOutputStream(file);
+            marshaller.marshal(workerList, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainPageController.getPrimaryStage());
+            alert.setTitle("XML fehlgeschlagen");
+            alert.setHeaderText("XML wurde nicht erstellt");
+            alert.setContentText("Bitte wählen Sie eine Person in der Tabelle aus.");
+
+            alert.showAndWait();
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(mainPageController.getPrimaryStage());
+        alert.setTitle("XML Gespeichert");
+        alert.setHeaderText("XML wurde erfolgreich erstellt");
+        alert.setContentText("Sie können sie nach dem Schließen des Programms lesen");
+
+        alert.showAndWait();
+    }
 }

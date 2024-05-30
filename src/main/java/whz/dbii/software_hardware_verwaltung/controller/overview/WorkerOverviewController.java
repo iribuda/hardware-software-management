@@ -160,7 +160,6 @@ public class WorkerOverviewController {
             outputStream.flush();
             outputStream.close();
         } catch (JAXBException | IOException e) {
-            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainPageController.getPrimaryStage());
             alert.setTitle("XML fehlgeschlagen");

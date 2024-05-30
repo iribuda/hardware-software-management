@@ -2,8 +2,12 @@ package whz.dbii.software_hardware_verwaltung.model.hardware;
 
 import javafx.beans.property.*;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.time.LocalDate;
 
+@XmlType(name = "failure")
+@XmlRootElement
 public class Failure {
 
     private final IntegerProperty id;
