@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.overview;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,16 +8,29 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
+import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
+import whz.dbii.software_hardware_verwaltung.controller.editview.WorkerEditController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
 import whz.dbii.software_hardware_verwaltung.dao.worker.impl.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
-import whz.dbii.software_hardware_verwaltung.model.software.Software;
+import whz.dbii.software_hardware_verwaltung.model.xml.WorkerList;
 
-import java.io.IOException;
-import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import java.io.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class WorkerOverviewController {
 
+    @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
     @FXML
     private Label surnameLabel;
     @FXML
@@ -46,6 +59,20 @@ public class WorkerOverviewController {
         populateWorkers();
         workerTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showWorkerDetails((Worker) newValue));
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+        }
     }
 
     private void populateWorkers(){
@@ -60,10 +87,12 @@ public class WorkerOverviewController {
             emailLabel.setText(worker.getEmail());
             ObservableList<String> software = workerDAO.findNamesOfSoftwareOfWorker(worker.getId());
             softwareCheckbox.setItems(software);
-            softwareCheckbox.setValue(softwareCheckbox.getItems().get(0));
+            if (!softwareCheckbox.getItems().isEmpty())
+                softwareCheckbox.setValue(softwareCheckbox.getItems().get(0));
             ObservableList<String> hardware = workerDAO.findNamesOfHardwareOfWorker(worker.getId());
             hardwareCheckbox.setItems(hardware);
-            hardwareCheckbox.setValue(hardwareCheckbox.getItems().get(0));
+            if (!hardwareCheckbox.getItems().isEmpty())
+                hardwareCheckbox.setValue(hardwareCheckbox.getItems().get(0));
         }
     }
 
@@ -109,12 +138,43 @@ public class WorkerOverviewController {
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainPageController.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setTitle("Keine Auswahl");
+            alert.setHeaderText("Keine Person ausgewählt");
+            alert.setContentText("Bitte wählen Sie eine Person in der Tabelle aus.");
 
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleExport(){
+        WorkerList workerList = new WorkerList(workerTable.getItems());
+        OutputStream outputStream = null;
+        try {
+            JAXBContext context = JAXBContext.newInstance(WorkerList.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            File file = new File("outputXML/workers.xml");
+            outputStream = new FileOutputStream(file);
+            marshaller.marshal(workerList, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (JAXBException | IOException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainPageController.getPrimaryStage());
+            alert.setTitle("XML fehlgeschlagen");
+            alert.setHeaderText("XML wurde nicht erstellt");
+            alert.setContentText("Bitte wählen Sie eine Person in der Tabelle aus.");
+
+            alert.showAndWait();
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(mainPageController.getPrimaryStage());
+        alert.setTitle("XML Gespeichert");
+        alert.setHeaderText("XML wurde erfolgreich erstellt");
+        alert.setContentText("Sie können sie nach dem Schließen des Programms lesen");
+
+        alert.showAndWait();
     }
 
     public boolean showWorkerEditDialog(Worker worker){

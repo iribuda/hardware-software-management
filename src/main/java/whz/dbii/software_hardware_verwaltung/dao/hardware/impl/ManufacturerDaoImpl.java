@@ -6,7 +6,6 @@ import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.DBException;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.ManufacturerDao;
 import whz.dbii.software_hardware_verwaltung.model.hardware.Manufacturer;
-import whz.dbii.software_hardware_verwaltung.model.software.Vendor;
 
 import java.sql.*;
 
@@ -14,7 +13,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer findById(Integer id) {
         Connection connection = DBConnection.getConnection();
-        String query = "SELECT * FROM manufacturer WHERE id = ?";
+        String query = "SELECT * FROM manufacturer WHERE manufacturer_id = ?";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
@@ -133,10 +132,55 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         return false;
     }
 
+    @Override
+    public ObservableList<String> findAllManufacturerNames() {
+        Connection connection = DBConnection.getConnection();
+        String query = "SELECT manufacturer_name FROM manufacturer";
+        Statement statement = null;
+        ResultSet resultSet = null;
+        ObservableList<String> manufacturers = FXCollections.observableArrayList();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next())
+                manufacturers.add(resultSet.getString("manufacturer_name"));
+
+        } catch (SQLException e) {
+            throw new DBException("Error occurred by connecting while getting the manufacturer list." + e.getMessage());
+        } finally {
+            DBConnection.closeResultSet(resultSet);
+            DBConnection.closeStatement(statement);
+            DBConnection.disconnect();
+        }
+
+        return manufacturers;
+    }
+
+    @Override
+    public int findByName(String name) {
+        Connection connection = DBConnection.getConnection();
+        String query = "SELECT manufacturer_id FROM manufacturer WHERE manufacturer_name=?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int id = 0;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, name);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("manufacturer_id");
+            }
+        } catch (SQLException e) {
+            throw new DBException(e.getMessage());
+        }
+
+        return id;
+    }
+
     private Manufacturer instantiateManufacturer(ResultSet resultSet) throws SQLException{
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setId(resultSet.getInt("manufacturer_id"));
-        manufacturer.setName(resultSet.getString("vendor_name"));
+        manufacturer.setName(resultSet.getString("manufacturer_name"));
         manufacturer.setEmail(resultSet.getString("email"));
         manufacturer.setMobileNumber(resultSet.getString("mobile_number"));
 

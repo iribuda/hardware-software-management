@@ -2,6 +2,13 @@ package whz.dbii.software_hardware_verwaltung.model;
 
 import javafx.beans.property.*;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+@XmlType(name = "worker")
+@XmlRootElement
 public class Worker {
 
     private IntegerProperty id;

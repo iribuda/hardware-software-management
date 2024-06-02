@@ -13,6 +13,7 @@ public interface WorkerDAO {
     boolean save(Worker worker);
     boolean update(Worker worker);
     boolean delete(int id);
+    boolean deleteWorkersHardware(int hardwareId, int workerId);
     ObservableList<String> findNamesOfSoftwareOfWorker(int id);
     ObservableList<Software> findSoftwareOfWorker(int id);
     ObservableList<String> findNamesOfHardwareOfWorker(int id);

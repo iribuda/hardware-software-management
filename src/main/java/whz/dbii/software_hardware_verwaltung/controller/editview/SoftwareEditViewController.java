@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.editview;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,6 +31,7 @@ public class SoftwareEditViewController {
         this.softwareDao = new SoftwareDaoImpl();
         this.vendorDao = new VendorDaoImpl();
     }
+
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
@@ -43,33 +44,37 @@ public class SoftwareEditViewController {
         if (software.getVendor() != null)
             vendorCheckbox.setValue(software.getVendor().getName());
     }
+
     private boolean isInputValid() {
         StringBuilder errorMessage = new StringBuilder();
         if (nameTextField.getText() == null || nameTextField.getText().isEmpty())
-            errorMessage.append("Please enter the valid name!\n");
+            errorMessage.append("Bitte geben Sie einen gültigen Namen ein!\n");
         if (versionTextField.getText() == null || versionTextField.getText().isEmpty())
-            errorMessage.append("Please enter the valid version!\n");
+            errorMessage.append("Bitte geben Sie eine gültige Version ein!\n");
         if (vendorCheckbox.getValue() == null || vendorCheckbox.getValue().isEmpty())
-            errorMessage.append("Please provide a valid vendor!\n");
+            errorMessage.append("Bitte wählen Sie einen gültigen Anbieter aus!\n");
 
         if (errorMessage.isEmpty()) return true;
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(dialogStage);
-        alert.setTitle("Invalid Fields");
-        alert.setHeaderText("Please correct invalid fields");
+        alert.setTitle("Ungültige Felder");
+        alert.setHeaderText("Bitte korrigieren Sie die ungültigen Felder");
         alert.setContentText(errorMessage.toString());
         alert.showAndWait();
 
         return false;
     }
+
     public boolean isOkClicked() {
         return isOkClicked;
     }
+
     @FXML
     public void handleCancel(ActionEvent actionEvent) {
         dialogStage.close();
     }
+
     @FXML
     public void handleOk(ActionEvent actionEvent) {
         if (!isInputValid()) return;

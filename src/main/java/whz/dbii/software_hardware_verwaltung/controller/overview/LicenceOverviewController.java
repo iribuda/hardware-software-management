@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.overview;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +9,9 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
+import whz.dbii.software_hardware_verwaltung.controller.editview.LicenseEditViewController;
+import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.software.LicenseDao;
 import whz.dbii.software_hardware_verwaltung.dao.software.impl.LicenseDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.software.License;
@@ -31,9 +34,20 @@ public class LicenceOverviewController {
     @FXML
     public Label softwareLabel;
     @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
+    @FXML
+    public Button btn_renew;
+
+    @FXML
     private TableView<License> licenseTable;
     @FXML
     private TableColumn<License, String> keyColumn;
+    @FXML
+    public TableColumn<License, String> softwareColumn;
 
     private MainPageController mainPageController;
     private LicenseDao licenseDao;
@@ -46,9 +60,26 @@ public class LicenceOverviewController {
     private void initialize(){
         licenseDao = new LicenseDaoImpl();
         keyColumn.setCellValueFactory(cellData -> cellData.getValue().keyProperty().asString());
+        softwareColumn.setCellValueFactory(cellData -> cellData.getValue().getSoftware().nameProperty());
         populateLicenses();
         licenseTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showLicenseDetails((License) newValue));
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+            btn_renew.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+            btn_renew.setVisible(DBConnection.hasWriteRights());
+        }
     }
 
     private void showLicenseDetails(License license) {
@@ -74,7 +105,7 @@ public class LicenceOverviewController {
             SplitPane page = (SplitPane) loader.load();
 
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Adding/Editing the license");
+            dialogStage.setTitle("Lizenz hinzufügen/bearbeiten");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainPageController.getPrimaryStage());
             Scene scene = new Scene(page);
@@ -95,9 +126,9 @@ public class LicenceOverviewController {
     private Alert getLicenseWasNotSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No license was selected.");
-        alert.setContentText("Please choose the license!");
+        alert.setTitle("Keine Auswahl");
+        alert.setHeaderText("Es wurde keine Lizenz ausgewählt.");
+        alert.setContentText("Bitte wählen Sie die Lizenz aus!");
 
         return alert;
     }
@@ -133,4 +164,18 @@ public class LicenceOverviewController {
             getLicenseWasNotSelectedAlert().showAndWait();
         }
     }
+
+    @FXML
+    public void handleRenewLicense(ActionEvent actionEvent) {
+        License selectedLicense = licenseTable.getSelectionModel().getSelectedItem();
+        if (selectedLicense != null) {
+            licenseDao.renewLicense(selectedLicense);
+            showLicenseDetails(selectedLicense);
+        } else {
+            getLicenseWasNotSelectedAlert().showAndWait();
+        }
+    }
+
+    @FXML
+    public void handleExport(){}
 }

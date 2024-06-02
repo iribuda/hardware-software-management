@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.editview;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,18 +28,18 @@ public class VendorEditViewController {
     private boolean isInputValid() {
         StringBuilder errorMessage = new StringBuilder();
         if (nameTextField.getText() == null || nameTextField.getText().isEmpty())
-            errorMessage.append("Please enter the valid name!\n");
+            errorMessage.append("Bitte geben Sie einen gültigen Namen ein!\n");
         if (emailTextField.getText() == null || emailTextField.getText().isEmpty())
-            errorMessage.append("Please enter the valid Email!\n");
+            errorMessage.append("Bitte geben Sie eine gültige E-Mail ein!\n");
         if (mobileTextField.getText() == null || mobileTextField.getText().isEmpty())
-            errorMessage.append("Please enter the valid Mobile number!");
+            errorMessage.append("Bitte geben Sie eine gültige Mobilnummer ein!");
 
         if (errorMessage.isEmpty()) return true;
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(dialogStage);
-        alert.setTitle("Invalid Fields");
-        alert.setHeaderText("Please correct invalid fields");
+        alert.setTitle("Ungültige Felder");
+        alert.setHeaderText("Bitte korrigieren Sie die ungültigen Felder");
         alert.setContentText(errorMessage.toString());
         alert.showAndWait();
 

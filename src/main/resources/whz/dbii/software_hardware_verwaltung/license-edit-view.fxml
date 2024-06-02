@@ -15,15 +15,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.LicenseEditViewController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.dbii.software_hardware_verwaltung.controller.editview.LicenseEditViewController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0">
             <children>
-                <VBox prefWidth="400.0" spacing="10.0">
+                <VBox prefWidth="400.0" spacing="10.0" style="-fx-background-color: #EBEFFF;">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" text="License" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="402.0" styleClass="title" text="Lizenz" textAlignment="CENTER" textFill="#453a65">
                             <font>
-                                <Font size="14.0" />
+                                <Font name="Segoe UI Bold" size="14.0" />
                             </font>
                         </Label>
                         <GridPane alignment="CENTER" vgap="10.0">
@@ -35,19 +35,40 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
                             </rowConstraints>
                             <children>
-                                <Label text="License key" />
-                                <Label text="Start date" GridPane.rowIndex="1" />
-                                <Label text="Expiration date" GridPane.rowIndex="2" />
-                                <Label text="Purchase date" GridPane.rowIndex="3" />
-                                <Label text="Status" GridPane.rowIndex="4" />
-                                <Label text="Price" GridPane.rowIndex="5" />
-                                <Label text="Software" GridPane.rowIndex="6" />
+                                <Label text="Lizenzsnummer" textFill="#443f53">
+                           <font>
+                              <Font name="Segoe UI" size="12.288000106811523" />
+                           </font></Label>
+                                <Label text="Startdatum" textFill="#443f53" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Segoe UI" size="12.288000106811523" />
+                           </font></Label>
+                                <Label text="Ablaufsdatum" textFill="#443f53" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Segoe UI" size="12.288000106811523" />
+                           </font></Label>
+                                <Label text="Kaufdatum" textFill="#443f53" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Segoe UI" size="12.288000106811523" />
+                           </font></Label>
+                                <Label text="Status" textFill="#443f53" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Segoe UI" size="12.288000106811523" />
+                           </font></Label>
+                                <Label text="Preise" textFill="#443f53" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Segoe UI" size="12.288000106811523" />
+                           </font></Label>
+                                <Label text="Software" textFill="#443f53" GridPane.rowIndex="6">
+                                    <font>
+                                        <Font name="Segoe UI" size="12.288000106811523" />
+                                    </font></Label>
                                 <TextField fx:id="keyTextField" GridPane.columnIndex="1" />
                                 <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <DatePicker fx:id="expirationDatePicker" layoutX="119.0" layoutY="53.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -59,12 +80,15 @@
                         </GridPane>
                         <HBox alignment="CENTER">
                             <children>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #656ED3;" text="Abbrechen" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets right="10.0" />
                                     </HBox.margin>
+                                    <font>
+                                        <Font name="Segoe UI Bold" size="12.288000106811523" />
+                                    </font>
                                 </Button>
-                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleOk" text="OK">
+                                <Button maxHeight="36.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleOk" style="-fx-background-color: #656ED3;" text="OK" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets />
                                     </HBox.margin>

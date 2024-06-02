@@ -1,4 +1,4 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.overview;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +9,9 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import whz.dbii.software_hardware_verwaltung.MainApp;
+import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
+import whz.dbii.software_hardware_verwaltung.controller.editview.SoftwareEditViewController;
+import whz.dbii.software_hardware_verwaltung.dao.DBConnection;
 import whz.dbii.software_hardware_verwaltung.dao.software.SoftwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.software.impl.SoftwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.model.software.Software;
@@ -22,6 +25,12 @@ public class SoftwareOverviewController {
     public Label versionLabel;
     @FXML
     public Label vendorLabel;
+    @FXML
+    public Button btn_new;
+    @FXML
+    public Button btn_delete;
+    @FXML
+    public Button btn_edit;
     @FXML
     private TableView<Software> softwareTable;
     @FXML
@@ -41,6 +50,20 @@ public class SoftwareOverviewController {
         populateSoftware();
         softwareTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> showSoftwareDetails((Software) newValue));
+
+        controlRights();
+    }
+
+    private void controlRights() {
+        if (DBConnection.hasDeleteRights()) {
+            btn_delete.setVisible(true);
+            btn_edit.setVisible(true);
+            btn_new.setVisible(true);
+        } else {
+            btn_delete.setVisible(false);
+            btn_edit.setVisible(DBConnection.hasWriteRights());
+            btn_new.setVisible(DBConnection.hasWriteRights());
+        }
     }
 
     private void showSoftwareDetails(Software software) {
@@ -83,9 +106,9 @@ public class SoftwareOverviewController {
     private Alert getSoftwareWasNotSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainPageController.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No software was selected.");
-        alert.setContentText("Please choose the software!");
+        alert.setTitle("Keine Auswahl");
+        alert.setHeaderText("Es wurde keine Software ausgewählt.");
+        alert.setContentText("Bitte wählen Sie die Software!");
 
         return alert;
     }
@@ -124,4 +147,7 @@ public class SoftwareOverviewController {
             getSoftwareWasNotSelectedAlert().showAndWait();
         }
     }
+
+    @FXML
+    public void handleExport(){}
 }

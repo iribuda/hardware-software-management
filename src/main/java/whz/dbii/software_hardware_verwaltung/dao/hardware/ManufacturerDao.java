@@ -9,4 +9,8 @@ public interface ManufacturerDao {
     boolean insert(Manufacturer manufacturer);
     boolean update(Manufacturer manufacturer);
     boolean delete(Manufacturer manufacturer);
+
+    ObservableList<String> findAllManufacturerNames();
+
+    int findByName(String name);
 }

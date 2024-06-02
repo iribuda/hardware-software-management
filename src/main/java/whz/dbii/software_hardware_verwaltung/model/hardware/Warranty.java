@@ -2,12 +2,13 @@ package whz.dbii.software_hardware_verwaltung.model.hardware;
 
 import javafx.beans.property.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalDate;
 
 public class Warranty {
     private final IntegerProperty id;
-    private final SimpleObjectProperty<LocalDateTime> startDate;
-    private final SimpleObjectProperty<LocalDateTime> expirationDate;
+    private final SimpleObjectProperty<LocalDate> startDate;
+    private final SimpleObjectProperty<LocalDate> expirationDate;
     private final SimpleStringProperty status;
 
     public Warranty() {
@@ -15,7 +16,6 @@ public class Warranty {
         this.startDate = new SimpleObjectProperty<>();
         this.expirationDate = new SimpleObjectProperty<>();
         this.status = new SimpleStringProperty();
-        this.hardware = new SimpleObjectProperty<>();
     }
     public int getId() {
         return id.get();
@@ -24,19 +24,19 @@ public class Warranty {
     public IntegerProperty idProperty() {
         return id;
     }
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate.get();
     }
 
-    public SimpleObjectProperty<LocalDateTime> startDateProperty() {
+    public SimpleObjectProperty<LocalDate> startDateProperty() {
         return startDate;
     }
 
-    public LocalDateTime getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate.get();
     }
 
-    public SimpleObjectProperty<LocalDateTime> expirationDateProperty() {
+    public SimpleObjectProperty<LocalDate> expirationDateProperty() {
         return expirationDate;
     }
 
@@ -47,23 +47,20 @@ public class Warranty {
     public SimpleStringProperty statusProperty() {
         return status;
     }
-
-
-    public Hardware getHardware() {
-        return hardware.get();
+    public void setId(int id) {
+        this.id.set(id);
     }
 
-    public SimpleObjectProperty<Hardware> hardwareProperty() {
-        return hardware;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate.set(startDate);
     }
 
-    private final SimpleObjectProperty<Hardware> hardware;
-
-    public Warranty(IntegerProperty id, SimpleIntegerProperty key, SimpleObjectProperty<LocalDateTime> startDate, SimpleObjectProperty<LocalDateTime> expirationDate, SimpleObjectProperty<LocalDateTime> purchaseDate, SimpleStringProperty status, SimpleFloatProperty price, SimpleObjectProperty<Hardware> hardware) {
-        this.id = id;
-        this.startDate = startDate;
-        this.expirationDate = expirationDate;
-        this.status = status;
-        this.hardware = hardware;
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate.set(expirationDate);
     }
+
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+
 }

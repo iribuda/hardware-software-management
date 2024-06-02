@@ -19,13 +19,6 @@ public class Manufacturer {
         this.email = new SimpleStringProperty();
         this.mobileNumber = new SimpleStringProperty();
     }
-    public Manufacturer(IntegerProperty id, StringProperty name, StringProperty email, StringProperty mobileNumber) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.mobileNumber = mobileNumber;
-    }
-
 
     public int getId() {
         return id.get();
@@ -33,6 +26,10 @@ public class Manufacturer {
 
     public IntegerProperty idProperty() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     public String getName() {
@@ -43,12 +40,20 @@ public class Manufacturer {
         return name;
     }
 
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
     public String getEmail() {
         return email.get();
     }
 
     public StringProperty emailProperty() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
     }
 
     public String getMobileNumber() {
@@ -59,16 +64,7 @@ public class Manufacturer {
         return mobileNumber;
     }
 
-
-    public void setId(int anInt) {
-    }
-
-    public void setName(String vendorName) {
-    }
-
-    public void setEmail(String email) {
-    }
-
     public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber.set(mobileNumber);
     }
 }

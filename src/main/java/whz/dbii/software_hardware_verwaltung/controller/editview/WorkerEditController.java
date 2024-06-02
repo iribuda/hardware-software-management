@@ -1,15 +1,13 @@
-package whz.dbii.software_hardware_verwaltung.controller;
+package whz.dbii.software_hardware_verwaltung.controller.editview;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import whz.dbii.software_hardware_verwaltung.controller.MainPageController;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.HardwareDao;
 import whz.dbii.software_hardware_verwaltung.dao.hardware.impl.HardwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.software.SoftwareDao;
@@ -17,7 +15,6 @@ import whz.dbii.software_hardware_verwaltung.dao.software.impl.SoftwareDaoImpl;
 import whz.dbii.software_hardware_verwaltung.dao.worker.WorkerDAO;
 import whz.dbii.software_hardware_verwaltung.dao.worker.impl.WorkerDAOImpl;
 import whz.dbii.software_hardware_verwaltung.model.Worker;
-import whz.dbii.software_hardware_verwaltung.model.hardware.Hardware;
 import whz.dbii.software_hardware_verwaltung.model.software.Software;
 
 public class WorkerEditController {
@@ -55,6 +52,7 @@ public class WorkerEditController {
     private WorkerDAO workerDAO;
     private HardwareDao hardwareDao;
 
+
     @FXML
     private void initialize(){
         softwareDao = new SoftwareDaoImpl();
@@ -71,14 +69,14 @@ public class WorkerEditController {
         nameTextField.setText(worker.getName());
         surnameTextField.setText(worker.getSurname());
         emailTextField.setText(worker.getEmail());
-        softwareCheckbox.setItems(softwareDao.findAllNameOfSoftware());
+        softwareCheckbox.setItems(softwareDao.findAllNameOfActiveSoftware());
+        hardwareCheckbox.setItems(hardwareDao.findAllNamesOfAvailableHardware());
         System.out.println(worker.getId());
         if (worker.getId() != 0){
             softwareNameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());
             softwareVersionColumn.setCellValueFactory(cellDate -> cellDate.getValue().versionProperty());
             populateSoftware();
 
-            hardwareCheckbox.setItems(hardwareDao.findAllNamesOfHardware());
             hardwareNameColumn.setCellValueFactory((data -> new SimpleStringProperty(data.getValue())));
             populateHardware();
         }
@@ -136,8 +134,8 @@ public class WorkerEditController {
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle("Ungültige Felder");
+            alert.setHeaderText("Bitte korrigieren Sie ungültige Felder");
             alert.setContentText(errorMsg);
 
             alert.showAndWait();
@@ -158,7 +156,23 @@ public class WorkerEditController {
     }
 
     @FXML
-    private void handleDeleteHaving(){}
+    private void handleDeleteHardware(){
+        int selectedIndex = hardwareTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            int hardwareId = hardwareDao.findIdByName(hardwareTable.getSelectionModel().getSelectedItem());
+            hardwareTable.getItems().remove(selectedIndex);
+            workerDAO.deleteWorkersHardware(hardwareId, worker.getId());
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(dialogStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("Keine Mitarbeiter wurde gewählt");
+            alert.setContentText("Wählen Sie bitte ein Hardware!");
+
+            alert.showAndWait();
+        }
+    }
 
     @FXML
     private void handleAddHardware(){
